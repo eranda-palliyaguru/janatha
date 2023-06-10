@@ -29,7 +29,7 @@
     <a href="job_view.php?id=<?php echo $_GET['id']; ?>"><i style="font-size:30px; color:#3A3939; margin:6%"
             class="ion-chevron-left"></i></a>
     <br><br>
-    <h2 style="margin:15px">Inspection</h2>
+    <h2 style="margin:15px">Job Listing</h2>
     <br>
 
     <center>
