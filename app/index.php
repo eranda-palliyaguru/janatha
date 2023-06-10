@@ -103,6 +103,46 @@
     <?php } ?>
     <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD JOB</button> </a> 
     <a href="customer_add.php" class="pull-right"> <button class="model-box" style="width: 150px;">ADD CUSTOMER</button> </a>
+
+    <?php
+    $result = $db->prepare("SELECT customer_name,vehicle_no,amount,date,transaction_id FROM sales WHERE action='active' AND remove='1' ");
+    $result->bindParam(':userid', $date);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){
+        
+    ?>
+    
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="model-box color-red" style="background-color: #662020;">
+    <table style="width:100%">
+    <label>INVOICE REMOVE</label>
+        <tr>
+            <td><?php echo $row['customer_name']; ?></td>
+            <td><?php echo $row['vehicle_no']; ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $row['date']; ?></td>
+            <td>Rs.<?php echo $row['amount']; ?></td>
+        </tr>
+    </table>
+        
+        <table style="width:100%">
+                <tr>
+                    <td>
+                        <div align="right" style="width:100%;">
+                            <a href="../bill_dll.php?id=<?php echo $row['transaction_id']; ?>&end=app">
+                                <div class="bg-red"
+                                    style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
+                                    Remove</div>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+        </table>
+    </div>
+    </div>
+    <?php } ?>
+
     <?php
     $result = $db->prepare("SELECT vehicle_no,reason,id FROM job WHERE type='active' ");
     $result->bindParam(':userid', $date);

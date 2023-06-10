@@ -14,7 +14,9 @@ $result = $db->prepare("DELETE FROM sales_list WHERE  id= :memid");
 	$result->execute();
 
 
-
+if($_GET['end']=="app"){
+	header("location: app/sales.php?id=$invo");
+}else{
 header("location: sales.php?id=$invo");
-
+}
 ?>

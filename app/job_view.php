@@ -34,17 +34,16 @@ for($i=0; $row1 = $result1->fetch(); $i++){ $model_name=$row1['model']; }
     <p style="color: #B6B6B6; margin:-10px 30px 30px 30px; font-size:20px"><?php echo $vehicle=$row['vehicle_no']; ?>
     </p>
     <br>
-    <div
-        style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; text-align: center;">
+    <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; text-align: center;">
         <table width="100%">
             <tr>
                 <td style="color:#585757">
-                <span class="material-symbols-outlined" style="margin: 10px;">
+                    <span class="material-symbols-outlined" style="margin: 10px;">
                         shopping_cart
                     </span>
                 </td>
                 <td style="color:#585757">
-                    
+
                     Bill Amount <br>
                     <b style="color: #dbdbdb; font-size:18px;">Rs.<?php $resultm = $db->prepare("SELECT sum(price) FROM sales_list WHERE invoice_no = '$invo' ");
 		$resultm->bindParam(':userid', $res);
@@ -77,19 +76,18 @@ for($i=0; $row1 = $result1->fetch(); $i++){
     <?php } ?>
 
     <br><br><br>
-    <div
-        style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px;">
+    <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px;">
         <table width="98%" style="margin: 10px;">
             <tr>
                 <td style="color:#585757">
-                Job Note: <b style="color:#B6B6B6"><?php echo $note; ?></b> 
+                    Job Note: <b style="color:#B6B6B6"><?php echo $note; ?></b>
                 </td>
-                
-                <td width="30%"><a href="inspection.php?id=<?php echo $id; ?>">
+
+                <td width="30%"><a href="job_list.php?id=<?php echo $id; ?>">
                         <div class="btn"
                             style="background-color: #3A3939; border-radius: 5px;  margin: 10px; border:0px; color:#737373;">
 
-                            <i style="font-size: 18px;">Go inspection</i>
+                            <i style="font-size: 18px;">Go Job List</i>
                         </div>
                     </a>
                 </td>
@@ -97,10 +95,10 @@ for($i=0; $row1 = $result1->fetch(); $i++){
         </table>
 
     </div>
-   
 
-   
-   
+
+
+
 
     <?php 
     $result = $db->prepare("SELECT *  FROM job_list  WHERE job_no='$id' ORDER BY id DESC");
@@ -108,46 +106,55 @@ for($i=0; $row1 = $result1->fetch(); $i++){
     $result->execute();
     for($i=0; $row = $result->fetch(); $i++){
     ?>
-    <div
-        style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; color:#959595; ">
+    <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; color:#959595; ">
         <table width="100%" style="margin: 10px;">
             <tr>
                 <td style="font-size: 22px;"><?php echo $row['name']; ?></td>
                 <td style="color:#585757; width:20%"><?php echo $row['note']; ?></td>
+
+                <?php if($row['type']=="pending"){ ?>
+
                 <td width="15%">
-                    <?php if($row['type']=="OK"){ ?>
-                    <span style="color:#009C28;" class="material-symbols-outlined">
-                        done
+                    Pending
+                </td>
+                <td width="15%">
+                    <span style="color:#FFA245" class="material-symbols-outlined">
+                        pending_actions
                     </span>
                     <?php } ?>
 
                     <?php if($row['type']=="NO"){ ?>
+                <td width="15%">
                     <span style="color:#BE0909" class="material-symbols-outlined">
-                        block
+                        Done
                     </span>
                     <?php } ?>
 
                     <?php if($row['type']=="GOOD"){ ?>
-                    <span style="color:#009C28" class="material-symbols-outlined">
-                    thumb_up
-                    </span>
+                <td width="15%">
+                <span style="color:#009C28" class="material-symbols-outlined">
+new_releases
+</span>
                     <?php } ?>
 
                     <?php if($row['type']=="BAD"){ ?>
+                <td width="15%">
                     <span style="color:#BE0909" class="material-symbols-outlined">
-                    thumb_down
+                        thumb_down
                     </span>
                     <?php } ?>
 
                     <?php if($row['type']=="Replace"){ ?>
+                <td width="15%">
                     <span style="color:#169886" class="material-symbols-outlined">
-                    swap_horiz
+                        swap_horiz
                     </span>
                     <?php } ?>
 
                     <?php if($row['type']=="Clean"){ ?>
+                <td width="15%">
                     <span style="color:#162298" class="material-symbols-outlined">
-                    mop
+                        mop
                     </span>
                     <?php } ?>
                 </td>
@@ -157,14 +164,14 @@ for($i=0; $row1 = $result1->fetch(); $i++){
     </div>
     <?php } ?>
 
-<br><br>
-<?php 
+    <br><br>
+    <?php 
 $result1 = $db->prepare("SELECT *  FROM customer INNER JOIN vehicle ON customer.id=vehicle.customer_id WHERE vehicle.id='$vehicle_id'  ");
 $result1->bindParam(':userid', $date);
 $result1->execute();
 for($i=0; $row = $result1->fetch(); $i++){ 
 ?>
-<div class="hederbar" style="overflow-x:auto;">
+    <div class="hederbar" style="overflow-x:auto;">
         <table>
             <tr>
 
@@ -220,14 +227,14 @@ for($i=0; $row = $result1->fetch(); $i++){
     <?php } ?>
     <br><br>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
- <form action="../save_cancel_job.php" method="post">
- <textarea name="note" class="model-box" placeholder="Reason Note"
+        <form action="../save_cancel_job.php" method="post">
+            <textarea name="note" class="model-box" placeholder="Reason Note"
                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
-                <input type="hidden"  name="id" value="<?php echo $id; ?>"  >
-                <input class="btn btn-info" type="submit" value="Remove Job" >
-                <input type="hidden" name="end" value="app">
- </form>
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input class="btn btn-info" type="submit" value="Remove Job">
+            <input type="hidden" name="end" value="app">
+        </form>
     </div>
     <div style="margin-bottom: 30px;">
         -

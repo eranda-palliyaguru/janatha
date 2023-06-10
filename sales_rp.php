@@ -101,14 +101,9 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 					<th>Date</th>
                   <th>Invoice no</th>
 				  <th>Vehicle No</th>
-                  
 				  <th>Customer Name</th>
-					
-					<th>F/S</th>
-                  
 					<th>Labor Cost</th>
                   <th>Part Price</th>
-				  
 				  <th>Amount</th>
                   <th>View</th>
                 </tr>
@@ -117,30 +112,31 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				
                 <tbody>
 				<?php
-   $d1=$_GET['d1'];
+                $d1=$_GET['d1'];
 				$d2=$_GET['d2'];
-			 $tot=0;
-   $result = $db->prepare("SELECT * FROM sales WHERE action='active' and date BETWEEN '$d1' AND '$d2'  ");
+			    $tot=0;
+                $result = $db->prepare("SELECT * FROM sales WHERE action='active' and date BETWEEN '$d1' AND '$d2'  ");
 				$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
 				
 				$type=$row['type'];
 				$id=$row['invoice_number'];
-				
+				$remove=$row['remove'];
+				if($remove==1){echo '<tr style="background-color: red;" >';}else{echo '<tr  >';}
 			?>
-                <tr>
-				  <td><?php echo $row['date'];?></td>
+                
+				  <td ><?php echo $row['date'];?></td>
 				  <td><?php echo $row['invoice_number'];?></td>
 				  <td><?php echo $row['vehicle_no'];?></td>
                   <td><?php echo $row['customer_name'];?></td>
 					
-					<td><?php if($type=="fs"){ echo "X"; } ;?></td>
-                  
 				  <td><?php echo $row['labor_cost'];?></td>
                   <td><?php echo $row['amount']-$row['labor_cost'];?></td>
                   <td><?php echo $row['amount'];?></td>
-				  <td><a href="bill.php?id=<?php echo $id;?>" class="btn btn-primary btn-xs"><b>Print</b></a></td>
+				  <td><a href="bill.php?id=<?php echo $id;?>" class="btn btn-primary btn-xs"><b>Print</b></a>
+				  <a href="bill_remove.php?id=<?php echo $row['transaction_id'];?>&d1=<?php echo $d1; ?>&d2=<?php echo $d2; ?>" class="btn btn-danger btn-xs dll" style="display: none; width:60%;"><b>Delete</b></a>
+				</td>
 				  
 				  
 				   <?php 
@@ -162,8 +158,6 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 					<th></th>
 					<th>Total </th>
 					
-					<th>F/S</th>
-                  
                   <th><?php echo $tot-$labor; ?>.00</th>
 				  <th><?php echo $labor; ?>.00</th>
 				  <th><?php echo $tot; ?>.00</th>
@@ -212,7 +206,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 				}
 					
 					
-	$result1 = $db->prepare("SELECT * FROM hold_amount WHERE date='$d2' ORDER by id DESC limit 0,1 ");
+	    $result1 = $db->prepare("SELECT * FROM hold_amount WHERE date='$d2' ORDER by id DESC limit 0,1 ");
 		$result1->bindParam(':userid', $res);
 		$result1->execute();
 		for($i=0; $row1 = $result1->fetch(); $i++){
@@ -232,6 +226,8 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 					?>
                 </tfoot>
               </table>
+
+			  <b class="btn btn-danger btn-md" onclick="dllshow()">INVOICE DELETE</b>
 				<div class="row">
 					 <h3>Total Balance</h3>
 				<div class="col-md-6">	
@@ -243,7 +239,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
                 </tr>
 				</thead>
 				
-					<tr>
+				<tr>
 					<th>Bill Total</th>
                   <th>Rs.<?php echo $tot; ?>.00</th>
                 </tr>
@@ -352,9 +348,7 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
           <!-- /.box -->
         </div>
         <!-- /.col -->
-      
-   
-   
+     
    
 
     <!-- Main content -->
@@ -393,6 +387,16 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
 <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- page script -->
 <script>
+function dllshow() {
+
+var all_col=document.getElementsByClassName('dll');
+ for(var i=0;i<all_col.length;i++)
+ {
+  all_col[i].style.display='block';
+ }
+  
+}
+
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({

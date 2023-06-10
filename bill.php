@@ -79,7 +79,7 @@ body {
 	  
 	  <div class="row">
         <!-- accepted payments column -->
-        <div class="col-xs-7">
+        <div class="col-xs-6">
         <img src="bill.jpg" width="145" alt="">
          <h5> <b>STARTUP Auto Care</b></h5>
          <p>52/B/1, 10th Mile Post,  <br>
@@ -99,7 +99,7 @@ body {
 
 		  
 		  
-        <div class="col-xs-5">
+        <div class="col-xs-6">
           <h1 class="pull-right"><?php if ($co=="qt"){ echo "Quotation";}
            if($co > 0){ echo "INVOICE"; }
            ?></h1>
@@ -200,7 +200,7 @@ body {
 					$balance=$row1['balance'];
 				}
 			?>  
-			<div class="col-xs-4 pull-right">
+			<div class="col-xs-5 pull-right">
 			    <div class="row" >
 					    <div class="col-xs-6">
 					       <h4 class="pull-right">Total</h4>
@@ -235,12 +235,12 @@ body {
 
 	
             </div> 
-           <b>Terms & Conditions</b>  <br><br>
-<?php if($co=="qt"){ ?>           
-Validity Period : Two weeks from the date of estimate.<br>
-<?php } ?>
-Cheque should be drawn in favour of "STARTUP Auto Care" <br><br>
+<center>
+	<br><br><br><br>
+	<i>CARE THE PRIDE IN YOUR RIDE</i><br>
 <img src="img/cloud arm name.svg" width="100" alt="">
+</center>
+
 	  
 	
         </div>

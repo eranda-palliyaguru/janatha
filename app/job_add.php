@@ -47,17 +47,15 @@
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
-	?>
-                    <option value="<?php echo $row['id'];?>"><?php echo $row['vehicle_no']; ?> (
+	                ?>
+                        <option value="<?php echo $row['id'];?>"><?php echo $row['vehicle_no']; ?> (
                         <?php echo $row['manufacture']; ?>-<?php echo $row['model']; ?> ) </option>
                     <?php
 				}
 			?>
                 </select>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-                <input type="number" class="model-box" style="width: 100%;" name="km" placeholder="Mileage">
-            </div>
+
 
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2" name="type" style="width: 100%;">
@@ -76,43 +74,7 @@
             <textarea name="note" class="model-box" placeholder="Note"
                 style="width: 90%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
-            <?php  
-                  $result = $db->prepare("SELECT * FROM job_inspection WHERE type='1' ORDER by id ASC ");
-                 $result->bindParam(':userid', $res);
-                 $result->execute();
-                 for($i=0; $row = $result->fetch(); $i++){ ?>
-                 <input type="hidden" name="type<?php echo $row['id'] ?>" value="non">
-
-
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                <div class="model-box" id="<?php echo $row['id']; ?>" style="margin-top: 15px;">
-                    <div class="row">
-                        <h3><?php echo $row['name'] ?></h3>
-                        <textarea class="model-box" placeholder="Note"
-                            style="width: 60%; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                            name="note<?php echo $row['id'] ?>" id="" cols="70" rows="1"></textarea>
-                        <label>
-                            <input type="radio" name="type<?php echo $row['id'] ?>"
-                                onclick="back(<?php echo $row['id'] ?>,'op1')" id="<?php echo $row['id'] ?>_op1"
-                                value="OK">
-                            <span class="material-symbols-outlined">
-                                done
-                            </span>
-                        </label>
-
-                        <label>
-                            <input type="radio" name="type<?php echo $row['id'] ?>"
-                                onclick="back(<?php echo $row['id'] ?>,'op2')" id="<?php echo $row['id'] ?>_op2"
-                                value="NO">
-                            <span class="material-symbols-outlined">
-                                block
-                            </span>
-                        </label>
-
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
+            
             <br>
             <input type="submit" value="Save" class="login-btn">
             <input type="hidden" name="end" value="app">

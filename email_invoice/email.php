@@ -90,11 +90,12 @@ body {
 					<tr>
 						<td valign="top" width="50%">
 							<img src="../RHN Logo.jpg" alt="Logo" style="max-width:150px;"><br>
-							 <b style="font-family: '."'Poppins'".'; font-size:17px">RHN TRADING COMPANY (PVT) LTD</b>
-         <p>NO. 325/6, PAHALA BOMITIYA <br>
-         KADUWELA<br> <br>
-         Mobile: 070-7485485<br>
-         E-mail: info@rhntrading.com<br>
+							 <b style="font-family: '."'Poppins'".'; font-size:17px">STARTUP Auto Care</b>
+         <p>52/B/1, 10th Mile Post,  <br>
+		 Katuwawala,  <br>
+		 Boralasgauwa <br><br>
+         Call: 0112 150 400<br>
+		 E-mail: startupautoare@gmail.com<br>
          www.rhntrading.com <br><br>
          <b style="font-size:20px">Bill To:</b><br>
          '.$row1["customer_name"].'<br>

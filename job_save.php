@@ -14,7 +14,7 @@ $vehicle_id = $_POST['cus'];
 			$model=$row['model'];
 		}
 
-	$result = $db->prepare("SELECT * FROM job WHERE vehicle_no = '$vehicle' and type='active' and category='' ");
+	$result = $db->prepare("SELECT * FROM job WHERE vehicle_no = '$vehicle' and type='active' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
@@ -56,7 +56,7 @@ include("connect.php");
 
 
 $job_type = $_POST['type'];
-$km = $_POST['km'];
+$km = 0;
 $note1 = $_POST['note'];
 $product1 = "";
 	
@@ -115,27 +115,7 @@ $q = $db->prepare($sql);
 $q->execute(array($invo,$job_no));
 
 if(isset($_POST['end'])){
-	
-
-$result = $db->prepare("SELECT * FROM job_inspection WHERE type='1' ORDER by id ASC ");
-$result->bindParam(':userid', $res);
-$result->execute();
-for($i=0; $row = $result->fetch(); $i++){
-$ins_id=$row['id'];
-
-$name=$row['name'];
-$type=$_POST['type'.$ins_id];
-$note=$_POST['note'.$ins_id];
-
-if($type=='none'){}else{
-$sql = "INSERT INTO job_list (name,type,ins_id,note,job_no,ins_type) VALUES (?,?,?,?,?,?)";
-$q = $db->prepare($sql);
-$q->execute(array($name, $type, $ins_id,$note,$job_no,'1'));
-}
-
- 
-}
-header("location: app/index.php");
+header("location: app/job_list.php?id=$job_no");
 }else{header("location: index.php"); }
 	
 	

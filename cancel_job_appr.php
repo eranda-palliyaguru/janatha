@@ -11,5 +11,10 @@ $sql = "UPDATE job
 $q = $db->prepare($sql);
 $q->execute(array($invo,$id));
 
-header("location: index.php");
+if($_GET['end']=='app'){
+    header("location: app/index.php");
+}else{
+    header("location: index.php");
+}
+
 ?>

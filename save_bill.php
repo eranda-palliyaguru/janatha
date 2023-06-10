@@ -116,7 +116,7 @@ $date=date("Y-m-d");
 $time=date('H:i:s');
 
 $credit=0;
-if($type=="Credit"){$credit=$a;}
+if($type=="Credit"){$credit=$a-$ar;}
 
 // query
 $sql = "UPDATE  sales SET amount=?,balance=?,action=?,profit=?,labor_cost=?,pay_type=?,date=?,mechanic_id=?,mechanic=?,email=?,plus_km=?,comment=?,time=?,credit=? WHERE invoice_number=?";
@@ -140,6 +140,5 @@ $q->execute(array($job_type,$vehicle_no));
 
 
 header("location: bill.php?id=$a1");
-
 
 ?>
