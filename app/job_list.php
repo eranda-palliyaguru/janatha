@@ -42,19 +42,19 @@
         </h1>
 
 
-       
+
         <form action="job_list_save.php" method="post">
 
             <div class="col-xs-9 col-sm-8 col-md-8 col-lg-3">
                 <input type="text" name="name" class="model-box" style="width: 100%;">
             </div>
             <div class="col-xs-3 col-sm-2 col-md-4 col-lg-3">
-                <input type="submit" value="ADD" class="model-box" >
+                <input type="submit" value="ADD" class="model-box">
             </div>
             <input type="hidden" name="job_no" value="<?php echo $id; ?>">
         </form>
     </center>
-   
+
     <br><br><br><br>
     <?php 
     $result = $db->prepare("SELECT *  FROM job_list  WHERE job_no='$id' ORDER BY id DESC");
@@ -62,52 +62,57 @@
     $result->execute();
     for($i=0; $row = $result->fetch(); $i++){
     ?>
-        <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; color:#959595; ">
-            <table width="100%" style="margin: 10px;">
-                <tr>
-                    <td style="font-size: 15px;"><?php echo $row['name']; ?></td>
-                    <td width="15%">
-                        <?php if($row['type']=="OK"){ ?>
-                        <span style="color:#009C28;" class="material-symbols-outlined">
-                            done
-                        </span>
-                        <?php } ?>
+    <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px; color:#959595; ">
+        <table width="100%" style="margin: 10px;">
+            <tr>
+                <td style="font-size: 15px;"><?php echo $row['name']; ?></td>
 
-                        <?php if($row['type']=="NO"){ ?>
-                        <span style="color:#BE0909" class="material-symbols-outlined">
-                            block
-                        </span>
-                        <?php } ?>
+                <?php if($row['type']=="pending"){ ?>
 
-                        <?php if($row['type']=="GOOD"){ ?>
-                        <span style="color:#009C28" class="material-symbols-outlined">
-                            thumb_up
-                        </span>
-                        <?php } ?>
+                <td width="15%">
+                    Pending
+                </td>
+                <td width="15%">
+                    <span style="color:#FFA245" class="material-symbols-outlined">
+                        pending_actions
+                    </span>
+                    <?php } ?>
 
-                        <?php if($row['type']=="BAD"){ ?>
-                        <span style="color:#BE0909" class="material-symbols-outlined">
-                            thumb_down
-                        </span>
-                        <?php } ?>
+                    <?php if($row['type']=="NO"){ ?>
+                    <span style="color:#BE0909" class="material-symbols-outlined">
+                        block
+                    </span>
+                    <?php } ?>
 
-                        <?php if($row['type']=="Replace"){ ?>
-                        <span style="color:#169886" class="material-symbols-outlined">
-                            swap_horiz
-                        </span>
-                        <?php } ?>
+                    <?php if($row['type']=="GOOD"){ ?>
+                    <span style="color:#009C28" class="material-symbols-outlined">
+                        thumb_up
+                    </span>
+                    <?php } ?>
 
-                        <?php if($row['type']=="Clean"){ ?>
-                        <span style="color:#162298" class="material-symbols-outlined">
-                            mop
-                        </span>
-                        <?php } ?>
-                    </td>
-                </tr>
-            </table>
+                    <?php if($row['type']=="BAD"){ ?>
+                    <span style="color:#BE0909" class="material-symbols-outlined">
+                        thumb_down
+                    </span>
+                    <?php } ?>
 
-        </div>
-        <?php } ?>
+                    <?php if($row['type']=="Replace"){ ?>
+                    <span style="color:#169886" class="material-symbols-outlined">
+                        swap_horiz
+                    </span>
+                    <?php } ?>
+
+                    <?php if($row['type']=="Clean"){ ?>
+                    <span style="color:#162298" class="material-symbols-outlined">
+                        mop
+                    </span>
+                    <?php } ?>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <?php } ?>
 </body>
 <script>
 
