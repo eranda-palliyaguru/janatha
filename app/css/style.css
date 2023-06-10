@@ -82,6 +82,14 @@ body {
     
 }
 
+.color-red{
+    border-color: #ff3434;
+    
+}
+.color-purple{
+    border-color: #9d34ff;
+}
+
 .model-fill-box {
     border-radius: 15px;
     background-color: #181929;  

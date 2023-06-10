@@ -218,10 +218,21 @@ for($i=0; $row = $result1->fetch(); $i++){
         </table>
     </div>
     <?php } ?>
+    <br><br>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+ <form action="../save_cancel_job.php" method="post">
+ <textarea name="note" class="model-box" placeholder="Reason Note"
+                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
+                <input type="hidden"  name="id" value="<?php echo $id; ?>"  >
+                <input class="btn btn-info" type="submit" value="Remove Job" >
+                <input type="hidden" name="end" value="app">
+ </form>
+    </div>
+    <div style="margin-bottom: 30px;">
+        -
+    </div>
 
-
-    <br><br><br>
 </body>
 
 

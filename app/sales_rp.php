@@ -4,7 +4,7 @@
 <head>
 <?php include('hed.php'); ?>
 <link rel="stylesheet" href="css/datepik.css">
-<link rel="stylesheet" href="css/datepik.css">
+
 </head>
 
 <body>

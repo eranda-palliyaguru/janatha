@@ -101,9 +101,38 @@
         </table>
     </div>
     <?php } ?>
-    <br>
-    <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD NEW JOB</button> </a>
-    <br>
+    <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD JOB</button> </a> 
+    <a href="customer_add.php" class="pull-right"> <button class="model-box" style="width: 150px;">ADD CUSTOMER</button> </a>
+    <?php
+    $result = $db->prepare("SELECT vehicle_no,reason,id FROM job WHERE type='active' ");
+    $result->bindParam(':userid', $date);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){
+        if($row['reason']==''){}else{
+    ?>
+    
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="model-box color-red">
+        <label><?php echo $row['vehicle_no'] ?></label>
+        <p><?php echo $row['reason'] ?></p>
+        <table style="width:100%">
+                <tr>
+                    <td>
+                        <div align="right" style="width:100%;">
+                            <a href="../cancel_job_appr.php?id=<?php echo $row['id']; ?>&end=app">
+                                <div class="bg-red"
+                                    style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
+                                    Remove</div>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+    </div>
+    </div>
+    <?php } } ?>
+    
+
     <?php 				  
         $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
@@ -116,14 +145,13 @@
             if($date==$date1){
 			$time=$row['time'];
             $time_now=date("H.i");					
-$date1 = new DateTime($time_now);
-$date2 = $date1->diff(new DateTime($time));
-
-$h=$date2->h;
-$m=$date2->i;
+            $date1 = new DateTime($time_now);
+            $date2 = $date1->diff(new DateTime($time));
+            $h=$date2->h;
+            $m=$date2->i;
 					
 			if($h==0){ 
-				$time_on=$m;	
+			$time_on=$m;	
 			$time_type="minute";
 			}else{
 			$time_on=$h;

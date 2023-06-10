@@ -2,45 +2,70 @@
 
 session_start();
 
-include('connect.php');
+include('connect.php'); 
+$cus_id = $_POST['cus_id'];
 
-$a = $_POST['vehicle_no'];
-
-$b = $_POST['model'];
-
-$c = $_POST['cus_name'];
-
-$d = $_POST['phone_no'];
-
-$e = $_POST['address'];
-
-$f =  $_POST['email'];
-
-$g =  $_POST['engine_no'];
-
-$h =  $_POST['chassis_no'];
-
-$i =  $_POST['bye_date'];
-
-$j =  $_POST['color'];
-$birthday =  $_POST['birthday'];
-$gend =  $_POST['gend'];
+if ($cus_id=='0'){
+//customer data
+$name = $_POST['cus_name'];
+$phone_no = $_POST['phone_no'];
+$address = $_POST['address'];
+$email =  $_POST['email'];
+$birthday=$_POST['birthday'];
+}
 
 
+// vehicle data
+$vehicle_no = $_POST['vehicle_no'];
+$model_id = $_POST['model'];
+$fuel_type=$_POST['fuel_type'];
+$transmission=$_POST['transmission'];
 
+
+$result = $db->prepare("SELECT * FROM model WHERE id ='$model_id'");
+$result->bindParam(':userid', $res);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ $model= $row['manufacture'].' - '.$row['name']; }
 
 
 
+// other information
+$date=date('Y-m-d');
+$time=date('H:i:s');
 
-// query
+if($cus_id == 0) {
 
-$sql = "INSERT INTO customer (vehicle_no,model,customer_name,contact,address,email,engine_no,chassis_no,bye_date,color,birthday,gend) VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i,:j,:birthday,:gend)";
-
+//Customer Save 
+$sql = "INSERT INTO customer (customer_name,contact,address,email,birthday) VALUES (?,?,?,?,?)";
 $ql = $db->prepare($sql);
+$ql->execute(array($name,$phone_no,$address,$email,$birthday));
 
-$ql->execute(array(':a'=>$a,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':h'=>$h,':i'=>$i,':j'=>$j,':birthday'=>$birthday,':gend'=>$gend));
 
+
+//Find customer id 
+$result = $db->prepare("SELECT * FROM customer ORDER BY id DESC LIMIT 1");
+$result->bindParam(':userid', $res);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ $cus_id= $row['id']; }
+
+}else{
+//Old customer data
+$result = $db->prepare("SELECT * FROM customer ORDER BY id DESC LIMIT 1");
+$result->bindParam(':userid', $res);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ $cus_id= $row['id']; $name= $row['customer_name'];}
+}
+
+// Vehicle Save
+$sql="INSERT INTO vehicle (vehicle_no,customer_id,customer_name,model,model_id,fuel_type,transmission_type,date,time) VALUES (?,?,?,?,?,?,?,?,?)";
+$ql = $db->prepare($sql);
+$ql->execute(array($vehicle_no,$cus_id,$name,$model,$model_id,$fuel_type,$transmission,$date,$time));
+
+if(isset($_POST['end'])){
+ header("location: app/customer.php");
+}else{
 header("location: cus_view.php");
+}
 
 
 
