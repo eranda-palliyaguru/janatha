@@ -138,6 +138,12 @@ if(isset($_POST["submit"])) {
   }
 }
 
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+	echo "Sorry, your file is too large.";
+	compressImage($file['tmp_name'], $destination,60);
+  }
+
 // Check if file already exists
 if (file_exists($target_file)) {
   echo "Sorry, file already exists.";
@@ -161,11 +167,7 @@ if ($uploadOk == 0) {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
     echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
   
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
-	compressImage($file['tmp_name'], $destination,60);
-  }
+
 //---------------------------------------------------------------- upload image end ----------------------------------------------------//
 	
 $sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,r_person,img) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:r_person,:img)";
