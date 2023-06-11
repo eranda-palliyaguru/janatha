@@ -141,7 +141,7 @@ if(isset($_POST["submit"])){
             $imageTemp = $_FILES["fileToUpload"]["tmp_name"]; 
              
             // Compress size and upload image 
-            $compressedImage = compressImage($imageTemp, $imageUploadPath, 75); 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath, 60); 
              
             if($compressedImage){ 
                 $status = 'success'; 
