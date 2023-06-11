@@ -17,6 +17,7 @@ for($i=0; $row = $result->fetch(); $i++){
     $invo=$row['invoice_no'];
     $cus_id=$row['cus_id'];
     $vehicle_id=$row['vehicle_id'];
+    $path=$row['img'];
 
 
 $result1 = $db->prepare("SELECT *  FROM customer  WHERE id='$cus_id'  ");
@@ -66,14 +67,9 @@ for($i=0; $row1 = $result1->fetch(); $i++){ $model_name=$row1['model']; }
     </div>
     <?php } ?>
     <br>
-    <?php 
-$result1 = $db->prepare("SELECT *  FROM model  WHERE name='$model_name'  ");
-$result1->bindParam(':userid', $date);
-$result1->execute();
-for($i=0; $row1 = $result1->fetch(); $i++){ 
-?>
-    <center><img src="../<?php echo $row1['parth']; ?>" width="300px"></center>
-    <?php } ?>
+    
+    <center><img src="../<?php echo $path; ?>" width="300px"></center>
+
 
     <br><br><br>
     <div style="border-radius: 15px; background-color: #181929; color:aliceblue;  margin: 10px;">
