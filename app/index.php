@@ -174,7 +174,7 @@
     
 
     <?php 				  
-        $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
+        $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no, job.img  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
         $result->execute();
         for($i=0; $row = $result->fetch(); $i++){ 
@@ -212,10 +212,11 @@
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
         <div style="border-radius: 15px; background-color: #181929; color:aliceblue; margin: 2%; ">
 
+        
             <table style="width:100%;  margin: 10px;">
                 <tr>
                     <td>
-                        <img src="<?php echo $row['img']; ?>" width="100px" alt="">
+                    <img src="../<?php echo $row['img'] ?>" width="100px" alt="">
                     </td>
                     <td><h3 style="color:#D1D1D1; margin: 10px;"><?php echo $row['vehicle_no']; ?></h3></td>
                     
