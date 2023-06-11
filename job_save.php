@@ -91,7 +91,7 @@ $nba=1;
 
 //---------------------------------------------------------------- upload image file ------------------------------------------------//
 $target_dir = "job_img/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . date('ymdHis').".".pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
@@ -133,16 +133,13 @@ if ($uploadOk == 0) {
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
     echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-}
+  
 
 //---------------------------------------------------------------- upload image end ----------------------------------------------------//
 	
-$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,r_person) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:r_person)";
+$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,r_person,img) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:r_person,:img)";
 $q = $db->prepare($sql);
-$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':r_person'=>$r_person));
+$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':r_person'=>$r_person,':img'=>$target_file));
 
 //echo $customer_id;
 
@@ -170,6 +167,10 @@ if(isset($_POST['end'])){
 header("location: app/job_list.php?id=$job_no");
 }else{header("location: job_list.php?id=$job_no"); }
 	
+} else {
+    echo "Sorry, there was an error uploading your file.";
+  }
+}
 	
 }
 

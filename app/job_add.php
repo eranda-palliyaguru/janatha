@@ -74,6 +74,21 @@
                 <input type="file" name="fileToUpload" id="fileToUpload" class="model-box">
             </div>
 
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <select class="model-box" name="rp" style="width: 100%;" tabindex="1" autofocus >
+				 
+                 <?php  $invo = $_GET['id'];
+                  $result = $db->prepare("SELECT * FROM Employees WHERE type='2'  ");
+                 $result->bindParam(':userid', $res);
+                 $result->execute();
+                 for($i=0; $row = $result->fetch(); $i++){ ?>
+                 <option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?></option>
+             <?php	} ?>
+                         </select>
+            </div>
+
+            
+
             <br>
             <textarea name="note" class="model-box" placeholder="Note"
                 style="width: 90%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>

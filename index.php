@@ -567,6 +567,7 @@ $tm=$ttime2->i;
                                             <?php }else{ ?>
                                         <tr class="alert alert-general record" style="background-color:brown">
                                             <?php } ?>
+                                            <td><img src="<?php echo $row['img']; ?>" alt="" width="100px"></td>
 
                                             <td><?php echo $job_no;?><span class="badge bg-<?php echo $type_color;?>"><i
                                                         class="fa fa-clock-o"></i> <?php echo $type_info;?></span></td>
