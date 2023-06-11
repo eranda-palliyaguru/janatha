@@ -107,66 +107,7 @@
 <script src="../../../plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="js/cam/webcam.min.js"></script>
 
-    <script ype="text/javascript">
-        navigator.mediaDevices.enumerateDevices()
-            .then(function(devices) {
-                var videoDevices = devices.filter(function(device) {
-                    return device.kind === 'videoinput';
-                });
 
-                var constraints = {
-                    video: {
-                        facingMode: {
-                            exact: 'environment' // Use 'environment' for back camera
-                        }
-                    }
-                };
-
-                if (videoDevices.length > 0) {
-                    constraints.video.deviceId = videoDevices[0].deviceId;
-                }
-
-                navigator.mediaDevices.getUserMedia(constraints)
-                    .then(function(stream) {
-                        var video = document.getElementById('video');
-                        video.srcObject = stream;
-                        video.play();
-                    })
-                    .catch(function(error) {
-                        console.log("Error accessing camera: " + error);
-                    });
-            })
-            .catch(function(error) {
-                console.log("Error enumerating devices: " + error);
-            });
-
-        document.getElementById('capture-btn').addEventListener('click', function() {
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            var video = document.getElementById('video');
-
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            canvas.toBlob(function(blob) {
-                var formData = new FormData();
-                formData.append('photo', blob, 'photo.jpg');
-
-                $.ajax({
-                    url: 'upload_photo.php',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log('Photo uploaded successfully.');
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('Error uploading photo: ' + error);
-                    }
-                });
-            }, 'image/jpeg', 0.9);
-        });
-    </script>
 
 
 <script>
