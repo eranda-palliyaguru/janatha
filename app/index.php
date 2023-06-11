@@ -215,9 +215,9 @@
             <table style="width:100%;  margin: 10px;">
                 <tr>
                     <td>
-                        <h3 style="color:#D1D1D1; margin: 10px;"><?php echo $row['vehicle_no']; ?></h3>
+                        <img src="<?php echo $row['img']; ?>" width="100px" alt="">
                     </td>
-                    <td></td>
+                    <td><h3 style="color:#D1D1D1; margin: 10px;"><?php echo $row['vehicle_no']; ?></h3></td>
                     
                 </tr>
                 <tr>
