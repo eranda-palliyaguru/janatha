@@ -90,89 +90,83 @@ $date=date("Y-m-d");
 $nba=1;
 
 //---------------------------------------------------------------- upload image file ------------------------------------------------//
-function compressImage($source, $destination, $quality) {
-    $info = getimagesize($source);
-    $mime = $info['mime'];
 
-    // Create an image resource based on the MIME type
-    switch ($mime) {
-        case 'image/jpeg':
-            $image = imagecreatefromjpeg($source);
-            break;
+function compressImage($source, $destination, $quality) { 
+    // Get image info 
+    $imgInfo = getimagesize($source); 
+    $mime = $imgInfo['mime']; 
+     
+    // Create a new image from file 
+    switch($mime){ 
+        case 'image/jpeg': 
+            $image = imagecreatefromjpeg($source); 
+           imagejpeg($image, $destination, $quality);
+            break; 
+        case 'image/png': 
+            $image = imagecreatefrompng($source); 
+            imagepng($image, $destination, $quality);
+            break; 
+        case 'image/gif': 
+            $image = imagecreatefromgif($source); 
+            imagegif($image, $destination, $quality);
+            break; 
+        default: 
+            $image = imagecreatefromjpeg($source); 
+           imagejpeg($image, $destination, $quality);
+    } 
+     
+     
+    // Return compressed image 
+    return $destination; 
+} 
+ 
+ 
+// File upload path 
+$uploadPath = "job_img/"; 
+ 
+// If file upload form is submitted 
+$status = $statusMsg = ''; 
+if(isset($_POST["submit"])){ 
+    $status = 'error'; 
+    if(!empty($_FILES["fileToUpload"]["name"])) { 
+        // File info 
+        $fileName = basename($_FILES["fileToUpload"]["name"]); 
+        $imageUploadPath = $uploadPath . $fileName; 
+        $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            // Image temp source 
+            $imageTemp = $_FILES["fileToUpload"]["tmp_name"]; 
+             
+            // Compress size and upload image 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath, 75); 
+             
+            if($compressedImage){ 
+                $status = 'success'; 
+                $statusMsg = "Image compressed successfully."; 
+            }else{ 
+                $statusMsg = "Image compress failed!"; 
+            } 
+        }else{ 
+            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+        } 
+    }else{ 
+        $statusMsg = 'Please select an image file to upload.'; 
+    } 
+} 
+ 
+// Display status message 
+echo $statusMsg; 
 
-        case 'image/png':
-            $image = imagecreatefrompng($source);
-            break;
-
-        case 'image/gif':
-            $image = imagecreatefromgif($source);
-            break;
-
-        default:
-            return false;
-    }
-
-    // Compress and save the image
-    imagejpeg($image, $destination, $quality);
-
-    // Free up memory
-    imagedestroy($image);
-
-    return true;
-}
-
-$target_dir = "job_img/";
-$target_file = $target_dir . date('ymdHis').".".pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
-
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
-	compressImage($file['tmp_name'], $destination,60);
-  }
-
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
-
-
-
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-  $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
   
 
 //---------------------------------------------------------------- upload image end ----------------------------------------------------//
 	
 $sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,r_person,img) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:r_person,:img)";
 $q = $db->prepare($sql);
-$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':r_person'=>$r_person,':img'=>$target_file));
+$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':r_person'=>$r_person,':img'=>$imageUploadPath));
 
 //echo $customer_id;
 
@@ -200,10 +194,7 @@ if(isset($_POST['end'])){
 header("location: app/job_list.php?id=$job_no");
 }else{header("location: job_list.php?id=$job_no"); }
 	
-} else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-}
+
 	
 }
 
