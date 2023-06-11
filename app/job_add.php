@@ -38,7 +38,7 @@
 
 
         
-        <form action="../job_save.php" method="post">
+        <form action="../job_save.php" method="post" enctype="multipart/form-data">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2 " name="cus" style="width: 100%;">
                 <option value="0" selected disabled>Vehicle No</option>
@@ -70,13 +70,17 @@
                 </select>
             </div>
 
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <input type="file" name="fileToUpload" id="fileToUpload" class="model-box">
+            </div>
+
             <br>
             <textarea name="note" class="model-box" placeholder="Note"
                 style="width: 90%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
             
             <br>
-            <input type="submit" value="Save" class="login-btn">
+            <input type="submit" value="Save" name="submit" class="login-btn">
             <input type="hidden" name="end" value="app">
         </form>
     </center>

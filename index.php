@@ -355,7 +355,6 @@ else{
                                         <tr>
                                             <th>No.</th>
                                             <th>Vehicle No.</th>
-                                            <th>Mileage</th>
                                             <th>Time</th>
                                             <th>Type</th>
                                             <th>Customer</th>
@@ -586,7 +585,6 @@ $tm=$ttime2->i;
                                                     </span></i>
                                                 <?php } ?>
                                             </td>
-                                            <td><?php echo $row['km'];?></td>
 
                                             <td><span class="badge bg-<?php echo $color;?>"><i
                                                         class="fa fa-clock-o"></i>
@@ -604,9 +602,9 @@ $tm=$ttime2->i;
                                                 <a href="profile.php?id=<?php echo $row['cus_id']; ?>"> <button
                                                         class="btn btn-success"><i
                                                             class="glyphicon glyphicon-user"></i></button></a>
-                                                <a href="job_print.php?id=<?php echo $row['id']; ?>">
+                                                <a href="job_list.php?id=<?php echo $row['id']; ?>">
                                                     <button class="btn btn-warning"><i
-                                                            class="glyphicon glyphicon-print"></i></button></a>
+                                                            class=" glyphicon glyphicon-list-alt"></i></button></a>
                                                 <?php if($tot_bill > 0){ ?>
                                                 <a href="sales.php?id=<?php echo $invoice_number; ?>">
                                                     <button class="btn btn-info"><i
@@ -662,7 +660,6 @@ $tm=$ttime2->i;
                                             <td><span class="badge bg-<?php echo $type_color1;?>"><i
                                                         class="fa fa-clock-o"></i> <?php echo $type_info1;?></span></td>
                                             <td><?php echo $row['vehicle_no'];?></td>
-                                            <td><?php echo $row['km'];?></td>
                                             <td><span class="badge bg-green"><i class="fa fa-clock-o"></i>
                                                     <?php echo $row['type']; ?></span></td>
                                             <td><span class="badge bg-red"><i class="fa fa-wrench "></i> <?php $ramp1=$row['mechanic_id']; 

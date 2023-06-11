@@ -48,7 +48,7 @@ include_once("sidebar.php");
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add new Job
+        Add new Job Card
         <small>Preview</small>
       </h1>
       <ol class="breadcrumb">
@@ -102,14 +102,23 @@ include_once("sidebar.php");
               <div class="form-group has-warning">
 				  <div class="input-group">
 				   <div class="input-group-addon">
-                    Mileage
+                  Responsible
                   </div>
-                <input  id="inputWarning" type="number" name="km"  class="form-control"  required>
+                  <select class="form-control" name="rp" style="width: 100%;" tabindex="1" autofocus >
+				 
+		<?php  $invo = $_GET['id'];
+         $result = $db->prepare("SELECT * FROM Employees WHERE type='2'  ");
+		$result->bindParam(':userid', $res);
+		$result->execute();
+		for($i=0; $row = $result->fetch(); $i++){ ?>
+		<option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?></option>
+	<?php	} ?>
+                </select>
                   </div>
                   </div>
 				</div>
 				
-				            <div class="col-md-4">
+				            <div class="col-md-3">
               <div class="form-group">
 				  <div class="input-group">
 				   <div class="input-group-addon">
