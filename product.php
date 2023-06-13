@@ -78,8 +78,8 @@ include_once("sidebar.php");
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_1" data-toggle="tab">Product</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Service</a></li>
+                                    <li class="active"><a href="#tab_1" data-toggle="tab">Service</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">Product</a></li>
                                     <li><a href="#tab_3" data-toggle="tab">Materials</a></li>
                                     <li><a href="#tab_4" data-toggle="tab">Quick Product</a></li>
 
@@ -109,62 +109,6 @@ include_once("sidebar.php");
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <div class="input-group date">
-                                                                        <div class="input-group-addon">
-                                                                            <label>Code</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control"
-                                                                            name="code" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-addon">
-                                                                            <label> Sell Price</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control"
-                                                                            name="sell">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-addon">
-                                                                            <label> Cost Price</label>
-                                                                        </div>
-                                                                        <input type="text" class="form-control"
-                                                                            name="cost">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-addon">
-                                                                            <label> RE-Order level</label>
-                                                                        </div>
-                                                                        <input type="text" name="re_order"
-                                                                            class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
                                                                     <div class="input-group">
                                                                         <div class="input-group-addon">
                                                                             <label> Category</label>
@@ -174,7 +118,7 @@ include_once("sidebar.php");
                                                                             autofocus>
 
                                                                             <?php
-                                                                            $result = $db->prepare("SELECT * FROM catogary_list ");
+                                                                            $result = $db->prepare("SELECT * FROM catogary_list ORDER BY id ASC");
 		                                                                        $result->bindParam(':userid', $res);
 		                                                                        $result->execute();
 		                                                                        for($i=0; $row = $result->fetch(); $i++){
@@ -190,9 +134,65 @@ include_once("sidebar.php");
                                                                 </div>
                                                             </div>
                                                         </div>
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <label>Supply</label>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="supply">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <label>Remove & Refitting</label>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="refit">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <label>Repair</label>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="repair">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <label> Paint</label>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="paint">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        
                                                     </div>
 
-                                                    <input type="hidden" name="type" value="Product">
+                                                    <input type="hidden" name="type" value="Service">
                                                     <input class="btn btn-info" type="submit" value="Submit">
                                                 </div>
                                             </div>

@@ -142,7 +142,7 @@ body {
               <table id="example1" class="table">
                 <thead>
                 <tr style="background-color: #737373; color:#eee">
-				<th>Part Number</th>
+				
 				<th>Decs</th>
 					<th>Unit Price</th>
                   <th>Qty</th>
@@ -160,7 +160,7 @@ body {
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
 					$tot_amount=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo'");
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND service_type='Supply'");
 					$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
@@ -168,7 +168,6 @@ body {
 					$u_pri=$u_to/$row['qty'];
 			?>
                 <tr>
-				<td><?php echo $row['code'];?></td>
                   <td><?php echo $row['name'];?></td>
 					<td><?php echo $u_pri;?></td>
 				  <td><?php echo $row['qty'];?></td>

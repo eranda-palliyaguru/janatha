@@ -234,7 +234,7 @@
 		 
 		  
 		  <li>
-          <a  href="quotation.php?id=qt<?php echo date("ymdhis");?>">
+          <a  href="sales.php?id=qt<?php echo date("ymdhis");?>">
             <i class="fa fa-file-text-o"></i> <span>Quotations</span>
             <span class="pull-right-container">
 			

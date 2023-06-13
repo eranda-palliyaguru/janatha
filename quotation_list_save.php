@@ -56,7 +56,7 @@ $ql->execute(array($product_id,$name,$invoice_no,$price,$qty,'Paint',$date,$pric
 }
 
 
-header("location: sales.php?id=$invoice_no");
+header("location: quotation.php?id=$invoice_no");
 
 
 

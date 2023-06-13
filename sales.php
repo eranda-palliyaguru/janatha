@@ -15,22 +15,13 @@ include_once("sidebar2.php");
 if($r =='admin'){
 include_once("sidebar.php");
 }
-	$type_name = "Sales";
-	$type_color= "info";
+
 	$invo = $_GET['id'];
 	$co = substr($invo,0,2) ;
-	if ($co=="qt"){
 		$type_name = "Quotations";
 		$type_color= "success";
-	}
-	if ($co=="pu"){
-		$type_name = "purchase";
-		$type_color= "danger";
-	}
-	if ($co=="tr"){
-		$type_name = "Transfer";
-		$type_color= "warning";
-	}
+	
+	
 ?>
 
     <link rel="stylesheet" href="datepicker.css" type="text/css" media="all" />
@@ -105,14 +96,14 @@ include_once("sidebar.php");
                                     <form method="post" action="sales_save.php">
 
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">
                                                             <label>Product</label>
                                                         </div>
 
-                                                        <select class="form-control select2" name="name"
+                                                        <select class="form-control select2" name="name" id="product"
                                                             style="width: 100%;" tabindex="1" autofocus>
 
                                                             <?php  $invo = $_GET['id'];
@@ -120,10 +111,13 @@ include_once("sidebar.php");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){ ?>
-                                                            <option value="<?php echo $row['product_id'];?>">
-                                                                <?php echo $row['name']; ?> -<?php echo $row['code']; ?>
-                                                                -
-                                                                Rs<?php if($co>0){ echo $row['sell'];} if($co=="pu"){echo $row['cost'];} ?>
+                                                            <option supply="<?php echo $row['supply'] ?>"
+                                                                refit="<?php echo $row['refit'] ?>"
+                                                                repair="<?php echo $row['repair'] ?>"
+                                                                paint="<?php echo $row['paint'] ?>"
+                                                                value="<?php echo $row['product_id'];?>">
+                                                                <?php echo $row['name']; ?>
+
                                                             </option>
                                                             <?php	} ?>
                                                         </select>
@@ -135,41 +129,80 @@ include_once("sidebar.php");
                                                 <div class="form-group">
                                                     <div class="input-group date">
                                                         <div class="input-group-addon">
-                                                            <label>Qty</label>
+                                                            <label>QTY</label>
                                                         </div>
-                                                        <input type="number" class="form-control" value="1" name="qty"
-                                                            tabindex="2">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>Dis %</label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="dis"
-                                                            tabindex="2">
+                                                        <input type="number" class="form-control" name="qty" value="1">
                                                     </div>
                                                 </div>
                                             </div>
 
 
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>Price</label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="price"
-                                                            tabindex="2">
-                                                    </div>
-                                                </div>
-                                            </div>
+
+
                                             <input type="hidden" name="invoice" value="<?php echo $invo; ?>">
                                             <input class="btn btn-<?php echo $type_color ?>" type="submit"
                                                 value="Submit">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>
+                                                                <input type="checkbox" name="supply_c" value="ok">
+                                                                Supply
+                                                            </label>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="supply"
+                                                            id="supply">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>
+                                                                <input type="checkbox" name="refit_c" value="ok">
+                                                                ReReFit
+                                                            </label>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="refit"
+                                                            id="refit">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>
+                                                                <input type="checkbox" name="repair_c" value="ok">
+                                                                Repair
+                                                            </label>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="repair"
+                                                            id="repair" >
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>
+                                                                <input type="checkbox" name="paint_c" value="ok">
+                                                                Paint
+                                                            </label>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="paint"
+                                                            id="paint" >
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -189,57 +222,185 @@ include_once("sidebar.php");
                                             <th>Amount (Rs.)</th>
                                             <th>#</th>
                                         </tr>
-                                        <?php $total=0; $style="";
-                $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-			$pro_id=$row['product_id'];
+                                        <tr style="background-color: #FFA245;">
+                                            <td colspan="6">
+                                                Supply
+                                            </td>
 
-$resultz = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' ");
-$resultz->bindParam(':userid', $res);
-$resultz->execute();
-for($i=0; $rowz = $resultz->fetch(); $i++){
-$stock=$rowz['qty'];
-}
-if ($stock < 0) {
-$style='style="color:red" ';
-}
+                                        </tr>
+                                        <?php $total=0; $supTot=0; $style="";
+                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Supply'");
+		                                $result->bindParam(':userid', $res);
+		                                $result->execute();
+		                                for($i=0; $row = $result->fetch(); $i++){
+			                            $pro_id=$row['product_id'];
+                                        ?>
 
-	?>
-                                        <tr <?php echo $style; ?>>
-                                            <td  width="50%"><?php echo $row['name']; ?></td>
+                                        <tr>
+                                            <td width="50%"><?php echo $row['name']; ?></td>
                                             <td><?php echo $row['qty']; ?></td>
                                             <td align="right"><?php echo $row['dic']; ?></td>
                                             <td align="right">
-                                              <form action="sales_list_edit.php" method="post">
-                                              <input style="text-align: right;" type="number" class="form-control" name="price" value="<?php echo $row['price']; ?>" id="">
-                                              <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                                              </form>
+                                                <form action="sales_list_edit.php" method="post">
+                                                    <input style="text-align: right;" type="number" class="form-control"
+                                                        name="price" value="<?php echo $row['price']; ?>" id="">
+                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                </form>
                                             </td>
                                             <td align="right"><?php echo $row['amount']; ?></td>
                                             <td width="5%"> <a
                                                     href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
                                                     <button class="btn btn-danger"><i
                                                             class="fa fa trash">X</i></button></a></td>
-                                            <?php  $total+=$row['price']; ?>
+                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
                                         </tr>
-                                        <?php
-		}
+                                        <?php } ?>
+                                        <tr style="background-color: #C8C8C8;">
 
-$result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
-		$result1->bindParam(':userid', $a1);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$adv=$row1['advance'];
-		$customer_id=$row1['customer_id'];
-		$job_no=$row1['job_no'];
+                                            <td align="right" colspan="4">Total</td>
+                                            <td>Rs.<?php echo $supTot; ?></td>
+                                            <td></td>
 
-		}
+                                        </tr>
 
-				 ?>
+                                        <tr style="background-color: #FFA245; ">
+                                            <td colspan="6">
+                                                Remove & Refitting
+                                            </td>
+
+                                        </tr>
+                                        <?php  $supTot=0; $style="";
+                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'ReReFit'");
+		                                $result->bindParam(':userid', $res);
+		                                $result->execute();
+		                                for($i=0; $row = $result->fetch(); $i++){
+			                            $pro_id=$row['product_id'];
+                                        ?>
+
+                                        <tr>
+                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['qty']; ?></td>
+                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                            <td align="right">
+                                                <form action="sales_list_edit.php" method="post">
+                                                    <input style="text-align: right;" type="number" class="form-control"
+                                                        name="price" value="<?php echo $row['price']; ?>" id="">
+                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                </form>
+                                            </td>
+                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                            <td width="5%"> <a
+                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                    <button class="btn btn-danger"><i
+                                                            class="fa fa trash">X</i></button></a></td>
+                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                        </tr>
+                                        <?php } ?>
+                                        <tr  style="background-color: #C8C8C8;">
+
+                                            <td colspan="4" align="right">Total</td>
+                                            <td>Rs.<?php echo $supTot; ?></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+
+                                        <tr style="background-color: #FFA245;">
+                                            <td colspan="6">
+                                                Repair
+                                            </td>
+
+                                        </tr>
+                                        <?php  $supTot=0; $style="";
+                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Repair'");
+		                                $result->bindParam(':userid', $res);
+		                                $result->execute();
+		                                for($i=0; $row = $result->fetch(); $i++){
+			                            $pro_id=$row['product_id'];
+                                        ?>
+
+                                        <tr>
+                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['qty']; ?></td>
+                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                            <td align="right">
+                                                <form action="sales_list_edit.php" method="post">
+                                                    <input style="text-align: right;" type="number" class="form-control"
+                                                        name="price" value="<?php echo $row['price']; ?>" id="">
+                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                </form>
+                                            </td>
+                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                            <td width="5%"> <a
+                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                    <button class="btn btn-danger"><i
+                                                            class="fa fa trash">X</i></button></a></td>
+                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                        </tr>
+                                        <?php } ?>
+                                        <tr  style="background-color: #C8C8C8;">
+                                            <td colspan="4" align="right">Total</td>
+                                            <td>Rs.<?php echo $supTot; ?></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+
+
+                                        <tr style="background-color: #FFA245;">
+                                            <td colspan="6"> Paint </td>
+
+                                        </tr>
+                                        <?php  $supTot=0; $style="";
+                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Paint'");
+		                                $result->bindParam(':userid', $res);
+		                                $result->execute();
+		                                for($i=0; $row = $result->fetch(); $i++){
+			                            $pro_id=$row['product_id'];
+                                        ?>
+
+                                        <tr>
+                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['qty']; ?></td>
+                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                            <td align="right">
+                                                <form action="sales_list_edit.php" method="post">
+                                                    <input style="text-align: right;" type="number" class="form-control"
+                                                        name="price" value="<?php echo $row['price']; ?>" id="">
+                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                </form>
+                                            </td>
+                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                            <td width="5%"> <a
+                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                    <button class="btn btn-danger"><i
+                                                            class="fa fa trash">X</i></button></a></td>
+                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                        </tr>
+                                        <?php } ?>
+                                        <tr style="background-color: #C8C8C8;">
+                                            <td colspan="4" align="right">Total</td>
+                                            <td>Rs.<?php echo $supTot; ?></td>
+                                            <td></td>
+
+                                        </tr>
+
+
                                     </table>
 
+                                    <?php 
+                                    $adv=0;
+                                    $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
+                                    $result1->bindParam(':userid', $a1);
+                                    $result1->execute();
+                                    for($i=0; $row1 = $result1->fetch(); $i++){
+                                    $adv=$row1['advance'];
+                                    $customer_id=$row1['customer_id'];
+                                    $job_no=$row1['job_no'];
+                            
+                                    } ?>
                                     <table align="right" cellpadding="0" cellspacing="0" border="0" width="30%">
                                         <tr>
                                             <td style="font-size:20px" align="right">Total:</td>
@@ -269,133 +430,13 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
                             <!-- /.col (left) -->
 
 
-                            <?php if ($co=="pu"){
-		?>
-                            <form method="post" action="save_purchase.php">
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <label>Supplier</label>
-                                        </div>
-                                        <select class="form-control select2" name="supplier" style="width: 100%;"
-                                            tabindex="1" autofocus>
 
-                                            <?php  $invo = $_GET['id'];
-         $result = $db->prepare("SELECT * FROM supplier ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){ ?>
-                                            <option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?>
-                                            </option>
-                                            <?php	} ?>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <input type="hidden" class="form-control" name="total"
-                                            value="<?php echo $total; ?>">
-                                        <input type="hidden" class="form-control" name="id"
-                                            value="<?php echo $invo; ?>">
-                                        <div class="input-group-addon">
-                                            <label>Suplier Invoice No</label>
-                                        </div>
-                                        <input type="text" class="form-control" name="invo_no">
-                                    </div><br>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <label>Remarks</label>
-                                        </div>
-                                        <input type="text" class="form-control" name="remarks">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="type" id="optionsRadios1" value="Cash"
-                                                    checked>
-                                                Cash <i class="fa fa-money"></i>
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="type" id="optionsRadios2" value="Chq">
-                                                Chq <i class="fa fa-credit-card"></i>
-                                            </label>
-                                        </div>
-
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="type" id="optionsRadios2" value="Credit">
-                                                Credit <i class="fa fa-credit-card"></i>
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <input class="btn btn-<?php echo $type_color ?>" type="submit" value="Save">
-                            </form>
-                            <?php } 	?>
                             <!-- /sub -->
-                            <?php if ($co=="ds"){
-		?>
-                            <form method="post" action="save_bill.php">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
-                                            Cash <i class="fa fa-money"></i>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" id="optionsRadios2" value="Card">
-                                            Card <i class="fa fa-credit-card"></i>
-                                        </label>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <!-- /btn-group -->
-                                        <input type="number" class="form-control" name="amount" value="">
-                                        <div class="input-group-btn">
-                                            <input type="hidden" class="form-control" name="total"
-                                                value="<?php echo $total; ?>">
-                                            <input type="hidden" class="form-control" name="invoice"
-                                                value="<?php echo $invo; ?>">
-                                            <input class="btn btn-info" type="submit" value="Pay and Print">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <?php } ?>
-
-
-                            <?php if ($co=="tr"){
-		?>
-                            <form method="post" action="save_tr.php">
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <input type="hidden" class="form-control" name="total"
-                                            value="<?php echo $total; ?>">
-                                        <input type="hidden" class="form-control" name="invoice"
-                                            value="<?php echo $invo; ?>">
-                                        <label>Note</label>
-                                        <input type="text" name="note" class="form-control" required>
-
-                                    </div>
-                                </div>
-
-                                <input class="btn btn-<?php echo $type_color ?>" type="submit" value="Transfer">
-                            </form>
 
 
 
 
 
-                            <?php } if ($co=="qt"){
-		?>
                             <form method="post" action="save_qt.php">
 
                                 <input type="hidden" class="form-control" name="total" value="<?php echo $total; ?>">
@@ -440,7 +481,6 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Model</label>
-
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-arrow-down"></i>
@@ -461,11 +501,7 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
 				}
 			?>
                                             </select>
-
                                         </div>
-
-
-
                                         <div class="form-group">
                                             <div class="radio">
                                                 <label>
@@ -474,191 +510,26 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
                                                     Quotations<i class="fa fa-money"></i>
                                                 </label>
                                             </div>
-
-
                                         </div>
-
-
-
                                     </div>
                                 </div>
-
-
-
                         </div>
 
                         <input class="btn btn-<?php echo $type_color ?>" type="submit" value=" Print">
                         </form>
-
-
-                        <?php } if ($co>0){	
-		    
-		
-		$result1 = $db->prepare("SELECT * FROM job WHERE id='$job_no' ");
-		$result1->bindParam(':userid', $a1);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$job_type=$row1['job_type'];
-		}
-		
-		$result1 = $db->prepare("SELECT * FROM customer WHERE id='$customer_id' ");
-		$result1->bindParam(':userid', $a1);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$email=$row1['email'];
-		}
-		
-		?>
-                        <form method="post" action="save_bill.php">
-                            <div class="form-group">
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="">Note</label><br>
-                                            <textarea name="note" id="" cols="70" rows="5"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
-                                        Cash <i class="fa fa-money"></i>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="type" id="optionsRadios2" value="Card">
-                                        Card <i class="fa fa-credit-card"></i>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- /.box-body -->
 
                     </div>
-                    <?php if($email==""){}else{ ?>
-                    <div class="col-md-3">
-                        <input id="vehicle2" type="checkbox" name="email" value="1">
-                        <label style="margin: 10px;" for="vehicle2"> Send to <?php echo $email; ?></label>
-                    </div>
-
-                    <?php } ?>
-
-                    <?php if($job_type==1){ ?>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <!-- /btn-group -->
-                            <input type="number" class="form-control" width="100%" name="km" value="5000">
-                            <div class="input-group-addon">
-                                <label>Km</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php } ?>
-
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <!-- /btn-group -->
-                            <input type="number" class="form-control" name="amount" value="">
-                            <div class="input-group-addon">
-                                <label>Pay Amount</label>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" class="form-control" name="total" value="<?php echo $total; ?>">
-                    <input type="hidden" class="form-control" name="invoice" value="<?php echo $invo; ?>"> <br><br>
-                    <input class="btn btn-info pull-right" type="submit" value="Pay and Print">
-                    </form>
-
-
-                    <?php }	?>
-                    <!-- /.box-body -->
-
-                </div>
-                <!-- /.box -->
-            </div>
-    </div>
-
-    <br><br>
-    <?php  if ($co>0){	?>
-
-    <br><br><br>
-
-    <div class="col-md-7">
-        <div class="box box-info">
-            <div class="box-header with-border">
-                <h3 class="box-title">Advance Payment</h3>
-
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                            class="fa fa-times"></i></button>
+                    <!-- /.box -->
                 </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <form method="post" action="save_advance.php">
-                    <div class="form-group">
-                        <div class="col-md-5">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
-                                            Cash <i class="fa fa-money"></i>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="type" id="optionsRadios2" value="Card">
-                                            Card <i class="fa fa-credit-card"></i>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
-                    </div>
-                    <div class="col-md-7">
-                        <div class="input-group">
-                            <!-- /btn-group -->
-                            <div class="input-group-addon">
-                                <label>Advance amount</label>
-                            </div>
-                            <input type="number" class="form-control" name="amount" value="">
-                            <div class="input-group-btn">
+            <!-- /.col (right) -->
 
-                                <input type="hidden" class="form-control" name="invoice" value="<?php echo $invo; ?>">
-                                <input class="btn btn-info" type="submit" value="save">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <?php }	?>
-    <!-- /.col (right) -->
-
-    <!-- /.row -->
-    </section>
-    <!-- /.content -->
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <?php
@@ -719,6 +590,19 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
 
     <!-- Page script -->
     <script>
+    $('#product').change(function() {
+        var supply = $(this).find('option:selected').attr('supply');
+        var refit = $(this).find('option:selected').attr('refit');
+        var repair = $(this).find('option:selected').attr('repair');
+        var paint = $(this).find('option:selected').attr('paint');
+
+
+        document.getElementById('supply').value = supply;
+        document.getElementById('refit').value = refit;
+        document.getElementById('repair').value = repair;
+        document.getElementById('paint').value = paint;
+    });
+
     $(function() {
 
         //Initialize Select2 Elements
@@ -727,73 +611,10 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
 
 
 
-        //Datemask dd/mm/yyyy
-
-        $("#datemask").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
-        });
-
-        //Datemask2 mm/dd/yyyy
-
-        $("#datemask2").inputmask("YYYY/MM/DD", {
-            "placeholder": "YYYY/MM/DD"
-        });
-
-        //Money Euro
-
-        $("[data-mask]").inputmask();
 
 
 
-        //Date range picker
 
-        $('#reservation').daterangepicker();
-
-        //Date range picker with time picker
-
-        $('#reservationtime').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            format: 'YYYY/MM/DD h:mm A'
-        });
-
-        //Date range as a button
-
-        $('#daterange-btn').daterangepicker(
-
-            {
-
-                ranges: {
-
-                    'Today': [moment(), moment()],
-
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-                        'month').endOf('month')]
-
-                },
-
-                startDate: moment().subtract(29, 'days'),
-
-                endDate: moment()
-
-            },
-
-            function(start, end) {
-
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format(
-                    'MMMM D, YYYY'));
-
-            }
-
-        );
 
 
 
@@ -817,45 +638,15 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
 
         });
 
-        //Red color scheme for iCheck
-
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-
-            checkboxClass: 'icheckbox_minimal-red',
-
-            radioClass: 'iradio_minimal-red'
-
-        });
-
-        //Flat red color scheme for iCheck
-
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-
-            checkboxClass: 'icheckbox_flat-green',
-
-            radioClass: 'iradio_flat-green'
-
-        });
 
 
 
-        //Colorpicker
-
-        $(".my-colorpicker1").colorpicker();
-
-        //color picker with addon
-
-        $(".my-colorpicker2").colorpicker();
 
 
 
-        //Timepicker
 
-        $(".timepicker").timepicker({
 
-            showInputs: false
 
-        });
 
     });
     </script>
