@@ -150,7 +150,7 @@ include_once("sidebar.php");
                                 <th>Address</th>
                                 <th>Attend Date</th>
                                 <th>Type</th>
-                                <th>Finger</th>
+                                <th>Day Rate</th>
                                 <th>View</th>
                             </tr>
 
@@ -169,7 +169,7 @@ include_once("sidebar.php");
                                 <td><?php echo $row['address'];?></td>
                                 <td><?php echo $row['attend_date'];?></td>
                                 <td><?php echo $row['type'];?></td>
-                                <td></td>
+                                <td>Rs.<?php echo $row['day_rate'];?></td>
                                 <td></td>
                             </tr>
                             <?php  }  ?>
