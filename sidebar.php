@@ -274,6 +274,21 @@
             <li><a href="supplier_payment.php"><i class="fa fa-circle-o text-red"></i>Supplier payment</a></li>
           </ul>
         </li>
+
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>HR</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+           </span>
+         </a>
+          <ul class="treeview-menu">
+             <li><a href="employee.php"><i class="fa fa-circle-o text-yellow"></i>Employee</a></li>
+            <li><a href="attendance.php"><i class="fa fa-circle-o text-yellow"></i>Attendance</a></li>
+            <li><a href="payroll.php"><i class="fa fa-circle-o text-red"></i>Payroll </a></li>
+          </ul>
+        </li>
 		  
 		  
 
