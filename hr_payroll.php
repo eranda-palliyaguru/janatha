@@ -232,7 +232,7 @@ include_once("sidebar.php");
                                 <!-- /.box -->
                             </div>
                             <!-- /.col (left) -->
-
+                            <a href="hr_payroll_print.php?id=<?php echo $_GET['id'] ?>&year=<?php echo $_GET['year'] ?>&month=<?php echo $_GET['month'] ?>"><button class="btn btn-danger pull-right" ><i class="fa fa-print"></i></button></a>
                         </div>
                     </div>
                 </div>
