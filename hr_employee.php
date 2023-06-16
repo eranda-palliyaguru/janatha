@@ -90,7 +90,7 @@ include_once("sidebar.php");
 
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="employee_save.php">
+                        <form method="post" action="hr_employee_save.php">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -121,6 +121,46 @@ include_once("sidebar.php");
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <h3>Hour Rate</h3>
+                                            <input class="form-control" type="text" name="rate">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <h3>Designation</h3>
+                                            <select class="form-control" name="type" >
+                                                <?php 
+                                                $result = $db->prepare("SELECT * FROM Employees_des ");
+                                                $result->bindParam(':userid', $res);
+                                                $result->execute();
+                                                for($i=0; $row = $result->fetch(); $i++){
+                                                ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <h3>EPF NO</h3>
+                                            <input class="form-control" type="text" name="etf_no">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <h3>EPF Amount</h3>
+                                            <input class="form-control" type="text" name="etf_amount">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.box -->
                             <input class="btn btn-info" type="submit" value="Save">
@@ -147,11 +187,11 @@ include_once("sidebar.php");
                                 <th>Name</th>
                                 <th>Phone NO</th>
                                 <th>NIC</th>
-                                <th>Address</th>
-                                <th>Attend Date</th>
-                                <th>Type</th>
-                                <th>Day Rate</th>
-                                <th>View</th>
+                                <th>EPF</th>
+                                <th>EPF No</th>
+                                <th>Designation</th>
+                                <th>Hour Rate</th>
+                                
                             </tr>
 
                         </thead>
@@ -166,11 +206,11 @@ include_once("sidebar.php");
                                 <td><?php echo $row['name'];?></td>
                                 <td><?php echo $vehi=$row['phone_no'];?></td>
                                 <td><?php echo $row['nic'];?></td>
-                                <td><?php echo $row['address'];?></td>
-                                <td><?php echo $row['attend_date'];?></td>
-                                <td><?php echo $row['type'];?></td>
-                                <td>Rs.<?php echo $row['day_rate'];?></td>
-                                <td></td>
+                                <td>Rs.<?php echo $row['epf_amount'];?></td>
+                                <td><?php echo $row['epf_no'];?></td>
+                                <td><?php echo $row['des'];?></td>
+                                <td>Rs.<?php echo $row['hour_rate'];?></td>
+                                
                             </tr>
                             <?php  }  ?>
                         </tbody>

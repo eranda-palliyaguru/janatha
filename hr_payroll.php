@@ -148,11 +148,11 @@ include_once("sidebar.php");
                                     $id=$_GET["id"];
                                     $d1=$_GET['year'].'-'.$_GET['month'].'-01';
                                     $d2=$_GET['year'].'-'.$_GET['month'].'-31';  $h=0;$m=0;
-                                    $result = $db->prepare("SELECT deff_time,ot FROM attendance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
+                                    $result = $db->prepare("SELECT work_time,ot FROM attendance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
                                     $result->bindParam(':userid', $date);
                                     $result->execute();
                                     for($i=0; $row = $result->fetch(); $i++){ 
-                                        $hour[]=$row['deff_time'];
+                                        $hour[]=$row['work_time'];
                                         $ot[]=$row['ot'];
                                     }
 
@@ -168,40 +168,57 @@ include_once("sidebar.php");
                                     $result->execute();
                                     for($i=0; $row = $result->fetch(); $i++){ 
                                         $name=$row['name'];
-                                        $rate=$row['day_rate'];
+                                        $rate=$row['hour_rate'];
+                                        $epf=$row['epf_amount'];
                                     }
 
+                                    $result = $db->prepare("SELECT sum(amount) FROM salary_advance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
+				                    $result->bindParam(':userid', $date);
+                                    $result->execute();
+                                    for($i=0; $row = $result->fetch(); $i++){$adv=$row['sum(amount)'];}
+                                    
                                     ?>
+                                    <h2><?php echo $name; ?></h2>
+                                    <h3><?php echo $_GET['year'].'-'.$_GET['month'] ?></h3>
                                 <table class="table">
                                     <tr>
-                                        <td>Number of days worked</td>
+                                        <td>ATTENDANCE DAYS</td>
                                         <td><?php echo $day; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Work Hours</td>
-                                        <td><?php echo AddPlayTime($hour); ?></td>
+                                        <td><?php echo $hour=AddPlayTime($hour); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hour Rate</td>
+                                        <td>Rs.<?php echo $rate; ?></td>
+                                    </tr>
+                                    <tr style="font-size: 16px; color:#2E86C1">
+                                        <td>GROSS PAY</td>
+                                        <td>Rs.<?php echo number_format($basic =$rate*$hour,2); ?></td>
                                     </tr>
                                     <tr>
                                         <td>Overtime</td>
                                         <td><?php echo $ot=AddPlayTime($ot); ?></td>
                                     </tr>
 
-                                    <tr>
-                                        <td>Day Rate</td>
-                                        <td>Rs.<?php echo $rate; ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Basic</td>
-                                        <td>Rs.<?php echo number_format( $basic=$day*$rate,2); ?></td>
-                                    </tr>
-                                    <tr>
+                                    <tr style="font-size: 16px; color:#2E86C1">
                                         <td>OT</td>
                                         <td>Rs.<?php echo $ot_tot=($rate/100 * 42.86)*$ot; ?></td>
                                     </tr>
+
                                     <tr>
-                                        <td>Total</td>
-                                        <td>Rs.<?php echo $ot_tot+$basic ?></td>
+                                        <td>Advance</td>
+                                        <td>Rs.<?php echo $adv; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>EPF</td>
+                                        <td>Rs.<?php echo $epf; ?></td>
+                                    </tr>
+                                    
+                                    <tr style="font-size: 20px; color:#2E86C1">
+                                        <td>Balance Pay</td>
+                                        <td>Rs.<?php echo ($ot_tot+$basic)-$epf-$adv ?></td>
                                     </tr>
                                 </table>
                                 <?php } ?>
@@ -215,7 +232,7 @@ include_once("sidebar.php");
 
                 <div class="col-md-6">
                     <?php if(isset($_GET['id'])){ ?>
-                    <div class="box">
+                    <div class="box box-warning">
                         <div class="box-header">
                             <h3 class="box-title">Attendance List</h3>
                         </div>
@@ -248,13 +265,69 @@ include_once("sidebar.php");
                                         <td><?php echo $row['date']?></td>
                                         <td><?php echo $row['IN_time'];?></td>
                                         <td><?php echo $row['OUT_time'];?></td>
-                                        <td><?php echo $row['deff_time']; ?></td>
+                                        <td><?php echo $row['work_time']; ?></td>
                                         <td><?php echo $row['ot']; ?></td>
 
                                         <?php	} ?>
                                     </tr>
                                 </tbody>
                                 <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><?php echo $hour; ?></th>
+                                    <th><?php echo $ot ?></th>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <?php } ?>
+                    <!-- /.box -->
+                </div>
+
+                <div class="col-md-6">
+                    <?php if(isset($_GET['id'])){ ?>
+                    <div class="box box-danger">
+                        <div class="box-header">
+                            <h3 class="box-title">Salary Advance List</h3>
+                        </div>
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Note</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    <?php
+                            $result = $db->prepare("SELECT * FROM salary_advance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
+				            $result->bindParam(':userid', $date);
+                            $result->execute();
+                            for($i=0; $row = $result->fetch(); $i++){
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row['id'];?></td>
+                                        <td><?php echo $row['date']?></td>
+                                        <td>Rs.<?php echo $row['amount'];?></td>
+                                        <td><?php echo $row['note'];?></td>
+
+                                        <?php	} ?>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Rs.<?php echo number_format($adv,2); ?></th>
                                 </tfoot>
                             </table>
                         </div>

@@ -57,11 +57,7 @@ $out_ti=$time;
 
 if(isset($att_id)){
 
-$wtime1 = new DateTime($out_ti);
-$wtime2 = $wtime1->diff(new DateTime($in_ti));
-$h=$wtime2->h;
-$m=$wtime2->i;
-//$deff=$h.'.'.sprintf("%02d",$m);
+
 
 list($out_h, $out_m) = explode('.', $out_ti);
 list($in_h, $in_m) = explode('.', $in_ti);
@@ -70,30 +66,31 @@ $deff_h=$out_h-$in_h;
 $deff_m=$out_m-$in_m;
 if ($deff_m < 0) {$deff_m=$deff_m+60; $deff_h=$deff_h-1;}
 
+
 $deff=$deff_h.".".sprintf("%02d",$deff_m);
 
-if($m==0){
-    $ot_h=$h-10;
-    $ot_m=$m;
-}else{
-    if($h<10){
+if($deff_h >= 10){$work_time='10.00';}else{$work_time=$deff;}
+
+
+    if($deff_h<10){
         $wh=9;
         $wm=60;
 
-        $ot_h=$h-$wh;
-        $ot_m=$wm-$m;
-        $ot='-'.$ot_h.'.'.sprintf("%02d",$ot_m);
+        $ot_h=$deff_h-$wh;
+        $ot_m=$wm-$deff_m;
+       // $ot='-'.$ot_h.'.'.sprintf("%02d",$ot_m);
+       $ot=0.00;
     }
-    if($h >= 10){
+    if($deff_h >= 10){
         $wh=10;
 
-        $ot_h=$h-$wh;
-        $ot_m=$m;
+        $ot_h=$deff_h-$wh;
+        $ot_m=$deff_m;
 
         $ot=$ot_h.'.'.sprintf("%02d",$ot_m);
     }
     
-}
+
 
 
 
@@ -102,18 +99,18 @@ if($m==0){
     if($type=='IN'){
 
     $sql = "UPDATE attendance
-    SET IN_time=?,deff_time=?,ot=?
+    SET IN_time=?,deff_time=?,ot=?,work_time=?
     WHERE id=?";
     $q = $db->prepare($sql);
-    $q->execute(array($time,$deff,$ot,$att_id));
+    $q->execute(array($time,$deff,$ot,$work_time,$att_id));
 
     }else{
 
     $sql = "UPDATE attendance
-    SET OUT_time=?,deff_time=?,ot=?
+    SET OUT_time=?,deff_time=?,ot=?,work_time=?
     WHERE id=?";
     $q = $db->prepare($sql);
-    $q->execute(array($time,$deff,$ot,$att_id));
+    $q->execute(array($time,$deff,$ot,$work_time,$att_id));
 
     }
 
@@ -124,6 +121,6 @@ $q = $db->prepare($sql);
 $q->execute(array($id,$name,$date,$time,$in,$out));
 }
 
-header("location: attendance.php");
+header("location: hr_attendance.php");
 
 ?>

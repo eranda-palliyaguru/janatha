@@ -70,7 +70,7 @@ include_once("sidebar.php");
                     <!-- /.box-header -->
                     <div class="form-group">
 
-                        <form method="post" action="attendance_save.php">
+                        <form method="post" action="hr_attendance_save.php">
 
                             <div class="box-body">
 
