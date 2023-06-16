@@ -82,13 +82,10 @@ include_once("sidebar.php");
 
                                     <div class="box-body">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
 
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <label>Employee</label>
-                                                        </div>
+                                                    
                                                         <select class="form-control select2" name="id"
                                                             style="width: 100%;" tabindex="1" autofocus>
 
@@ -103,7 +100,7 @@ include_once("sidebar.php");
                                                             </option>
                                                             <?php	} ?>
                                                         </select>
-                                                    </div>
+                                                   
                                                 </div>
                                             </div>
 
@@ -140,6 +137,12 @@ include_once("sidebar.php");
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                <input class="btn btn-info" type="submit" value="Submit">
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -151,7 +154,7 @@ include_once("sidebar.php");
                                     </div>
 
 
-                                    <input class="btn btn-info" type="submit" value="Submit">
+                                    
 
                         </form>
                         <!-- /.box -->

@@ -79,12 +79,10 @@ include_once("sidebar.php");
                                         <div class="form-group">
                                             <div class="box-body">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <label>Employee</label>
-                                                                </div>
+                                                            
+                                                                
                                                                 <select class="form-control select2" name="id"
                                                                     style="width: 100%;" tabindex="1" autofocus>
                                                                     <option value="0"></option>
@@ -98,7 +96,7 @@ include_once("sidebar.php");
                                                                     </option>
                                                                     <?php	} ?>
                                                                 </select>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -142,6 +140,15 @@ include_once("sidebar.php");
                                 
                                     // returns the time already formatted
                                     return sprintf('%02d.%02d', $hours, $minutes);
+                                  
+                                }
+
+                                function TimeSet($times) {
+                                    
+                                    list($hour, $minute) = explode('.', $times);
+                                    $minutes=$minute+$hour*60;
+                                
+                                   return $minutes/60;
                                 }
                                 
                                 if(isset($_GET['id'])){ 
@@ -195,7 +202,7 @@ include_once("sidebar.php");
                                     </tr>
                                     <tr style="font-size: 16px; color:#2E86C1">
                                         <td>GROSS PAY</td>
-                                        <td>Rs.<?php echo number_format($basic =$rate*$hour,2); ?></td>
+                                        <td>Rs.<?php echo number_format($basic =$rate*TimeSet($hour),2); ?></td>
                                     </tr>
                                     <tr>
                                         <td>Overtime</td>
@@ -204,7 +211,7 @@ include_once("sidebar.php");
 
                                     <tr style="font-size: 16px; color:#2E86C1">
                                         <td>OT</td>
-                                        <td>Rs.<?php echo $ot_tot=($rate/100 * 42.86)*$ot; ?></td>
+                                        <td>Rs.<?php echo $ot_tot=($rate * 142.86)/100 * TimeSet($ot); ?></td>
                                     </tr>
 
                                     <tr>
