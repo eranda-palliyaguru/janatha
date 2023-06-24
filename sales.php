@@ -5,7 +5,7 @@ include("head.php");
 include("connect.php");
 ?>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <?php
 include_once("auth.php");
 $r=$_SESSION['SESS_LAST_NAME'];
@@ -92,120 +92,7 @@ include_once("sidebar.php");
                             <!-- /.box -->
 
                             <div class="form-group">
-                                <div class="box-body">
-                                    <form method="post" action="sales_save.php">
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <label>Product</label>
-                                                        </div>
-
-                                                        <select class="form-control select2" name="name" id="product"
-                                                            style="width: 100%;" tabindex="1" autofocus>
-
-                                                            <?php  $invo = $_GET['id'];
-         $result = $db->prepare("SELECT * FROM product ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){ ?>
-                                                            <option supply="<?php echo $row['supply'] ?>"
-                                                                refit="<?php echo $row['refit'] ?>"
-                                                                repair="<?php echo $row['repair'] ?>"
-                                                                paint="<?php echo $row['paint'] ?>"
-                                                                value="<?php echo $row['product_id'];?>">
-                                                                <?php echo $row['name']; ?>
-
-                                                            </option>
-                                                            <?php	} ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>QTY</label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="qty" value="1">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-                                            <input type="hidden" name="invoice" value="<?php echo $invo; ?>">
-                                            <input class="btn btn-<?php echo $type_color ?>" type="submit"
-                                                value="Submit">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>
-                                                                <input type="checkbox" name="supply_c" value="ok">
-                                                                Supply
-                                                            </label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="supply"
-                                                            id="supply">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>
-                                                                <input type="checkbox" name="refit_c" value="ok">
-                                                                ReReFit
-                                                            </label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="refit"
-                                                            id="refit">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>
-                                                                <input type="checkbox" name="repair_c" value="ok">
-                                                                Repair
-                                                            </label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="repair"
-                                                            id="repair" >
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>
-                                                                <input type="checkbox" name="paint_c" value="ok">
-                                                                Paint
-                                                            </label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="paint"
-                                                            id="paint" >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                               
 
 
 
@@ -213,214 +100,331 @@ include_once("sidebar.php");
 
 
                                 <div class="box-body">
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <tr>
-                                            <th>Product Name</th>
-                                            <th>QTY</th>
-                                            <th>Dic (Rs.)</th>
-                                            <th>Price (Rs.)</th>
-                                            <th>Amount (Rs.)</th>
-                                            <th>#</th>
-                                        </tr>
-                                        <tr style="background-color: #FFA245;">
-                                            <td colspan="6">
-                                                Supply
-                                            </td>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                            
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>Price</label>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="price" id="price" value="1">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        </tr>
-                                        <?php $total=0; $supTot=0; $style="";
-                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Supply'");
-		                                $result->bindParam(':userid', $res);
-		                                $result->execute();
-		                                for($i=0; $row = $result->fetch(); $i++){
-			                            $pro_id=$row['product_id'];
-                                        ?>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <label>QTY</label>
+                                                        </div>
+                                                        <input type="number" class="form-control" id="qty" name="qty" value="1">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <tr>
-                                            <td width="50%"><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['qty']; ?></td>
-                                            <td align="right"><?php echo $row['dic']; ?></td>
-                                            <td align="right">
-                                                <form action="sales_list_edit.php" method="post">
-                                                    <input style="text-align: right;" type="number" class="form-control"
-                                                        name="price" value="<?php echo $row['price']; ?>" id="">
-                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                                                </form>
-                                            </td>
-                                            <td align="right"><?php echo $row['amount']; ?></td>
-                                            <td width="5%"> <a
-                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                    <button class="btn btn-danger"><i
-                                                            class="fa fa trash">X</i></button></a></td>
-                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                        </tr>
-                                        <?php } ?>
-                                        <tr style="background-color: #C8C8C8;">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                       
+                                                        <input class="btn btn-<?php echo $type_color ?>" type="submit"
+                                                value="Submit">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                            <td align="right" colspan="4">Total</td>
-                                            <td>Rs.<?php echo $supTot; ?></td>
-                                            <td></td>
+                                            </div>
+                                            <div class="col-md-12">
+                                            <div id="sales_list">
+                                            <table id="example2" class="table table-bordered table-hover">
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>QTY</th>
+                                                    <th>Dic (Rs.)</th>
+                                                    <th>Price (Rs.)</th>
+                                                    <th>Amount (Rs.)</th>
+                                                    <th>#</th>
+                                                </tr>
+                                                <tr style="background-color: #FFA245;">
+                                                    <td colspan="6">
+                                                        Supply
+                                                    </td>
 
-                                        </tr>
+                                                </tr>
+                                                <?php $total=0; $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'supply'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
 
-                                        <tr style="background-color: #FFA245; ">
-                                            <td colspan="6">
-                                                Remove & Refitting
-                                            </td>
+                                                <tr>
+                                                    <td width="50%"><?php echo $row['name']; ?></td>
+                                                    <td><?php echo $row['qty']; ?></td>
+                                                    <td align="right"><?php echo $row['dic']; ?></td>
+                                                    <td align="right">
+                                                        <form action="sales_list_edit.php" method="post">
+                                                            <input style="text-align: right;" type="number"
+                                                                class="form-control" name="price"
+                                                                value="<?php echo $row['price']; ?>" id="">
+                                                            <input type="hidden" name="id"
+                                                                value="<?php echo $row['id'] ?>">
+                                                        </form>
+                                                    </td>
+                                                    <td align="right"><?php echo $row['amount']; ?></td>
+                                                    <td width="5%"> <a
+                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                            <button class="btn btn-danger"><i
+                                                                    class="fa fa trash">X</i></button></a></td>
+                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                </tr>
+                                                <?php } ?>
+                                                <tr style="background-color: #C8C8C8;">
 
-                                        </tr>
-                                        <?php  $supTot=0; $style="";
-                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'ReReFit'");
-		                                $result->bindParam(':userid', $res);
-		                                $result->execute();
-		                                for($i=0; $row = $result->fetch(); $i++){
-			                            $pro_id=$row['product_id'];
-                                        ?>
+                                                    <td align="right" colspan="4">Total</td>
+                                                    <td>Rs.<?php echo $supTot; ?></td>
+                                                    <td></td>
 
-                                        <tr>
-                                            <td width="50%"><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['qty']; ?></td>
-                                            <td align="right"><?php echo $row['dic']; ?></td>
-                                            <td align="right">
-                                                <form action="sales_list_edit.php" method="post">
-                                                    <input style="text-align: right;" type="number" class="form-control"
-                                                        name="price" value="<?php echo $row['price']; ?>" id="">
-                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                                                </form>
-                                            </td>
-                                            <td align="right"><?php echo $row['amount']; ?></td>
-                                            <td width="5%"> <a
-                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                    <button class="btn btn-danger"><i
-                                                            class="fa fa trash">X</i></button></a></td>
-                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                        </tr>
-                                        <?php } ?>
-                                        <tr  style="background-color: #C8C8C8;">
+                                                </tr>
 
-                                            <td colspan="4" align="right">Total</td>
-                                            <td>Rs.<?php echo $supTot; ?></td>
-                                            <td></td>
+                                                <tr style="background-color: #FFA245; ">
+                                                    <td colspan="6">
+                                                        Remove & Refitting
+                                                    </td>
 
-                                        </tr>
+                                                </tr>
+                                                <?php  $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'refit'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
 
+                                                <tr>
+                                                    <td width="50%"><?php echo $row['name']; ?></td>
+                                                    <td><?php echo $row['qty']; ?></td>
+                                                    <td align="right"><?php echo $row['dic']; ?></td>
+                                                    <td align="right">
+                                                        <form action="sales_list_edit.php" method="post">
+                                                            <input style="text-align: right;" type="number"
+                                                                class="form-control" name="price"
+                                                                value="<?php echo $row['price']; ?>" id="">
+                                                            <input type="hidden" name="id"
+                                                                value="<?php echo $row['id'] ?>">
+                                                        </form>
+                                                    </td>
+                                                    <td align="right"><?php echo $row['amount']; ?></td>
+                                                    <td width="5%"> <a
+                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                            <button class="btn btn-danger"><i
+                                                                    class="fa fa trash">X</i></button></a></td>
+                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                </tr>
+                                                <?php } ?>
+                                                <tr style="background-color: #C8C8C8;">
 
+                                                    <td colspan="4" align="right">Total</td>
+                                                    <td>Rs.<?php echo $supTot; ?></td>
+                                                    <td></td>
 
-                                        <tr style="background-color: #FFA245;">
-                                            <td colspan="6">
-                                                Repair
-                                            </td>
-
-                                        </tr>
-                                        <?php  $supTot=0; $style="";
-                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Repair'");
-		                                $result->bindParam(':userid', $res);
-		                                $result->execute();
-		                                for($i=0; $row = $result->fetch(); $i++){
-			                            $pro_id=$row['product_id'];
-                                        ?>
-
-                                        <tr>
-                                            <td width="50%"><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['qty']; ?></td>
-                                            <td align="right"><?php echo $row['dic']; ?></td>
-                                            <td align="right">
-                                                <form action="sales_list_edit.php" method="post">
-                                                    <input style="text-align: right;" type="number" class="form-control"
-                                                        name="price" value="<?php echo $row['price']; ?>" id="">
-                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                                                </form>
-                                            </td>
-                                            <td align="right"><?php echo $row['amount']; ?></td>
-                                            <td width="5%"> <a
-                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                    <button class="btn btn-danger"><i
-                                                            class="fa fa trash">X</i></button></a></td>
-                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                        </tr>
-                                        <?php } ?>
-                                        <tr  style="background-color: #C8C8C8;">
-                                            <td colspan="4" align="right">Total</td>
-                                            <td>Rs.<?php echo $supTot; ?></td>
-                                            <td></td>
-
-                                        </tr>
-
-
-
-
-                                        <tr style="background-color: #FFA245;">
-                                            <td colspan="6"> Paint </td>
-
-                                        </tr>
-                                        <?php  $supTot=0; $style="";
-                                        $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'Paint'");
-		                                $result->bindParam(':userid', $res);
-		                                $result->execute();
-		                                for($i=0; $row = $result->fetch(); $i++){
-			                            $pro_id=$row['product_id'];
-                                        ?>
-
-                                        <tr>
-                                            <td width="50%"><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['qty']; ?></td>
-                                            <td align="right"><?php echo $row['dic']; ?></td>
-                                            <td align="right">
-                                                <form action="sales_list_edit.php" method="post">
-                                                    <input style="text-align: right;" type="number" class="form-control"
-                                                        name="price" value="<?php echo $row['price']; ?>" id="">
-                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                                                </form>
-                                            </td>
-                                            <td align="right"><?php echo $row['amount']; ?></td>
-                                            <td width="5%"> <a
-                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                    <button class="btn btn-danger"><i
-                                                            class="fa fa trash">X</i></button></a></td>
-                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                        </tr>
-                                        <?php } ?>
-                                        <tr style="background-color: #C8C8C8;">
-                                            <td colspan="4" align="right">Total</td>
-                                            <td>Rs.<?php echo $supTot; ?></td>
-                                            <td></td>
-
-                                        </tr>
+                                                </tr>
 
 
-                                    </table>
 
-                                    <?php 
-                                    $adv=0;
-                                    $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
-                                    $result1->bindParam(':userid', $a1);
-                                    $result1->execute();
-                                    for($i=0; $row1 = $result1->fetch(); $i++){
-                                    $adv=$row1['advance'];
-                                    $customer_id=$row1['customer_id'];
-                                    $job_no=$row1['job_no'];
+                                                <tr style="background-color: #FFA245;">
+                                                    <td colspan="6">
+                                                        Repair
+                                                    </td>
+
+                                                </tr>
+                                                <?php  $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'repair'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
+
+                                                <tr>
+                                                    <td width="50%"><?php echo $row['name']; ?></td>
+                                                    <td><?php echo $row['qty']; ?></td>
+                                                    <td align="right"><?php echo $row['dic']; ?></td>
+                                                    <td align="right">
+                                                        <form action="sales_list_edit.php" method="post">
+                                                            <input style="text-align: right;" type="number"
+                                                                class="form-control" name="price"
+                                                                value="<?php echo $row['price']; ?>" id="">
+                                                            <input type="hidden" name="id"
+                                                                value="<?php echo $row['id'] ?>">
+                                                        </form>
+                                                    </td>
+                                                    <td align="right"><?php echo $row['amount']; ?></td>
+                                                    <td width="5%"> <a
+                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                            <button class="btn btn-danger"><i
+                                                                    class="fa fa trash">X</i></button></a></td>
+                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                </tr>
+                                                <?php } ?>
+                                                <tr style="background-color: #C8C8C8;">
+                                                    <td colspan="4" align="right">Total</td>
+                                                    <td>Rs.<?php echo $supTot; ?></td>
+                                                    <td></td>
+
+                                                </tr>
+
+
+
+
+                                                <tr style="background-color: #FFA245;">
+                                                    <td colspan="6"> Paint </td>
+
+                                                </tr>
+                                                <?php  $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'paint'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
+
+                                                <tr>
+                                                    <td width="50%"><?php echo $row['name']; ?></td>
+                                                    <td><?php echo $row['qty']; ?></td>
+                                                    <td align="right"><?php echo $row['dic']; ?></td>
+                                                    <td align="right">
+                                                        <form action="sales_list_edit.php" method="post">
+                                                            <input style="text-align: right;" type="number"
+                                                                class="form-control" name="price"
+                                                                value="<?php echo $row['price']; ?>" id="">
+                                                            <input type="hidden" name="id"
+                                                                value="<?php echo $row['id'] ?>">
+                                                        </form>
+                                                    </td>
+                                                    <td align="right"><?php echo $row['amount']; ?></td>
+                                                    <td width="5%"> <a
+                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                            <button class="btn btn-danger"><i
+                                                                    class="fa fa trash">X</i></button></a></td>
+                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                </tr>
+                                                <?php } ?>
+                                                <tr style="background-color: #C8C8C8;">
+                                                    <td colspan="4" align="right">Total</td>
+                                                    <td>Rs.<?php echo $supTot; ?></td>
+                                                    <td></td>
+
+                                                </tr>
+
+
+                                            </table>
+
+                                            <?php 
+                                        $adv=0;
+                                        $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
+                                        $result1->bindParam(':userid', $a1);
+                                        $result1->execute();
+                                        for($i=0; $row1 = $result1->fetch(); $i++){
+                                        $adv=$row1['advance'];
+                                        $customer_id=$row1['customer_id'];
+                                        $job_no=$row1['job_no'];
                             
-                                    } ?>
-                                    <table align="right" cellpadding="0" cellspacing="0" border="0" width="30%">
-                                        <tr>
-                                            <td style="font-size:20px" align="right">Total:</td>
-                                            <td style="font-size:20px" align="right">
-                                                Rs.<?php echo number_format($total,2); ?></td>
-                                            <td width="15%"></td>
-                                        </tr>
+                                        } ?>
+                                            <table align="right" cellpadding="0" cellspacing="0" border="0" width="30%">
+                                                <tr>
+                                                    <td style="font-size:20px" align="right">Total:</td>
+                                                    <td style="font-size:20px" align="right">
+                                                        Rs.<?php echo number_format($total,2); ?></td>
+                                                    <td width="15%"></td>
+                                                </tr>
 
-                                        <tr>
-                                            <td align="right">Advance:</td>
-                                            <td align="right">Rs.<?php echo number_format($adv,2); ?></td>
-                                            <td width="15%"></td>
-                                        </tr>
+                                                <tr>
+                                                    <td align="right">Advance:</td>
+                                                    <td align="right">Rs.<?php echo number_format($adv,2); ?></td>
+                                                    <td width="15%"></td>
+                                                </tr>
 
-                                        <tr>
-                                            <td align="right">Balance:</td>
-                                            <td align="right">Rs.<?php echo number_format($total-$adv,2); ?></td>
-                                            <td width="15%"></td>
-                                        </tr>
-                                    </table>
+                                                <tr>
+                                                    <td align="right">Balance:</td>
+                                                    <td align="right">Rs.<?php echo number_format($total-$adv,2); ?>
+                                                    </td>
+                                                    <td width="15%"></td>
+                                                </tr>
+                                            </table>
+                                            </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="supply" onclick="type_apply('info','supply');"
+                                                            class="btn btn-info">Supply</button>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="rerefit" onclick="type_apply('danger','rerefit');"
+                                                            class="btn btn-danger">ReReFit</button>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="repair" onclick="type_apply('success','repair');"
+                                                            class="btn btn-success">Repair</button>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="paint" onclick="type_apply('warning','paint');"
+                                                            class="btn btn-warning">Paint</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br><br>
+                                            <input type="hidden" id="product_type" >
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="front" onclick="get_item('front');"
+                                                            class="btn "> <img src="img/type_img/fron.svg" alt="">
+                                                            <br> FRONT</button>
+                                                            
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="rear" onclick="get_item('rear');"
+                                                            class="btn btn-"><img src="img/type_img/REAR.svg" alt="">
+                                                            <br> REAR</button>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="eroom" onclick="get_item('eroom');"
+                                                            class="btn btn-"><img src="img/type_img/ENGINE ROOM.svg" alt="">
+                                                            <br> ENGINE ROOM</button>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <button style="width: 100%;" id="room" onclick="get_item('room');"
+                                                            class="btn "><img src="img/type_img/ROOM.svg" alt="">
+                                                            <br> ROOM</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div id="product_list"></div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
 
 
 
@@ -590,63 +594,120 @@ include_once("sidebar.php");
 
     <!-- Page script -->
     <script>
-    $('#product').change(function() {
-        var supply = $(this).find('option:selected').attr('supply');
-        var refit = $(this).find('option:selected').attr('refit');
-        var repair = $(this).find('option:selected').attr('repair');
-        var paint = $(this).find('option:selected').attr('paint');
+
+function type_apply(info,id){
+
+document.getElementById('supply').className='btn';
+document.getElementById('rerefit').className='btn';
+document.getElementById('repair').className='btn';
+document.getElementById('paint').className='btn';
+
+document.getElementById(id).className='btn btn-'+info;
+
+document.getElementById("front").className="btn btn-"+info;
+document.getElementById("rear").className="btn btn-"+info;
+document.getElementById("eroom").className='btn btn-'+info;
+document.getElementById("room").className="btn btn-"+info;
+
+document.getElementById("product_type").value=info;
+document.getElementById("product_list").innerHTML="";
+}
 
 
-        document.getElementById('supply').value = supply;
-        document.getElementById('refit').value = refit;
-        document.getElementById('repair').value = repair;
-        document.getElementById('paint').value = paint;
-    });
+
+
+
+
+function list_update(id,price,item_type){
+console.log(item_type);
+    var invo = '<?php echo $invo; ?>'
+
+    var xmlhttp;
+if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+} else { // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+    }
+}
+
+xmlhttp.open("GET", "sales_product_list_add.php?type="+item_type+"&invo=" +invo+"&price="+price+"&id="+id+"&qty=1", true);
+xmlhttp.send();
+
+document.getElementById('ls_'+id).style.display="none";
+
+}
+
+
+
+
+function list_load(id,amount){
+    document.getElementById("price").value=amount;
+}
+
+
+
+
+function get_item(item){
+    var cl = document.getElementById('product_type').value;
+    var part="";
+    var invo = '<?php echo $invo; ?>'
+
+    if(cl == "info"){ part="supply"; }
+    if(cl == "danger"){ part="refit"; }
+    if(cl == "success"){ part="repair"; }
+    if(cl == "warning"){ part="paint"; }
+
+document.getElementById("front").className="btn";
+document.getElementById("rear").className="btn";
+document.getElementById("eroom").className='btn';
+document.getElementById("room").className='btn';
+
+var ty= document.getElementById("product_type").value;
+document.getElementById(item).className="btn btn-"+ty; 
+
+        var xmlhttp;
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("product_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET", "sales_product_list.php?type=" + part + "&area=" + item+'&invo='+invo, true);
+        xmlhttp.send();
+}
+
+
+
+
+
+
+
+
 
     $(function() {
 
         //Initialize Select2 Elements
-
         $(".select2").select2();
 
-
-
-
-
-
-
-
-
-
-        //Date picker
-
         $('#datepicker').datepicker({
-
             autoclose: true
-
         });
-
-
 
         //iCheck for checkbox and radio inputs
-
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-
             checkboxClass: 'icheckbox_minimal-blue',
-
             radioClass: 'iradio_minimal-blue'
-
         });
-
-
-
-
-
-
-
-
-
-
 
     });
     </script>
