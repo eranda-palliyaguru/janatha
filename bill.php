@@ -243,8 +243,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $u_pri;?></td>
                             <td><?php echo $row['qty'];?></td>
+                            <td><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
@@ -289,8 +289,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $u_pri;?></td>
                             <td><?php echo $row['qty'];?></td>
+                            <td><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
@@ -334,8 +334,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $u_pri;?></td>
                             <td><?php echo $row['qty'];?></td>
+                            <td><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
