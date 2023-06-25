@@ -48,7 +48,7 @@ $ql->execute(array($product_id,$name,$invo,$price,$qty,$type,$date,$price*$qty))
                                             ?>
 
                                                 <tr>
-                                                    <td width="50%"><?php echo $row['name']; ?></td>
+                                                    <td width="40%"><?php echo $row['name']; ?></td>
                                                     <td><?php echo $row['qty']; ?></td>
                                                     <td align="right"><?php echo $row['dic']; ?></td>
                                                     <td align="right">

@@ -31,6 +31,13 @@
     body {
         font-family: 'Poppins';
     }
+
+    @media print {
+        td.cs{
+            background-color: #737373 !important;
+            color: #eee !important;
+        }
+    }
     </style>
 </head>
 
@@ -143,26 +150,29 @@
             <div class="box-body">
                 <table id="example2" style="width:100%">
                     <thead>
-                        <tr style="background-color: #737373; color:#eee">
+                        <tr >
 
-                            <th>Decs</th>
-                            <th>Unit Price</th>
+                            <th >Decs</th>
                             <th>Qty</th>
+                            <th>Rate</th>
+                            
                             <?php
 					if($dis_tot>0){
 					?>
                             <th>Disc</th>
                             <?php } ?>
-                            <th align="right" >Amount </th>
+                            <th style="text-align: right;">Amount </th>
+                            <th style="text-align: right;">Amendment</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        <tr style="background-color: #FFA245;">
+                        <tr >
                             <td >
-                                <center>Supply</center>
+                               <b><u>Supply</u></b> 
+                                
                             </td>
-							<td colspan="4">
+                            <td colspan="4">
                             </td>
 
                         </tr>
@@ -179,40 +189,43 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td width="50%"><?php echo $row['name'];?></td>
-                            <td><?php echo $u_pri;?></td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td><?php echo $row['qty'];?></td>
+                            <td><?php echo $row['price'];?></td>
+                            
                             <?php
 					if($dis_tot>0){
 					?>
                             <td><?php echo $row['dic'];?></td>
                             <?php } ?>
-                            <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
+                            <td style="text-align: right;">Rs.<?php echo $row['amount'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
+                            <td></td>
+                            </tr>
                             <?php } ?>
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
                         </tr>
 
-
-
-
-
-
-
-
-
-
-
-
-						<tr>
-							<td colspan="3"></td>
-							<td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
-						</tr>
-
-						<tr style="background-color: #FFA245">
-                            <td >
-								<center>Remove & Refitting</center>
+                        <tr >
+                            <td>
+                            <b><u>Remove & Refitting</u></b> 
                             </td>
-							<td colspan="4">
+                            <td colspan="4">
                             </td>
 
                         </tr>
@@ -239,24 +252,26 @@
                             <?php } ?>
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
+                            <td></td>
+                            </tr>
                             <?php } ?>
+                        
+
+
+
+
+
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
                         </tr>
 
-
-
-
-
-
-						<tr>
-							<td colspan="3"></td>
-							<td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
-						</tr>
-
-						<tr style="background-color: #FFA245;">
-                            <td >
-								<center>Repair</center>
+                        <tr >
+                            <td>
+                                 <b><u>Repair</u></b>
                             </td>
-							<td colspan="4">
+                            <td colspan="4">
                             </td>
 
                         </tr>
@@ -283,23 +298,25 @@
                             <?php } ?>
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+= $row['amount'];?>
+                            <td></td>
+                            </tr>
                             <?php } ?>
+                       
+
+
+
+
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
                         </tr>
 
-
-
-
-
-						<tr>
-							<td colspan="3"></td>
-							<td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
-						</tr>
-
-						<tr style="background-color: #FFA245;">
-                            <th >
-								<center>Paint</center>
+                        <tr >
+                            <th>
+                                <b><u>Paint</u></b>
                             </th>
-							<td colspan="4">
+                            <td colspan="4">
                             </td>
 
                         </tr>
@@ -326,13 +343,15 @@
                             <?php } ?>
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['price']; $tot+=$row['amount'];?>
+                            <td></td>
+                            </tr>
                             <?php } ?>
-                        </tr>
+                        
 
-						<tr>
-							<td colspan="3"></td>
-							<td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
-						</tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                        </tr>
 
 
                         <tr>
@@ -343,9 +362,9 @@
                             <td></td>
                         </tr>
                     </tbody>
-					
+
                 </table>
-				<br><br>
+                <br><br>
                 <?php
 				$result1 = $db->prepare("SELECT * FROM sales WHERE   invoice_number='$invo'  ");		
 					$result1->bindParam(':userid', $date);
