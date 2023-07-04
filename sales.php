@@ -166,15 +166,7 @@ include_once("sidebar.php");
                                                     <td width="40%"><?php echo $row['name']; ?></td>
                                                     <td><?php echo $row['qty']; ?></td>
                                                     <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right">
-                                                        <form action="sales_list_edit.php" method="post">
-                                                            <input style="text-align: right;" type="number"
-                                                                class="form-control" name="price"
-                                                                value="<?php echo $row['price']; ?>" id="">
-                                                            <input type="hidden" name="id"
-                                                                value="<?php echo $row['id'] ?>">
-                                                        </form>
-                                                    </td>
+                                                    <td align="right"><?php echo $row['price']; ?></td>
                                                     <td align="right"><?php echo $row['amount']; ?></td>
                                                     <td width="5%"> <a
                                                             href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
@@ -209,15 +201,7 @@ include_once("sidebar.php");
                                                     <td width="50%"><?php echo $row['name']; ?></td>
                                                     <td><?php echo $row['qty']; ?></td>
                                                     <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right">
-                                                        <form action="sales_list_edit.php" method="post">
-                                                            <input style="text-align: right;" type="number"
-                                                                class="form-control" name="price"
-                                                                value="<?php echo $row['price']; ?>" id="">
-                                                            <input type="hidden" name="id"
-                                                                value="<?php echo $row['id'] ?>">
-                                                        </form>
-                                                    </td>
+                                                    <td align="right"><?php echo $row['price']; ?></td>
                                                     <td align="right"><?php echo $row['amount']; ?></td>
                                                     <td width="5%"> <a
                                                             href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
@@ -254,15 +238,7 @@ include_once("sidebar.php");
                                                     <td width="50%"><?php echo $row['name']; ?></td>
                                                     <td><?php echo $row['qty']; ?></td>
                                                     <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right">
-                                                        <form action="sales_list_edit.php" method="post">
-                                                            <input style="text-align: right;" type="number"
-                                                                class="form-control" name="price"
-                                                                value="<?php echo $row['price']; ?>" id="">
-                                                            <input type="hidden" name="id"
-                                                                value="<?php echo $row['id'] ?>">
-                                                        </form>
-                                                    </td>
+                                                    <td align="right"><?php echo $row['price']; ?></td>
                                                     <td align="right"><?php echo $row['amount']; ?></td>
                                                     <td width="5%"> <a
                                                             href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
@@ -297,15 +273,7 @@ include_once("sidebar.php");
                                                     <td width="50%"><?php echo $row['name']; ?></td>
                                                     <td><?php echo $row['qty']; ?></td>
                                                     <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right">
-                                                        <form action="sales_list_edit.php" method="post">
-                                                            <input style="text-align: right;" type="number"
-                                                                class="form-control" name="price"
-                                                                value="<?php echo $row['price']; ?>" id="">
-                                                            <input type="hidden" name="id"
-                                                                value="<?php echo $row['id'] ?>">
-                                                        </form>
-                                                    </td>
+                                                    <td align="right"><?php echo $row['price']; ?></td>
                                                     <td align="right"><?php echo $row['amount']; ?></td>
                                                     <td width="5%"> <a
                                                             href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
@@ -417,7 +385,7 @@ include_once("sidebar.php");
                                             </div>
 
                                             <div class="col-md-12">
-                                                <div id="product_list"></div>
+                                                <div style="height: 400px; overflow: auto" id="product_list"></div>
                                             </div>
                                         </div>
 
