@@ -387,7 +387,7 @@ include_once("sidebar.php");
                                             <div class="col-md-12">
                                                 <input type="hidden" name="area" id="area">
                                                 <input type="hidden" name="type" id='type'>
-                                               <input id='serch' onkeypress="item_serch()" type="text" placeholder="Serch" style="border-radius: 15px; width: 90%; margin:10px; text-align:center;">
+                                               <input id='serch' onkeypress="item_serch()" type="text" placeholder="Search" style="border-radius: 15px; width: 90%; margin:10px; text-align:center;">
                                             </div>
                                             <div class="col-md-12">
                                                 <div style="height: 400px; overflow: auto" id="product_list"></div>
