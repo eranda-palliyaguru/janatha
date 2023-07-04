@@ -28,15 +28,20 @@ $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no='$invo' ");
             
         }
 
+		if(isset($_GET['serch'])){ 
+			$serch=$_GET['serch'];
+			$result = $db->prepare("SELECT * FROM product WHERE category='$category' AND $type > 0 AND name LIKE '$serch%' ");
+		}else{
+			$result = $db->prepare("SELECT * FROM product WHERE category='$category' AND $type > 0");
+		}
 
-$result = $db->prepare("SELECT * FROM product WHERE category='$category' AND $type > 0");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
            $pro_id=$row['product_id'].'_'.$type;
 
 if(in_array($pro_id, $pro)){}else{
-       
+	
 ?>
 
 <div id="ls_<?php echo $row['product_id'] ?>" ondblclick="list_update(<?php echo $row['product_id'].','.$row[$type] ?>,'<?php echo $type; ?>')" onclick="list_load(<?php echo $row['product_id'] ?>,<?php echo $row[$type] ?>)" style="border-radius: 15px; width:90%; background-color: <?php echo $color; ?>; color:aliceblue; text-align:center;margin: 10px; font-size:18px"><?php echo $row['name'] ?></div>

@@ -385,6 +385,11 @@ include_once("sidebar.php");
                                             </div>
 
                                             <div class="col-md-12">
+                                                <input type="hidden" name="area" id="area">
+                                                <input type="hidden" name="type" id='type'>
+                                               <input id='serch' onkeypress="item_serch()" type="text" placeholder="Serch" style="border-radius: 15px; width: 90%; margin:10px; text-align:center;">
+                                            </div>
+                                            <div class="col-md-12">
                                                 <div style="height: 400px; overflow: auto" id="product_list"></div>
                                             </div>
                                         </div>
@@ -619,6 +624,35 @@ function list_load(id,amount){
 
 
 
+
+
+function item_serch(){
+    var area = document.getElementById('area').value;
+    var type = document.getElementById('type').value;
+    var serch = document.getElementById('serch').value;
+    var invo = '<?php echo $invo; ?>'
+
+    var xmlhttp;
+if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+} else { // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        document.getElementById("product_list").innerHTML = xmlhttp.responseText;
+    }
+}
+
+xmlhttp.open("GET", "sales_product_list.php?type=" +type+ "&area=" +area+'&invo='+invo+'&serch='+serch, true);
+xmlhttp.send();
+}
+
+
+
+
+
+
 function get_item(item){
     var cl = document.getElementById('product_type').value;
     var part="";
@@ -633,6 +667,8 @@ document.getElementById("front").className="btn";
 document.getElementById("rear").className="btn";
 document.getElementById("eroom").className='btn';
 document.getElementById("room").className='btn';
+
+
 
 var ty= document.getElementById("product_type").value;
 document.getElementById(item).className="btn btn-"+ty; 
@@ -652,6 +688,10 @@ document.getElementById(item).className="btn btn-"+ty;
 
         xmlhttp.open("GET", "sales_product_list.php?type=" + part + "&area=" + item+'&invo='+invo, true);
         xmlhttp.send();
+
+        document.getElementById("type").value= part;
+        document.getElementById("area").value= item;
+        document.getElementById("serch").value= "";
 }
 
 
