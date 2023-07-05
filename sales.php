@@ -141,7 +141,7 @@ include_once("sidebar.php");
 
                                             </div>
                                             <div class="col-md-12">
-                                                <div id="sales_list">
+                                                <div style="height: 600px; overflow: auto" id="sales_list">
                                                     <table id="example2" class="table table-bordered table-hover">
                                                         <tr>
                                                             <th>Product Name</th>
