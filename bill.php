@@ -95,18 +95,9 @@
             <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-xs-6">
-                    <img src="bill.jpeg" width="145" alt="">
-                    <h5> <b>JANATHA MOTORS</b></h5>
-                    <p>52/B/1, 10th Mile Post, <br>
-                        Katuwawala, <br>
-                        Boralasgauwa <BR>
-                        <br>
-                        Call: 0112 150 400<br>
-                        E-mail: startupautoare@gmail.com<br><br>
-                        Bill To:<br>
-                        <?php echo $cus_name; ?>
-
-                    </p>
+                <h1 ><?php if ($co=="qt"){ echo "Quotation";}
+           if($co > 0){ echo "INVOICE"; }
+           ?></h1>
                 </div>
                 <!-- /.col -->
 
@@ -115,9 +106,7 @@
 
 
                 <div class="col-xs-6">
-                    <h1 class="pull-right"><?php if ($co=="qt"){ echo "Quotation";}
-           if($co > 0){ echo "INVOICE"; }
-           ?></h1>
+                    
                     <h5 class="pull-right"><b class="pull-right">#<?php echo $_GET['id']; ?></b><br><br>
                         Date:<?php date_default_timezone_set("Asia/Colombo"); 
     echo date("Y-m-d"); echo "  Time-";  echo date("h:ia")  ?></h5>
@@ -239,7 +228,7 @@
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
 					 $tot=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND service_type='ReReFit'");
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND service_type='refit'");
 					$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){

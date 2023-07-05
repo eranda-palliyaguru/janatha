@@ -92,7 +92,7 @@ include_once("sidebar.php");
                             <!-- /.box -->
 
                             <div class="form-group">
-                               
+
 
 
 
@@ -103,58 +103,61 @@ include_once("sidebar.php");
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="col-md-12">
-                                            
-                                            <div class="col-md-7">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>Price</label>
-                                                        </div>
-                                                        <input type="number" class="form-control" name="price" id="price" value="1">
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-addon">
-                                                            <label>QTY</label>
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <label>Price</label>
+                                                            </div>
+                                                            <input type="number" class="form-control" name="price"
+                                                                id="price" value="1">
                                                         </div>
-                                                        <input type="number" class="form-control" id="qty" name="qty" value="1">
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <div class="input-group date">
-                                                       <input type="hidden" name="product_id" id="product_id">
-                                                        <input onclick="price_submit()" id="sbtn"  class="btn btn-<?php echo $type_color ?>" type="submit"
-                                                value="Submit">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <label>QTY</label>
+                                                            </div>
+                                                            <input type="number" class="form-control" id="qty"
+                                                                name="qty" value="1">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <div class="input-group date">
+                                                            <input type="hidden" name="product_id" id="product_id">
+                                                            <input onclick="price_submit()" id="sbtn"
+                                                                class="btn btn-<?php echo $type_color ?>" type="submit"
+                                                                value="Submit">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="col-md-12">
-                                            <div id="sales_list">
-                                            <table id="example2" class="table table-bordered table-hover">
-                                                <tr>
-                                                    <th>Product Name</th>
-                                                    <th>QTY</th>
-                                                    <th>Dic (Rs.)</th>
-                                                    <th>Price (Rs.)</th>
-                                                    <th>Amount (Rs.)</th>
-                                                    <th>#</th>
-                                                </tr>
-                                                <tr style="background-color: #FFA245;">
-                                                    <td colspan="6">
-                                                        Supply
-                                                    </td>
+                                                <div id="sales_list">
+                                                    <table id="example2" class="table table-bordered table-hover">
+                                                        <tr>
+                                                            <th>Product Name</th>
+                                                            <th>QTY</th>
+                                                            <th>Dic (Rs.)</th>
+                                                            <th>Price (Rs.)</th>
+                                                            <th>Amount (Rs.)</th>
+                                                            <th>#</th>
+                                                        </tr>
+                                                        <tr style="background-color: #FFA245;">
+                                                            <td colspan="6">
+                                                                Supply
+                                                            </td>
 
-                                                </tr>
-                                                <?php $total=0; $supTot=0; $style="";
+                                                        </tr>
+                                                        <?php $total=0; $supTot=0; $style="";
                                             $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'supply'");
 		                                    $result->bindParam(':userid', $res);
 		                                    $result->execute();
@@ -162,34 +165,34 @@ include_once("sidebar.php");
 			                                $pro_id=$row['product_id'];
                                             ?>
 
-                                                <tr>
-                                                    <td width="40%"><?php echo $row['name']; ?></td>
-                                                    <td><?php echo $row['qty']; ?></td>
-                                                    <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right"><?php echo $row['price']; ?></td>
-                                                    <td align="right"><?php echo $row['amount']; ?></td>
-                                                    <td width="5%"> <a
-                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                            <button class="btn btn-danger"><i
-                                                                    class="fa fa trash">X</i></button></a></td>
-                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                                </tr>
-                                                <?php } ?>
-                                                <tr style="background-color: #C8C8C8;">
+                                                        <tr>
+                                                            <td width="40%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
 
-                                                    <td align="right" colspan="4">Total</td>
-                                                    <td>Rs.<?php echo $supTot; ?></td>
-                                                    <td></td>
+                                                            <td align="right" colspan="4">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
 
-                                                </tr>
+                                                        </tr>
 
-                                                <tr style="background-color: #FFA245; ">
-                                                    <td colspan="6">
-                                                        Remove & Refitting
-                                                    </td>
+                                                        <tr style="background-color: #FFA245; ">
+                                                            <td colspan="6">
+                                                                Remove & Refitting
+                                                            </td>
 
-                                                </tr>
-                                                <?php  $supTot=0; $style="";
+                                                        </tr>
+                                                        <?php  $supTot=0; $style="";
                                             $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'refit'");
 		                                    $result->bindParam(':userid', $res);
 		                                    $result->execute();
@@ -197,36 +200,36 @@ include_once("sidebar.php");
 			                                $pro_id=$row['product_id'];
                                             ?>
 
-                                                <tr>
-                                                    <td width="50%"><?php echo $row['name']; ?></td>
-                                                    <td><?php echo $row['qty']; ?></td>
-                                                    <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right"><?php echo $row['price']; ?></td>
-                                                    <td align="right"><?php echo $row['amount']; ?></td>
-                                                    <td width="5%"> <a
-                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                            <button class="btn btn-danger"><i
-                                                                    class="fa fa trash">X</i></button></a></td>
-                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                                </tr>
-                                                <?php } ?>
-                                                <tr style="background-color: #C8C8C8;">
+                                                        <tr>
+                                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
 
-                                                    <td colspan="4" align="right">Total</td>
-                                                    <td>Rs.<?php echo $supTot; ?></td>
-                                                    <td></td>
+                                                            <td colspan="4" align="right">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
 
-                                                </tr>
+                                                        </tr>
 
 
 
-                                                <tr style="background-color: #FFA245;">
-                                                    <td colspan="6">
-                                                        Repair
-                                                    </td>
+                                                        <tr style="background-color: #FFA245;">
+                                                            <td colspan="6">
+                                                                Repair
+                                                            </td>
 
-                                                </tr>
-                                                <?php  $supTot=0; $style="";
+                                                        </tr>
+                                                        <?php  $supTot=0; $style="";
                                             $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'repair'");
 		                                    $result->bindParam(':userid', $res);
 		                                    $result->execute();
@@ -234,34 +237,34 @@ include_once("sidebar.php");
 			                                $pro_id=$row['product_id'];
                                             ?>
 
-                                                <tr>
-                                                    <td width="50%"><?php echo $row['name']; ?></td>
-                                                    <td><?php echo $row['qty']; ?></td>
-                                                    <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right"><?php echo $row['price']; ?></td>
-                                                    <td align="right"><?php echo $row['amount']; ?></td>
-                                                    <td width="5%"> <a
-                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                            <button class="btn btn-danger"><i
-                                                                    class="fa fa trash">X</i></button></a></td>
-                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                                </tr>
-                                                <?php } ?>
-                                                <tr style="background-color: #C8C8C8;">
-                                                    <td colspan="4" align="right">Total</td>
-                                                    <td>Rs.<?php echo $supTot; ?></td>
-                                                    <td></td>
+                                                        <tr>
+                                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
+                                                            <td colspan="4" align="right">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
 
-                                                </tr>
-
-
+                                                        </tr>
 
 
-                                                <tr style="background-color: #FFA245;">
-                                                    <td colspan="6"> Paint </td>
 
-                                                </tr>
-                                                <?php  $supTot=0; $style="";
+
+                                                        <tr style="background-color: #FFA245;">
+                                                            <td colspan="6"> Paint </td>
+
+                                                        </tr>
+                                                        <?php  $supTot=0; $style="";
                                             $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'paint'");
 		                                    $result->bindParam(':userid', $res);
 		                                    $result->execute();
@@ -269,30 +272,30 @@ include_once("sidebar.php");
 			                                $pro_id=$row['product_id'];
                                             ?>
 
-                                                <tr>
-                                                    <td width="50%"><?php echo $row['name']; ?></td>
-                                                    <td><?php echo $row['qty']; ?></td>
-                                                    <td align="right"><?php echo $row['dic']; ?></td>
-                                                    <td align="right"><?php echo $row['price']; ?></td>
-                                                    <td align="right"><?php echo $row['amount']; ?></td>
-                                                    <td width="5%"> <a
-                                                            href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
-                                                            <button class="btn btn-danger"><i
-                                                                    class="fa fa trash">X</i></button></a></td>
-                                                    <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
-                                                </tr>
-                                                <?php } ?>
-                                                <tr style="background-color: #C8C8C8;">
-                                                    <td colspan="4" align="right">Total</td>
-                                                    <td>Rs.<?php echo $supTot; ?></td>
-                                                    <td></td>
+                                                        <tr>
+                                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
+                                                            <td colspan="4" align="right">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
 
-                                                </tr>
+                                                        </tr>
 
 
-                                            </table>
+                                                    </table>
 
-                                            <?php 
+                                                    <?php 
                                         $adv=0;
                                         $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
                                         $result1->bindParam(':userid', $a1);
@@ -303,82 +306,93 @@ include_once("sidebar.php");
                                         $job_no=$row1['job_no'];
                             
                                         } ?>
-                                            <table align="right" cellpadding="0" cellspacing="0" border="0" width="30%">
-                                                <tr>
-                                                    <td style="font-size:20px" align="right">Total:</td>
-                                                    <td style="font-size:20px" align="right">
-                                                        Rs.<?php echo number_format($total,2); ?></td>
-                                                    <td width="15%"></td>
-                                                </tr>
+                                                    <table align="right" cellpadding="0" cellspacing="0" border="0"
+                                                        width="30%">
+                                                        <tr>
+                                                            <td style="font-size:20px" align="right">Total:</td>
+                                                            <td style="font-size:20px" align="right">
+                                                                Rs.<?php echo number_format($total,2); ?></td>
+                                                            <td width="15%"></td>
+                                                        </tr>
 
-                                                <tr>
-                                                    <td align="right">Advance:</td>
-                                                    <td align="right">Rs.<?php echo number_format($adv,2); ?></td>
-                                                    <td width="15%"></td>
-                                                </tr>
+                                                        <tr>
+                                                            <td align="right">Advance:</td>
+                                                            <td align="right">Rs.<?php echo number_format($adv,2); ?>
+                                                            </td>
+                                                            <td width="15%"></td>
+                                                        </tr>
 
-                                                <tr>
-                                                    <td align="right">Balance:</td>
-                                                    <td align="right">Rs.<?php echo number_format($total-$adv,2); ?>
-                                                    </td>
-                                                    <td width="15%"></td>
-                                                </tr>
-                                            </table>
+                                                        <tr>
+                                                            <td align="right">Balance:</td>
+                                                            <td align="right">
+                                                                Rs.<?php echo number_format($total-$adv,2); ?>
+                                                            </td>
+                                                            <td width="15%"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            </div>
-                                            
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="supply" onclick="type_apply('info','supply');"
+                                                        <button style="width: 100%;" id="supply"
+                                                            onclick="type_apply('info','supply');"
                                                             class="btn btn-info">Supply</button>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="rerefit" onclick="type_apply('danger','rerefit');"
+                                                        <button style="width: 100%;" id="rerefit"
+                                                            onclick="type_apply('danger','rerefit');"
                                                             class="btn btn-danger">ReReFit</button>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="repair" onclick="type_apply('success','repair');"
+                                                        <button style="width: 100%;" id="repair"
+                                                            onclick="type_apply('success','repair');"
                                                             class="btn btn-success">Repair</button>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="paint" onclick="type_apply('warning','paint');"
+                                                        <button style="width: 100%;" id="paint"
+                                                            onclick="type_apply('warning','paint');"
                                                             class="btn btn-warning">Paint</button>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <br><br>
-                                            <input type="hidden" id="product_type" >
+                                            <input type="hidden" id="product_type">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="front" onclick="get_item('front');"
-                                                            class="btn "> <img src="img/type_img/fron.svg" alt="">
+                                                        <button style="width: 100%;" id="front"
+                                                            onclick="get_item('front');" class="btn "> <img
+                                                                src="img/type_img/fron.svg" alt="">
                                                             <br> FRONT</button>
-                                                            
+
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="rear" onclick="get_item('rear');"
-                                                            class="btn btn-"><img src="img/type_img/REAR.svg" alt="">
+                                                        <button style="width: 100%;" id="rear"
+                                                            onclick="get_item('rear');" class="btn btn-"><img
+                                                                src="img/type_img/REAR.svg" alt="">
                                                             <br> REAR</button>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="eroom" onclick="get_item('eroom');"
-                                                            class="btn btn-"><img src="img/type_img/ENGINE ROOM.svg" alt="">
+                                                        <button style="width: 100%;" id="eroom"
+                                                            onclick="get_item('eroom');" class="btn btn-"><img
+                                                                src="img/type_img/ENGINE ROOM.svg" alt="">
                                                             <br> ENGINE ROOM</button>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <button style="width: 100%;" id="room" onclick="get_item('room');"
-                                                            class="btn "><img src="img/type_img/ROOM.svg" alt="">
+                                                        <button style="width: 100%;" id="room"
+                                                            onclick="get_item('room');" class="btn "><img
+                                                                src="img/type_img/ROOM.svg" alt="">
                                                             <br> ROOM</button>
                                                     </div>
                                                 </div>
@@ -387,7 +401,9 @@ include_once("sidebar.php");
                                             <div class="col-md-12">
                                                 <input type="hidden" name="area" id="area">
                                                 <input type="hidden" name="type" id='type'>
-                                               <input id='serch' onkeypress="item_serch()" type="text" placeholder="Search" style="border-radius: 15px; width: 90%; margin:10px; text-align:center;">
+                                                <input id='serch' onkeypress="item_serch()" type="text"
+                                                    placeholder="Search"
+                                                    style="border-radius: 15px; width: 90%; margin:10px; text-align:center;">
                                             </div>
                                             <div class="col-md-12">
                                                 <div style="height: 400px; overflow: auto" id="product_list"></div>
@@ -419,80 +435,66 @@ include_once("sidebar.php");
                                 <input type="hidden" class="form-control" name="total" value="<?php echo $total; ?>">
                                 <input type="hidden" class="form-control" name="invoice" value="<?php echo $invo; ?>">
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label> Vehicle Number</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                <i class="fa fa-motorcycle"></i>
+                                                <i class="fa fa-car"></i>
                                             </div>
-                                            <input type="text" name="vehicle_no" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label> Customer Name</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" name="cus" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label> Comment</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" name="comment" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Model</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-arrow-down"></i>
-                                            </div>
-                                            <select class="form-control select2" name="model" style="width: 100%;"
+                                            <select class="form-control select2" name="id" style="width: 100%;"
                                                 autofocus>
 
 
                                                 <?php
-                $result = $db->prepare("SELECT * FROM model ");
+                $result = $db->prepare("SELECT * FROM vehicle ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
 	?>
-                                                <option value="<?php echo $row['name'];?>"><?php echo $row['name']; ?>
+                                                <option value="<?php echo $row['id'];?>">
+                                                    <?php echo $row['vehicle_no']; ?>
                                                 </option>
                                                 <?php
 				}
 			?>
                                             </select>
                                         </div>
-                                        <div class="form-group" >
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="type" id="optionsRadios1"
-                                                        value="Quotations" checked>
-                                                    Quotations<i class="fa fa-money"></i>
-                                                </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> Insurance Company</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user"></i>
                                             </div>
+                                            <select class="form-control select2" name="incom" style="width: 100%;"
+                                                autofocus>
+
+
+                                                <?php
+                $result = $db->prepare("SELECT * FROM insurance_com ");
+		$result->bindParam(':userid', $res);
+		$result->execute();
+		for($i=0; $row = $result->fetch(); $i++){
+	?>
+                                                <option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?>
+                                                </option>
+                                                <?php
+				}
+			?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4"> <br>
+                                    <input class="btn btn-<?php echo $type_color ?>" type="submit" value=" Print">
+                                </div>
                         </div>
 
-                        <input class="btn btn-<?php echo $type_color ?>" type="submit" value=" Print">
+
                         </form>
                         <!-- /.box-body -->
 
@@ -567,160 +569,170 @@ include_once("sidebar.php");
 
     <!-- Page script -->
     <script>
+    var input = document.getElementById("price");
+    var price = input.value;
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            if (price === 0) {
+                alert("Please select a product");
+            } else {
+                event.preventDefault();
+                document.getElementById("sbtn").click();
+            }
+        }
+    });
 
-var input = document.getElementById("price");
-var price = input.value;
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    if(price === 0) {
-        alert("Please select a product");
-    }else{
-        event.preventDefault();
-    document.getElementById("sbtn").click();
+
+
+
+    function type_apply(info, id) {
+
+        document.getElementById('supply').className = 'btn';
+        document.getElementById('rerefit').className = 'btn';
+        document.getElementById('repair').className = 'btn';
+        document.getElementById('paint').className = 'btn';
+
+        document.getElementById(id).className = 'btn btn-' + info;
+
+        document.getElementById("front").className = "btn btn-" + info;
+        document.getElementById("rear").className = "btn btn-" + info;
+        document.getElementById("eroom").className = 'btn btn-' + info;
+        document.getElementById("room").className = "btn btn-" + info;
+
+        document.getElementById("product_type").value = info;
+        document.getElementById("product_list").innerHTML = "";
     }
-  }
-});
+
+    // +++++++++++++++++++++++  Price Update  ++++++++++++++++++++++++++//
+    function price_submit() {
+        var item_type = document.getElementById('type').value;
+        var id = document.getElementById('product_id').value;
+        var price = document.getElementById('price').value;
+        var qty = document.getElementById('qty').value;
+        var invo = '<?php echo $invo; ?>'
 
 
 
+        var xmlhttp;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+            }
+        }
 
-function type_apply(info,id){
+        xmlhttp.open("GET", "sales_product_list_add.php?type=" + item_type + "&invo=" + invo + "&price=" + price +
+            "&id=" + id + "&qty=" + qty, true);
+        xmlhttp.send();
 
-document.getElementById('supply').className='btn';
-document.getElementById('rerefit').className='btn';
-document.getElementById('repair').className='btn';
-document.getElementById('paint').className='btn';
+        document.getElementById('ls_' + id).style.display = "none";
 
-document.getElementById(id).className='btn btn-'+info;
-
-document.getElementById("front").className="btn btn-"+info;
-document.getElementById("rear").className="btn btn-"+info;
-document.getElementById("eroom").className='btn btn-'+info;
-document.getElementById("room").className="btn btn-"+info;
-
-document.getElementById("product_type").value=info;
-document.getElementById("product_list").innerHTML="";
-}
-
-// +++++++++++++++++++++++  Price Update  ++++++++++++++++++++++++++//
-function price_submit(){
-    var item_type = document.getElementById('type').value;
-    var id = document.getElementById('product_id').value;
-    var price = document.getElementById('price').value;
-    var qty = document.getElementById('qty').value;
-    var invo = '<?php echo $invo; ?>'
-
-
-
-    var xmlhttp;
-if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-} else { // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+        document.getElementById('price').value = 0;
+        document.getElementById('product_id').value = "non";
     }
-}
-
-xmlhttp.open("GET", "sales_product_list_add.php?type="+item_type+"&invo=" +invo+"&price="+price+"&id="+id+"&qty="+qty, true);
-xmlhttp.send();
-
-document.getElementById('ls_'+id).style.display="none";
-
-document.getElementById('price').value = 0;
-document.getElementById('product_id').value ="non";
-}
 
 
-//+++++++++++++++++++++++ List updates +++++++++++++++++++++++++//
-function list_update(id,price){
-    var item_type = document.getElementById('type').value;
-console.log(item_type);
-    var invo = '<?php echo $invo; ?>'
+    //+++++++++++++++++++++++ List updates +++++++++++++++++++++++++//
+    function list_update(id, price) {
+        var item_type = document.getElementById('type').value;
+        console.log(item_type);
+        var invo = '<?php echo $invo; ?>'
 
-    var xmlhttp;
-if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-} else { // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+        var xmlhttp;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET", "sales_product_list_add.php?type=" + item_type + "&invo=" + invo + "&price=" + price +
+            "&id=" + id + "&qty=1", true);
+        xmlhttp.send();
+
+        document.getElementById('ls_' + id).style.display = "none";
+
     }
-}
-
-xmlhttp.open("GET", "sales_product_list_add.php?type="+item_type+"&invo=" +invo+"&price="+price+"&id="+id+"&qty=1", true);
-xmlhttp.send();
-
-document.getElementById('ls_'+id).style.display="none";
-
-}
 
 
 
-//++++++++++++++++ List Load ++++++++++++++++++//
-function list_load(id,amount){
-    document.getElementById("price").value=amount;
-    document.getElementById("product_id").value=id;
+    //++++++++++++++++ List Load ++++++++++++++++++//
+    function list_load(id, amount) {
+        document.getElementById("price").value = amount;
+        document.getElementById("product_id").value = id;
 
-    document.getElementById("price").focus();
-    document.getElementById("price").select()
-}
-
-
-
-
-
-//+++++++++++++++++++++++   Item Search   +++++++++++++++++++++++++//
-function item_serch(){
-    var area = document.getElementById('area').value;
-    var type = document.getElementById('type').value;
-    var serch = document.getElementById('serch').value;
-    var invo = '<?php echo $invo; ?>'
-
-    var xmlhttp;
-if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-} else { // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        document.getElementById("product_list").innerHTML = xmlhttp.responseText;
+        document.getElementById("price").focus();
+        document.getElementById("price").select()
     }
-}
-
-xmlhttp.open("GET", "sales_product_list.php?type=" +type+ "&area=" +area+'&invo='+invo+'&serch='+serch, true);
-xmlhttp.send();
-}
 
 
 
 
 
+    //+++++++++++++++++++++++   Item Search   +++++++++++++++++++++++++//
+    function item_serch() {
+        var area = document.getElementById('area').value;
+        var type = document.getElementById('type').value;
+        var serch = document.getElementById('serch').value;
+        var invo = '<?php echo $invo; ?>'
 
-function get_item(item){
-    var cl = document.getElementById('product_type').value;
-    var part="";
-    var invo = '<?php echo $invo; ?>'
+        var xmlhttp;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("product_list").innerHTML = xmlhttp.responseText;
+            }
+        }
 
-    if(cl == "info"){ part="supply"; }
-    if(cl == "danger"){ part="refit"; }
-    if(cl == "success"){ part="repair"; }
-    if(cl == "warning"){ part="paint"; }
-
-document.getElementById("front").className="btn";
-document.getElementById("rear").className="btn";
-document.getElementById("eroom").className='btn';
-document.getElementById("room").className='btn';
+        xmlhttp.open("GET", "sales_product_list.php?type=" + type + "&area=" + area + '&invo=' + invo + '&serch=' +
+            serch, true);
+        xmlhttp.send();
+    }
 
 
 
-var ty= document.getElementById("product_type").value;
-document.getElementById(item).className="btn btn-"+ty; 
+
+
+
+    function get_item(item) {
+        var cl = document.getElementById('product_type').value;
+        var part = "";
+        var invo = '<?php echo $invo; ?>'
+
+        if (cl == "info") {
+            part = "supply";
+        }
+        if (cl == "danger") {
+            part = "refit";
+        }
+        if (cl == "success") {
+            part = "repair";
+        }
+        if (cl == "warning") {
+            part = "paint";
+        }
+
+        document.getElementById("front").className = "btn";
+        document.getElementById("rear").className = "btn";
+        document.getElementById("eroom").className = 'btn';
+        document.getElementById("room").className = 'btn';
+
+
+
+        var ty = document.getElementById("product_type").value;
+        document.getElementById(item).className = "btn btn-" + ty;
 
         var xmlhttp;
 
@@ -735,13 +747,13 @@ document.getElementById(item).className="btn btn-"+ty;
             }
         }
 
-        xmlhttp.open("GET", "sales_product_list.php?type=" + part + "&area=" + item+'&invo='+invo, true);
+        xmlhttp.open("GET", "sales_product_list.php?type=" + part + "&area=" + item + '&invo=' + invo, true);
         xmlhttp.send();
 
-        document.getElementById("type").value= part;
-        document.getElementById("area").value= item;
-        document.getElementById("serch").value= "";
-}
+        document.getElementById("type").value = part;
+        document.getElementById("area").value = item;
+        document.getElementById("serch").value = "";
+    }
 
 
 
