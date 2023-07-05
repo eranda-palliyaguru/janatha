@@ -129,8 +129,8 @@ include_once("sidebar.php");
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="input-group date">
-                                                       
-                                                        <input class="btn btn-<?php echo $type_color ?>" type="submit"
+                                                       <input type="hidden" name="product_id" id="product_id">
+                                                        <input onclick="price_submit()" id="sbtn"  class="btn btn-<?php echo $type_color ?>" type="submit"
                                                 value="Submit">
                                                     </div>
                                                 </div>
@@ -479,7 +479,7 @@ include_once("sidebar.php");
 			?>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <div class="radio">
                                                 <label>
                                                     <input type="radio" name="type" id="optionsRadios1"
@@ -568,6 +568,22 @@ include_once("sidebar.php");
     <!-- Page script -->
     <script>
 
+var input = document.getElementById("price");
+var price = input.value;
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    if(price === 0) {
+        alert("Please select a product");
+    }else{
+        event.preventDefault();
+    document.getElementById("sbtn").click();
+    }
+  }
+});
+
+
+
+
 function type_apply(info,id){
 
 document.getElementById('supply').className='btn';
@@ -586,12 +602,41 @@ document.getElementById("product_type").value=info;
 document.getElementById("product_list").innerHTML="";
 }
 
+// +++++++++++++++++++++++  Price Update  ++++++++++++++++++++++++++//
+function price_submit(){
+    var item_type = document.getElementById('type').value;
+    var id = document.getElementById('product_id').value;
+    var price = document.getElementById('price').value;
+    var qty = document.getElementById('qty').value;
+    var invo = '<?php echo $invo; ?>'
 
 
 
+    var xmlhttp;
+if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+} else { // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        document.getElementById("sales_list").innerHTML = xmlhttp.responseText;
+    }
+}
+
+xmlhttp.open("GET", "sales_product_list_add.php?type="+item_type+"&invo=" +invo+"&price="+price+"&id="+id+"&qty="+qty, true);
+xmlhttp.send();
+
+document.getElementById('ls_'+id).style.display="none";
+
+document.getElementById('price').value = 0;
+document.getElementById('product_id').value ="non";
+}
 
 
-function list_update(id,price,item_type){
+//+++++++++++++++++++++++ List updates +++++++++++++++++++++++++//
+function list_update(id,price){
+    var item_type = document.getElementById('type').value;
 console.log(item_type);
     var invo = '<?php echo $invo; ?>'
 
@@ -616,16 +661,20 @@ document.getElementById('ls_'+id).style.display="none";
 
 
 
-
+//++++++++++++++++ List Load ++++++++++++++++++//
 function list_load(id,amount){
     document.getElementById("price").value=amount;
+    document.getElementById("product_id").value=id;
+
+    document.getElementById("price").focus();
+    document.getElementById("price").select()
 }
 
 
 
 
 
-
+//+++++++++++++++++++++++   Item Search   +++++++++++++++++++++++++//
 function item_serch(){
     var area = document.getElementById('area').value;
     var type = document.getElementById('type').value;

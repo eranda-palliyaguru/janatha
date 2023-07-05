@@ -11,6 +11,10 @@ $qty=$_GET["qty"];
 $price=$_GET["price"];
 $type=$_GET["type"];
 
+if($product_id=='non'){
+    echo '<h3 style="color: darkred;"> Please select a product </h3>';
+}else{
+
 $result = $db->prepare("SELECT * FROM product WHERE product_id='$product_id'");
 $result->bindParam(':userid', $res);
 $result->execute();
@@ -22,6 +26,7 @@ $date=date('Y-m-d');
 $sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,qty,service_type,date,amount) VALUES (?,?,?,?,?,?,?,?)";
 $ql = $db->prepare($sql);
 $ql->execute(array($product_id,$name,$invo,$price,$qty,$type,$date,$price*$qty));
+}
 ?>
 
 <table id="example2" class="table table-bordered table-hover">
