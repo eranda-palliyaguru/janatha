@@ -33,11 +33,17 @@
     }
 
     @media print {
-        td.cs{
+        td.cs {
             background-color: #737373 !important;
             color: #eee !important;
         }
     }
+
+    table.list{
+        border: 1px solid;
+        
+    }
+    th:not(:last-child), td:not(:last-child) { border-right: 1px solid; }
     </style>
 </head>
 
@@ -148,14 +154,14 @@
 				}
   ?>
             <div class="box-body">
-                <table id="example2" style="width:100%">
-                    <thead>
+                <table style="width:100%;" class="list">
+                    <thead style="border: 1px solid;">
                         <tr >
 
-                            <th >Decs</th>
-                            <th>Qty</th>
+                            <th>Decs</th>
+                            <th width="40px">Qty</th>
                             <th>Rate</th>
-                            
+
                             <?php
 					if($dis_tot>0){
 					?>
@@ -167,13 +173,12 @@
                     </thead>
                     <tbody>
 
-                        <tr >
-                            <td >
-                               <b><u>Supply</u></b> 
-                                
+                        <tr>
+                            <td>
+                                <b><u>Supply</u></b>
+
                             </td>
-                            <td colspan="4">
-                            </td>
+                            <td></td> <td></td> <td></td> <td></td>
 
                         </tr>
                         <?php
@@ -190,9 +195,9 @@
 			?>
                         <tr>
                             <td width="40%"><?php echo $row['name'];?></td>
-                            <td><?php echo $row['qty'];?></td>
-                            <td><?php echo $row['price'];?></td>
-                            
+                            <td style="text-align: center;"><?php echo $row['qty'];?></td>
+                            <td style="text-align: center;"><?php echo $row['price'];?></td>
+
                             <?php
 					if($dis_tot>0){
 					?>
@@ -201,9 +206,9 @@
                             <td style="text-align: right;">Rs.<?php echo $row['amount'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
-                            </tr>
-                            <?php } ?>
-                        
+                        </tr>
+                        <?php } ?>
+
 
 
 
@@ -217,16 +222,16 @@
 
 
                         <tr>
-                            <td colspan="3"></td>
+                            <td></td> <td></td> <td></td>
                             <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td></td>
                         </tr>
 
-                        <tr >
+                        <tr>
                             <td>
-                            <b><u>Remove & Refitting</u></b> 
+                                <b><u>Remove & Refitting</u></b>
                             </td>
-                            <td colspan="4">
-                            </td>
+                            <td></td> <td></td> <td></td> <td></td>
 
                         </tr>
                         <?php
@@ -243,8 +248,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $row['qty'];?></td>
-                            <td><?php echo $row['price'];?></td>
+                            <td style="text-align: center;"><?php echo $row['qty'];?></td>
+                            <td style="text-align: center;"><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
@@ -253,9 +258,9 @@
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
-                            </tr>
-                            <?php } ?>
-                        
+                        </tr>
+                        <?php } ?>
+
 
 
 
@@ -263,16 +268,16 @@
 
 
                         <tr>
-                            <td colspan="3"></td>
+                        <td></td> <td></td> <td></td>
                             <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td></td>
                         </tr>
 
-                        <tr >
+                        <tr>
                             <td>
-                                 <b><u>Repair</u></b>
+                                <b><u>Repair</u></b>
                             </td>
-                            <td colspan="4">
-                            </td>
+                            <td></td> <td></td> <td></td> <td></td>
 
                         </tr>
                         <?php
@@ -289,8 +294,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $row['qty'];?></td>
-                            <td><?php echo $row['price'];?></td>
+                            <td style="text-align: center;"><?php echo $row['qty'];?></td>
+                            <td style="text-align: center;"><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
@@ -299,25 +304,29 @@
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['amount']; $tot+= $row['amount'];?>
                             <td></td>
-                            </tr>
-                            <?php } ?>
-                       
+                        </tr>
+                        <?php } ?>
+
 
 
 
 
 
                         <tr>
-                            <td colspan="3"></td>
+                        <td></td> <td></td> <td></td>
                             <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td></td>
                         </tr>
 
-                        <tr >
+                        <tr>
                             <th>
                                 <b><u>Paint</u></b>
+                                <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             </th>
-                            <td colspan="4">
-                            </td>
+                            
 
                         </tr>
                         <?php
@@ -334,8 +343,8 @@
 			?>
                         <tr>
                             <td><?php echo $row['name'];?></td>
-                            <td><?php echo $row['qty'];?></td>
-                            <td><?php echo $row['price'];?></td>
+                            <td style="text-align: center;"><?php echo $row['qty'];?></td>
+                            <td style="text-align: center;"><?php echo $row['price'];?></td>
                             <?php
 					if($dis_tot>0){
 					?>
@@ -344,17 +353,19 @@
                             <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
                             <?php $tot_amount+= $row['price']; $tot+=$row['amount'];?>
                             <td></td>
-                            </tr>
-                            <?php } ?>
-                        
+                        </tr>
+                        <?php } ?>
+
 
                         <tr>
-                            <td colspan="3"></td>
+                        <td></td> <td></td> <td></td>
                             <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td></td>
                         </tr>
 
 
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
