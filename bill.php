@@ -44,6 +44,10 @@
         
     }
     th:not(:last-child), td:not(:last-child) { border-right: 1px solid; }
+
+    th.hed_list {
+        border-right: 0px solid;
+    }
     </style>
 </head>
 
@@ -53,7 +57,7 @@
         <!-- Main content -->
         <section class="invoice">
 
-            <?php
+            <?php $job_type=0;
            $invo=$_GET['id'];	
 		   $result1 = $db->prepare("SELECT * FROM sales WHERE   invoice_number='$invo'");
 		   $result1->bindParam(':userid', $date);
@@ -85,6 +89,7 @@
 		$km=$row1['model'];
 		$next_km=" ";
         $incom=$row1['in_com_name'];
+        $date=$row1['date'];
 		}
 		//if ($co=="qt"){ $h3="Note:"; $next_km=$row1['comment'];}
                 }
@@ -96,24 +101,28 @@
             <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-xs-6">
-                <h1 ><?php if ($co=="qt"){ echo "Quotation";}
+                <h4 ><?php if ($co=="qt"){ }
            if($co > 0){ echo "INVOICE"; }
-           ?></h1>
+           ?></h4>
+           <br><br>
+           
            For:<b> <?php echo $incom; ?></b>
                 </div>
                 <!-- /.col -->
 
 
-
-
-
                 <div class="col-xs-6">
                     
                     <h5 class="pull-right"><b class="pull-right">#<?php echo $_GET['id']; ?></b><br><br>
-                        Date:<?php date_default_timezone_set("Asia/Colombo"); 
-    echo date("Y-m-d"); echo "  Time-";  echo date("h:ia")  ?></h5>
+                        </h5>
 
                     <table align="right" cellpadding="0" cellspacing="0" border="0" width="70%">
+
+                        <tr>
+                            <td align="right" class="hed_list"><b>Date:</b></td>
+                            <td align="right" class="hed_list"><?php echo $date; ?></td>
+                        </tr>
+
                         <tr>
                             <td align="right"><?php echo $h1 ?></td>
                             <td align="right"><?php echo $vehicle_no ?></td>
@@ -124,16 +133,14 @@
                             <td align="right"><?php echo $km ?></td>
                         </tr>
 
-                        <tr>
-                            <td align="right"><?php echo $h3 ?></td>
-                            <td align="right"><?php echo $next_km ?></td>
-                        </tr>
                     </table>
                 </div>
                 <?php if($note==""){}else{ echo "Note:  ".$note; }?>
 
                 <!-- /.col -->
             </div>
+            <h4><center><?php echo "Estimate For Repairs to Vehicle Number: <i>".$vehicle_no."</i>"; ?></center></h4>
+            <p>We thank you for your kind inquiries and wish to submit our quotation for your kind consideration.</p>
             <?php
   			  $invo=$_GET['id'];
 					$tot_amount=0;
@@ -411,6 +418,12 @@
 
 
             </div>
+            <h4>SPECIAL NOTE</h4>
+            <P>We assure our best service all the time. Waiting for your valuable confirmation</P>
+            <b>Thanking You, <br> Yours Faithfully</b> <br><br>
+
+            ----------------------- <br>
+            Managing Director
             <center>
                 <br><br><br><br>
                 <img src="img/cloud arm name.svg" width="100" alt="">
