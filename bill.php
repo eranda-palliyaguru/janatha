@@ -84,6 +84,7 @@
 		$vehicle_no=$row1['vehicle_no'];
 		$km=$row1['model'];
 		$next_km=" ";
+        $incom=$row1['in_com_name'];
 		}
 		//if ($co=="qt"){ $h3="Note:"; $next_km=$row1['comment'];}
                 }
@@ -98,6 +99,7 @@
                 <h1 ><?php if ($co=="qt"){ echo "Quotation";}
            if($co > 0){ echo "INVOICE"; }
            ?></h1>
+           For:<b> <?php echo $incom; ?></b>
                 </div>
                 <!-- /.col -->
 
@@ -144,20 +146,20 @@
   ?>
             <div class="box-body">
                 <table style="width:100%;" class="list">
-                    <thead style="border: 1px solid;">
+                    <thead style="border: 1px solid; text-align: center;" >
                         <tr >
 
-                            <th>Decs</th>
-                            <th width="40px">Qty</th>
-                            <th>Rate</th>
+                            <th style="text-align: center;">Decs</th>
+                            <th style="text-align: center;" width="40px">Qty</th>
+                            <th style="text-align: center;">Rate</th>
 
                             <?php
 					if($dis_tot>0){
 					?>
                             <th>Disc</th>
                             <?php } ?>
-                            <th style="text-align: right;">Amount </th>
-                            <th style="text-align: right;">Amendment</th>
+                            <th style="text-align: center;">Amount </th>
+                            <th style="text-align: center;">Amendment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,14 +187,14 @@
                         <tr>
                             <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
-                            <td style="text-align: center;"><?php echo $row['price'];?></td>
+                            <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
 
                             <?php
 					if($dis_tot>0){
 					?>
                             <td><?php echo $row['dic'];?></td>
                             <?php } ?>
-                            <td style="text-align: right;">Rs.<?php echo $row['amount'];?></td>
+                            <td style="text-align: right;">Rs.<?php echo number_format($row['amount'],2);?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
@@ -212,7 +214,7 @@
 
                         <tr>
                             <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> Rs.<?php echo number_format($tot,2); ?></b></td>
                             <td></td>
                         </tr>
 
@@ -238,13 +240,13 @@
                         <tr>
                             <td><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
-                            <td style="text-align: center;"><?php echo $row['price'];?></td>
+                            <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
 					if($dis_tot>0){
 					?>
                             <td><?php echo $row['dic'];?></td>
                             <?php } ?>
-                            <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
+                            <td style="text-align: right;">Rs.<?php echo number_format($row['amount'],2);?></td>
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
@@ -258,7 +260,7 @@
 
                         <tr>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
                             <td></td>
                         </tr>
 
@@ -284,13 +286,13 @@
                         <tr>
                             <td><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
-                            <td style="text-align: center;"><?php echo $row['price'];?></td>
+                            <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
 					if($dis_tot>0){
 					?>
                             <td><?php echo $row['dic'];?></td>
                             <?php } ?>
-                            <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
+                            <td style="text-align: right;">Rs.<?php echo number_format($row['amount'],2)?></td>
                             <?php $tot_amount+= $row['amount']; $tot+= $row['amount'];?>
                             <td></td>
                         </tr>
@@ -303,7 +305,7 @@
 
                         <tr>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
                             <td></td>
                         </tr>
 
@@ -333,13 +335,13 @@
                         <tr>
                             <td><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
-                            <td style="text-align: center;"><?php echo $row['price'];?></td>
+                            <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
 					if($dis_tot>0){
 					?>
                             <td><?php echo $row['dic'];?></td>
                             <?php } ?>
-                            <td style="text-align: right;">Rs.<?php echo $row['price'];?></td>
+                            <td style="text-align: right;">Rs.<?php echo number_format($row['amount'],2);?></td>
                             <?php $tot_amount+= $row['price']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
@@ -348,7 +350,7 @@
 
                         <tr>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 18px;"><b>Rs.<?php echo $tot; ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
                             <td></td>
                         </tr>
 
