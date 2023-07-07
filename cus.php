@@ -123,18 +123,121 @@ include_once("sidebar.php");
 	<div class="box-body">
           <div class="row">
             <div class="col-md-6">
-              <div class="form-group">
-                <label>	Vehicle Number</label>
+            <div class="form-group">
+                <label>	Phone Number</label>
 				  <div class="input-group">
 				   <div class="input-group-addon">
-                    <i class="fa fa-motorcycle"></i>
+                    <i class="fa fa-phone"></i>
                   </div>
-                <input type="text" name="vehicle_no"  class="form-control"  required>
+                <input type="text" class="form-control" onchange="ex_cus();" id="phone" name="phone_no" >
+                  </div>
+                  </div>
+              
+				</div>
+
+
+        <div class="form-group">
+                <label>	Address</label>
+				  <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-home"></i>
+                  </div>
+                <input type="text" name="address" id="address" class="form-control pull-right"  >
+                  </div>
+                  </div> 
+			  
+			  
+              </div>
+		</div>	
+	
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>	Customer Name</label>
+				  <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                <input type="text" class="form-control" id="name" name="cus_name" required >
                   </div>
                   </div>
 				</div>
 			  
-			  <div class="form-group">
+        <div class="form-group">
+                <label>Email</label>
+                 <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-at"></i>
+                  </div>
+                <input type="text" name="email" id="email" class="form-control pull-right"  >
+                  </div>  
+                  </div>
+
+       
+			  
+              </div>
+              </div>
+	
+	
+	
+	<div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+
+
+           
+
+
+              <div class="form-group">
+                <label>Birthday</label>
+                 <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-odnoklassniki"></i>
+                  </div>
+                <input type="text" name="birthday" id="birthday"  class="form-control pull-right" data-inputmask='"mask": "9999-99-99"' data-mask >
+                  </div>  
+                  </div>
+				</div>
+			  
+			  
+
+        <div class="form-group">
+                <label>	Vehicle Number</label>
+				  <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-car"></i>
+                  </div>
+                <input type="text" name="vehicle_no"  class="form-control"  required>
+                  </div>
+                  </div>
+
+			  
+              </div>
+              </div>
+	
+	
+	
+      <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label>	Fuel Type</label>
+				  <div class="input-group">
+				   <div class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  <select name="fuel_type" class="form-control" >
+                
+                <option value="Diesel">Diesel</option>
+                <option value="Petrol">Petrol</option>
+            </select>
+                  </div>
+                  </div>
+				</div>
+			  
+			  
+        <div class="form-group">
                <label>Model</label>
 
                 <div class="input-group date">
@@ -150,7 +253,7 @@ include_once("sidebar.php");
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
 	?>
-		<option value="<?php echo $row['name'];?>"><?php echo $row['name']; ?>    </option>
+		<option value="<?php echo $row['id'];?>"><?php echo $row['manufacture_name'].' - '.$row['name']; ?>    </option>
 	<?php
 				}
 			?>
@@ -162,96 +265,6 @@ include_once("sidebar.php");
 		
         </div>
               </div>
-		</div>	
-	
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>	Customer Name</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </div>
-                <input type="text" class="form-control" name="cus_name" required >
-                  </div>
-                  </div>
-				</div>
-			  
-			   <div class="form-group">
-                <label>	Phone Number</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-phone"></i>
-                  </div>
-                <input type="text" class="form-control" name="phone_no" data-inputmask='"mask": "(999)-9999999"' data-mask>
-                  </div>
-                  </div>
-			  
-              </div>
-              </div>
-	
-	
-	
-	<div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Birthday</label>
-                 <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-odnoklassniki"></i>
-                  </div>
-                <input type="text" name="birthday"  class="form-control pull-right" data-inputmask='"mask": "9999-99-99"' data-mask >
-                  </div>  
-                  </div>
-				</div>
-			  
-			  
-			  <div class="form-group">
-                <label>	gender</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-users"></i>
-                  </div>
-                <select class="form-control select2" name="gend" style="width: 100%;" autofocus >
-		<option value="Mr.">Mr.</option>
-					<option value="Miss.">Miss.</option>
-					<option value="Mrs.">Mrs.</option>
-	
-                </select>
-                  </div>
-                  </div> 
-              </div>
-              </div>
-	
-	
-	
-      <div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Email</label>
-                 <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-at"></i>
-                  </div>
-                <input type="text" name="email" class="form-control pull-right"  >
-                  </div>  
-                  </div>
-				</div>
-			  
-			  
-			  <div class="form-group">
-                <label>	Address</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-home"></i>
-                  </div>
-                <input type="text" name="address" class="form-control pull-right"  >
-                  </div>
-                  </div> 
-              </div>
               </div>
 	
 		
@@ -261,56 +274,28 @@ include_once("sidebar.php");
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Engine Number</label>
+                <label>Transmission</label>
                  <div class="input-group">
 				   <div class="input-group-addon">
                     <i class="fa fa-gears"></i>
                   </div>
-                <input type="text" name="engine_no" class="form-control pull-right"  >
+                  <select name="transmission" class="form-control" >
+                  <option value="Manual">Manual</option>
+                <option value="Auto">Auto</option>
+            </select>
                   </div>  
                   </div>
 				</div>
 			  
 			  
-			  <div class="form-group">
-                <label>	Chassis No</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-code-fork"></i>
-                  </div>
-                <input type="text" name="chassis_no" class="form-control pull-right"  >
-                  </div>
-                  </div> 
+			
               </div>
               </div>
 	
 	
 	
 	
-	<div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Bye Date</label>
-                 <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                <input type="text" name="bye_date" class="form-control pull-right" data-inputmask='"mask": "9999-99-99"' data-mask  >
-                  </div>  
-                  </div>
-				</div>
-			  <div class="form-group">
-                <label>	Color</label>
-				  <div class="input-group">
-				   <div class="input-group-addon">
-                    <i class="fa fa-paint-brush"></i>
-                  </div>
-                <input type="text" name="color" class="form-control pull-right"  >
-                  </div>
-                  </div> 
-              </div>
-              </div>
+	<input type="hidden" name="cus_id" id="cus_id">
 		  
 			  <input class="btn btn-info" type="submit" value="Submit" >
 			  
@@ -381,30 +366,44 @@ include_once("sidebar.php");
 <!-- Page script -->
 <script>
 
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+function ex_cus(){
+    var phone = document.getElementById('phone').value;
+    var data='ur';
+    fetch("app/customer_data.php?phone="+phone)
+  .then((response) => response.json())
+  .then((json) => fill(json));
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+function fill(json) {
+    
+
+    if(json.action == "true"){
+console.log("old customer");
+    document.getElementById('name').value = json.name;
+    document.getElementById('address').value = json.address;
+    document.getElementById('email').value = json.email;
+    document.getElementById('birthday').value = json.birthday;
+    document.getElementById('cus_id').value = json.id;
+
+    document.getElementById('name').disabled = true;
+    document.getElementById('address').disabled = true;
+    document.getElementById('email').disabled = true;
+    document.getElementById('birthday').disabled = true;
+
+}else{
+    console.log("new customer");
+    document.getElementById('name').value = '';
+    document.getElementById('address').value = '' ;
+    document.getElementById('email').value =  '';
+    document.getElementById('birthday').value = "" ;
+    document.getElementById('cus_id').value = "0" ;
+
+    document.getElementById('name').disabled = false ;
+    document.getElementById('address').disabled = false;
+    document.getElementById('email').disabled = false;
+    document.getElementById('birthday').disabled = false;
+}
 }
 
 
@@ -412,67 +411,7 @@ window.onclick = function(event) {
     //Initialize Select2 Elements
     $(".select2").select2();
 
-    //Datemask dd/mm/yyyy
-    $("#datemask").inputmask("YYYY/MM/DD", {"placeholder": "YYYY/MM/DD"});
-    //Datemask2 mm/dd/yyyy
-    $("#datemask2").inputmask("YYYY/MM/DD", {"placeholder": "YYYY/MM/DD"});
-    //Money Euro
-    $("[data-mask]").inputmask();
-
-    //Date range picker
-    $('#reservation').daterangepicker();
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-        {
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          startDate: moment().subtract(29, 'days'),
-          endDate: moment()
-        },
-        function (start, end) {
-          $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-    );
-
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    });
-
-    //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue'
-    });
-    //Red color scheme for iCheck
-    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass: 'iradio_minimal-red'
-    });
-    //Flat red color scheme for iCheck
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass: 'iradio_flat-green'
-    });
-
-    //Colorpicker
-    $(".my-colorpicker1").colorpicker();
-    //color picker with addon
-    $(".my-colorpicker2").colorpicker();
-
-    //Timepicker
-    $(".timepicker").timepicker({
-      showInputs: false
-    });
-  });
+  })  
 </script>
 </body>
 </html>
