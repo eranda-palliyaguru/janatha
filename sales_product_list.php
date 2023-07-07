@@ -9,15 +9,19 @@ $area=$_GET["area"];
 $type=$_GET["type"];
 $invo=$_GET["invo"];
 
+
+
 if($type=='supply'){$color="#0192A3";}
 if($type=='repair'){$color="#08A301";}
 if($type=='refit'){$color="#CE0000";}
 if($type=='paint'){$color="#F0A301";}
+if($type=='mis'){$color="#001F3F";}
 
 if($area=='front'){$category=1;}
 if($area=='rear'){$category=2;}
 if($area=='eroom'){$category=3;}
 if($area=='room'){$category=4;}
+if($area=='Miscellaneous'){$category=0;}
 
 
 $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no='$invo' ");

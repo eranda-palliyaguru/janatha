@@ -10,6 +10,7 @@ $supply=0;
 $refit=0;
 $repair=0;
 $paint=0;
+$mis=0;
 
 $sell=0;
 $cost=0;
@@ -34,16 +35,18 @@ if($type=="Product"){
 if($type=="Materials"){
     $f = $_POST['re_order'];
 }
-if($type=="Quick"){
-    $rack = $_POST['category'];
+if($type=="Miscellaneous"){
+    $sell = $_POST['sell'];
+    $cost = $_POST['cost'];
+    $mis=$sell;
 }
 
 
 $time=date('Y-m-d H:i:s');
 // query
-$sql = "INSERT INTO product (name,code,type,sell,cost,re_order,category,time,supply,refit,repair,paint) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO product (name,code,type,sell,cost,re_order,category,time,supply,refit,repair,paint,mis) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $ql = $db->prepare($sql);
-$ql->execute(array($name,$code,$type,$sell,$cost,$re_order,$cat,$time,$supply,$refit,$repair,$paint));
+$ql->execute(array($name,$code,$type,$sell,$cost,$re_order,$cat,$time,$supply,$refit,$repair,$paint,$mis));
 
 
 

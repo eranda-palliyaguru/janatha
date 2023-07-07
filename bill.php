@@ -207,23 +207,17 @@
                         </tr>
                         <?php $list_no+=1; } ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
                         <tr>
                             <td></td> <td></td> <td></td>
                             <td align="right" style="font-size: 16px;"><b> Rs.<?php echo number_format($tot,2); ?></b></td>
                             <td></td>
                         </tr>
+
+
+
+
+
+
 
                         <tr>
                             <td>
@@ -258,12 +252,6 @@
                             <td></td>
                         </tr>
                         <?php $list_no+=1; } ?>
-
-
-
-
-
-
 
                         <tr>
                         <td></td> <td></td> <td></td>
@@ -361,6 +349,48 @@
                             <td></td>
                         </tr>
 
+
+
+
+
+                        <td>
+                                <b><u>Miscellaneous</u></b>
+                            </td>
+                            <td></td> <td></td> <td></td> <td></td>
+
+                        </tr>
+                        <?php
+			date_default_timezone_set("Asia/Colombo");
+		$hh=date("Y/m/d");
+		$invo=$_GET['id'];
+					 $tot=0;
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND service_type='mis'");
+					$result->bindParam(':userid', $date);
+                $result->execute();
+                for($i=0; $row = $result->fetch(); $i++){
+					$u_to=$row['price']+$row['dic'];
+					$u_pri=$u_to/$row['qty'];
+			?>
+                        <tr>
+                        <td><?php echo $list_no.'. '.$row['name'];?></td>
+                            <td style="text-align: center;"><?php echo $row['qty'];?></td>
+                            <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
+                            <?php
+					if($dis_tot>0){
+					?>
+                            <td><?php echo $row['dic'];?></td>
+                            <?php } ?>
+                            <td style="text-align: right;">Rs.<?php echo number_format($row['amount'],2);?></td>
+                            <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
+                            <td></td>
+                        </tr>
+                        <?php $list_no+=1; } ?>
+
+                        <tr>
+                        <td></td> <td></td> <td></td>
+                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td></td>
+                        </tr>
 
                         <tr>
                             <td></td>

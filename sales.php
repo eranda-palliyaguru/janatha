@@ -297,6 +297,40 @@ include_once("sidebar.php");
 
                                                         </tr>
 
+                                                        <tr style="background-color: #FFA245;">
+                                                            <td colspan="6">
+                                                            Miscellaneous
+                                                            </td>
+
+                                                        </tr>
+                                                        <?php  $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'mis'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
+
+                                                        <tr>
+                                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
+                                                            <td colspan="4" align="right">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
+
+                                                        </tr>
+
 
                                                     </table>
 
@@ -340,6 +374,11 @@ include_once("sidebar.php");
 
                                         </div>
                                         <div class="col-md-6">
+                                            <div class="col-md-3 pull-right" style="text-align:right;">
+                                                <button  style="width: 100%; " id="Miscellaneous"
+                                                
+                                                            onclick="type_apply('primary','Miscellaneous');get_item('Miscellaneous');"
+                                                            class="btn btn-sm btn-primary">Miscellaneous</button></div><br><br>
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -367,6 +406,7 @@ include_once("sidebar.php");
                                                     </div>
                                                 </div>
                                             </div>
+                                            
 
                                             <br><br>
                                             <input type="hidden" id="product_type">
@@ -646,6 +686,7 @@ include_once("sidebar.php");
     function list_update(id, price) {
         var item_type = document.getElementById('type').value;
         var name = document.getElementById('pro_name').value;
+        var qty = document.getElementById('qty').value;
         console.log(item_type);
         var invo = '<?php echo $invo; ?>'
 
@@ -662,7 +703,7 @@ include_once("sidebar.php");
         }
 
         xmlhttp.open("GET", "sales_product_list_add.php?type=" + item_type + "&invo=" + invo + "&price=" + price +
-            "&id=" + id + "&qty=1 &name="+name, true);
+            "&id=" + id + "&qty=" + qty+"&name="+name, true);
         xmlhttp.send();
 
         document.getElementById('ls_' + id).style.display = "none";
@@ -717,7 +758,10 @@ include_once("sidebar.php");
     function get_item(item) {
         var cl = document.getElementById('product_type').value;
         var part = "";
+        var ty='';
         var invo = '<?php echo $invo; ?>'
+
+        console.log(cl);
 
         if (cl == "info") {
             part = "supply";
@@ -731,6 +775,9 @@ include_once("sidebar.php");
         if (cl == "warning") {
             part = "paint";
         }
+        if (cl == "primary") {
+            part = "mis";
+        }
 
         document.getElementById("front").className = "btn";
         document.getElementById("rear").className = "btn";
@@ -739,7 +786,7 @@ include_once("sidebar.php");
 
 
 
-        var ty = document.getElementById("product_type").value;
+        ty = document.getElementById("product_type").value;
         document.getElementById(item).className = "btn btn-" + ty;
 
         var xmlhttp;

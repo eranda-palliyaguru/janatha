@@ -16,12 +16,6 @@ if($product_id=='non'){
     echo '<h3 style="color: darkred;"> Please select a product </h3>';
 }else{
 
-$result = $db->prepare("SELECT * FROM product WHERE product_id='$product_id'");
-$result->bindParam(':userid', $res);
-$result->execute();
-for($i=0; $row = $result->fetch(); $i++){
-  //  $name=$row['name'];
-}
 
 
 $date=date('Y-m-d');
@@ -181,6 +175,39 @@ $ql->execute(array($product_id,$name,$invo,$price,$qty,$type,$date,$price*$qty))
 
                                                 </tr>
 
+                                                <tr style="background-color: #FFA245;">
+                                                            <td colspan="6">
+                                                            Miscellaneous
+                                                            </td>
+
+                                                        </tr>
+                                                        <?php  $supTot=0; $style="";
+                                            $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' AND service_type = 'mis'");
+		                                    $result->bindParam(':userid', $res);
+		                                    $result->execute();
+		                                    for($i=0; $row = $result->fetch(); $i++){
+			                                $pro_id=$row['product_id'];
+                                            ?>
+
+                                                        <tr>
+                                                            <td width="50%"><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['qty']; ?></td>
+                                                            <td align="right"><?php echo $row['dic']; ?></td>
+                                                            <td align="right"><?php echo $row['price']; ?></td>
+                                                            <td align="right"><?php echo $row['amount']; ?></td>
+                                                            <td width="5%"> <a
+                                                                    href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa trash">X</i></button></a></td>
+                                                            <?php  $supTot+=$row['amount']; $total+=$row['amount']; ?>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        <tr style="background-color: #C8C8C8;">
+                                                            <td colspan="4" align="right">Total</td>
+                                                            <td>Rs.<?php echo $supTot; ?></td>
+                                                            <td></td>
+
+                                                        </tr>
 
                                             </table>
 

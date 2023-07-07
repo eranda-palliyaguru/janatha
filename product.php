@@ -81,7 +81,7 @@ include_once("sidebar.php");
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Service</a></li>
                                     <li><a href="#tab_2" data-toggle="tab">Product</a></li>
                                     <li><a href="#tab_3" data-toggle="tab">Materials</a></li>
-                                    <li><a href="#tab_4" data-toggle="tab">Quick Product</a></li>
+                                    <li><a href="#tab_4" data-toggle="tab">Miscellaneous Items / Services</a></li>
 
                                 </ul>
                                 <div class="tab-content">
@@ -472,36 +472,10 @@ include_once("sidebar.php");
                                                         </div>
 
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-addon">
-                                                                            <label> Category</label>
-                                                                        </div>
-                                                                        <select class="form-control select2"
-                                                                            name="category" style="width: 100%;"
-                                                                            autofocus>
-
-                                                                            <?php
-                                                                            $result = $db->prepare("SELECT * FROM catogary_list ");
-		                                                                        $result->bindParam(':userid', $res);
-		                                                                        $result->execute();
-		                                                                        for($i=0; $row = $result->fetch(); $i++){
-	                                                                         ?>
-                                                                            <option value="<?php echo $row['id'];?>">
-                                                                                <?php echo $row['name']; ?>
-                                                                            </option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
+                                              
                                                     </div>
 
-                                                    <input type="hidden" name="type" value="Quick">
+                                                    <input type="hidden" name="type" value="Miscellaneous">
                                                     <input type="hidden" name="category" value="0">
                                                     <input class="btn btn-info" type="submit" value="Submit">
                                                 </div>
