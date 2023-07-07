@@ -179,7 +179,7 @@
                             <td></td> <td></td> <td></td> <td></td>
 
                         </tr>
-                        <?php
+                        <?php $list_no=1;
 			date_default_timezone_set("Asia/Colombo");
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
@@ -192,7 +192,7 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td width="40%"><?php echo $row['name'];?></td>
+                            <td width="40%"><?php echo $list_no.'. '. $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
 
@@ -205,7 +205,7 @@
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
-                        <?php } ?>
+                        <?php $list_no+=1; } ?>
 
 
 
@@ -245,7 +245,7 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td><?php echo $row['name'];?></td>
+                        <td><?php echo $list_no.'. '.$row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -257,7 +257,7 @@
                             <?php $tot_amount+= $row['amount']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
-                        <?php } ?>
+                        <?php $list_no+=1; } ?>
 
 
 
@@ -291,7 +291,7 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td><?php echo $row['name'];?></td>
+                        <td><?php echo $list_no.'. '.$row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -303,7 +303,7 @@
                             <?php $tot_amount+= $row['amount']; $tot+= $row['amount'];?>
                             <td></td>
                         </tr>
-                        <?php } ?>
+                        <?php $list_no+=1; } ?>
 
 
 
@@ -340,7 +340,7 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td><?php echo $row['name'];?></td>
+                            <td><?php echo $list_no.'. '.$row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -352,7 +352,7 @@
                             <?php $tot_amount+= $row['price']; $tot+=$row['amount'];?>
                             <td></td>
                         </tr>
-                        <?php } ?>
+                        <?php $list_no+=1; } ?>
 
 
                         <tr>
