@@ -10,6 +10,7 @@ $product_id=$_GET["id"];
 $qty=$_GET["qty"];
 $price=$_GET["price"];
 $type=$_GET["type"];
+$name=$_GET["name"];
 
 if($product_id=='non'){
     echo '<h3 style="color: darkred;"> Please select a product </h3>';
@@ -19,8 +20,9 @@ $result = $db->prepare("SELECT * FROM product WHERE product_id='$product_id'");
 $result->bindParam(':userid', $res);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
-    $name=$row['name'];
+  //  $name=$row['name'];
 }
+
 
 $date=date('Y-m-d');
 $sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,qty,service_type,date,amount) VALUES (?,?,?,?,?,?,?,?)";

@@ -103,6 +103,11 @@ include_once("sidebar.php");
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="pro_name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
 
                                                 <div class="col-md-7">
                                                     <div class="form-group">
@@ -609,6 +614,7 @@ include_once("sidebar.php");
         var id = document.getElementById('product_id').value;
         var price = document.getElementById('price').value;
         var qty = document.getElementById('qty').value;
+        var name = document.getElementById('pro_name').value;
         var invo = '<?php echo $invo; ?>'
 
 
@@ -626,7 +632,7 @@ include_once("sidebar.php");
         }
 
         xmlhttp.open("GET", "sales_product_list_add.php?type=" + item_type + "&invo=" + invo + "&price=" + price +
-            "&id=" + id + "&qty=" + qty, true);
+            "&id=" + id + "&qty=" + qty+"&name="+name, true);
         xmlhttp.send();
 
         document.getElementById('ls_' + id).style.display = "none";
@@ -639,6 +645,7 @@ include_once("sidebar.php");
     //+++++++++++++++++++++++ List updates +++++++++++++++++++++++++//
     function list_update(id, price) {
         var item_type = document.getElementById('type').value;
+        var name = document.getElementById('pro_name').value;
         console.log(item_type);
         var invo = '<?php echo $invo; ?>'
 
@@ -655,7 +662,7 @@ include_once("sidebar.php");
         }
 
         xmlhttp.open("GET", "sales_product_list_add.php?type=" + item_type + "&invo=" + invo + "&price=" + price +
-            "&id=" + id + "&qty=1", true);
+            "&id=" + id + "&qty=1 &name="+name, true);
         xmlhttp.send();
 
         document.getElementById('ls_' + id).style.display = "none";
@@ -665,9 +672,10 @@ include_once("sidebar.php");
 
 
     //++++++++++++++++ List Load ++++++++++++++++++//
-    function list_load(id, amount) {
+    function list_load(id,amount,name) {
         document.getElementById("price").value = amount;
         document.getElementById("product_id").value = id;
+        document.getElementById("pro_name").value = name;
 
         document.getElementById("price").focus();
         document.getElementById("price").select()
