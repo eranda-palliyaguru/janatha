@@ -191,6 +191,7 @@ include_once("sidebar.php");
                                 <th>EPF No</th>
                                 <th>Designation</th>
                                 <th>Hour Rate</th>
+                                <th>#</th>
                                 
                             </tr>
 
@@ -210,6 +211,7 @@ include_once("sidebar.php");
                                 <td><?php echo $row['epf_no'];?></td>
                                 <td><?php echo $row['des'];?></td>
                                 <td>Rs.<?php echo $row['hour_rate'];?></td>
+                                <td><a href="hr_employee_profile.php?id=<?php echo $id; ?>"><button class="btn btn-info"><i class="fa fa-user"></i></button></a></td>
                                 
                             </tr>
                             <?php  }  ?>
