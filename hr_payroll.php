@@ -209,6 +209,18 @@ include_once("sidebar.php");
                                         <td><?php echo $ot=AddPlayTime($ot); ?></td>
                                     </tr>
 
+                                    <?php  $allowances=0;
+                                    $result = $db->prepare("SELECT * FROM hr_allowances WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
+				                    $result->bindParam(':userid', $date);
+                                    $result->execute();
+                                    for($i=0; $row = $result->fetch(); $i++){ ?>
+
+                                    <tr style="font-size: 16px; color:#2E86C1">
+                                        <td><?php echo $row['note'] ?></td>
+                                        <td>Rs.<?php echo $row['amount']; ?></td>
+                                    </tr>
+                                    <?php $allowances+=$row['amount'];} ?>
+
                                     <tr style="font-size: 16px; color:#2E86C1">
                                         <td>OT</td>
                                         <td>Rs.<?php echo $ot_tot=($rate * 142.86)/100 * TimeSet($ot); ?></td>
@@ -225,7 +237,7 @@ include_once("sidebar.php");
                                     
                                     <tr style="font-size: 20px; color:#2E86C1">
                                         <td>Balance Pay</td>
-                                        <td>Rs.<?php echo ($ot_tot+$basic)-$epf-$adv ?></td>
+                                        <td>Rs.<?php echo ($ot_tot+$basic+$allowances)-$epf-$adv ?></td>
                                     </tr>
                                 </table>
                                 <?php } ?>

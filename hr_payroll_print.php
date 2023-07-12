@@ -147,6 +147,18 @@
                                 <td><?php echo $ot=AddPlayTime($ot); ?></td>
                             </tr>
 
+                            <?php  $allowances=0;
+                                    $result = $db->prepare("SELECT * FROM hr_allowances WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
+				                    $result->bindParam(':userid', $date);
+                                    $result->execute();
+                                    for($i=0; $row = $result->fetch(); $i++){ ?>
+
+                            <tr style="font-size: 16px; color:#2E86C1">
+                                <td><?php echo $row['note'] ?></td>
+                                <td>Rs.<?php echo $row['amount']; ?></td>
+                            </tr>
+                            <?php $allowances+=$row['amount'];} ?>
+
                             <tr style="font-size: 16px; color:#2E86C1">
                                 <td>OT</td>
                                 <td>Rs.<?php echo $ot_tot=($rate * 142.86)/100 * TimeSet($ot); ?></td>
@@ -163,7 +175,7 @@
 
                             <tr style="font-size: 20px; color:#2E86C1">
                                 <td>Balance Pay</td>
-                                <td>Rs.<?php echo ($ot_tot+$basic)-$epf-$adv ?></td>
+                                <td>Rs.<?php echo ($ot_tot+$basic+$allowances)-$epf-$adv ?></td>
                             </tr>
                         </table>
                     </div>
@@ -171,111 +183,111 @@
 
                 </div>
 
-<div>
-                <div class="pull-right" style="width: 48%; ">
-                    <div class="box box-danger">
-                        <div class="box-header">
-                            <h3 class="box-title">Salary Advance List</h3>
-                        </div>
-                        <!-- /.box-header -->
+                <div>
+                    <div class="pull-right" style="width: 48%; ">
+                        <div class="box box-danger">
+                            <div class="box-header">
+                                <h3 class="box-title">Salary Advance List</h3>
+                            </div>
+                            <!-- /.box-header -->
 
-                        <div class="box-body">
-                            <table id="example2" class="table table-bordered table-striped">
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-striped">
 
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Date</th>
-                                        <th>Amount</th>
-                                        <th>Note</th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Note</th>
+                                        </tr>
 
-                                </thead>
+                                    </thead>
 
-                                <tbody>
-                                    <?php
+                                    <tbody>
+                                        <?php
                                    $result = $db->prepare("SELECT * FROM salary_advance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
 				                   $result->bindParam(':userid', $date);
                                    $result->execute();
                                    for($i=0; $row = $result->fetch(); $i++){
                                   ?>
-                                    <tr>
-                                        <td><?php echo $row['id'];?></td>
-                                        <td><?php echo $row['date']?></td>
-                                        <td>Rs.<?php echo $row['amount'];?></td>
-                                        <td><?php echo $row['note'];?></td>
+                                        <tr>
+                                            <td><?php echo $row['id'];?></td>
+                                            <td><?php echo $row['date']?></td>
+                                            <td>Rs.<?php echo $row['amount'];?></td>
+                                            <td><?php echo $row['note'];?></td>
 
-                                        <?php	} ?>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Rs.<?php echo number_format($adv,2); ?></th>
-                                </tfoot>
-                            </table>
+                                            <?php	} ?>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Rs.<?php echo number_format($adv,2); ?></th>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                </div>
 
 
-                <div style="width:48%;">
-                    <?php if(isset($_GET['id'])){ ?>
-                    <div class="box box-warning">
-                        <div class="box-header">
-                            <h3 class="box-title">Attendance List</h3>
-                        </div>
-                        <!-- /.box-header -->
+                    <div style="width:48%;">
+                        <?php if(isset($_GET['id'])){ ?>
+                        <div class="box box-warning">
+                            <div class="box-header">
+                                <h3 class="box-title">Attendance List</h3>
+                            </div>
+                            <!-- /.box-header -->
 
-                        <div class="box-body">
-                            <table id="example2" class="table table-bordered table-striped">
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-striped">
 
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Date</th>
-                                        <th>IN</th>
-                                        <th>OUT</th>
-                                        <th>W time</th>
-                                        <th>OT</th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>IN</th>
+                                            <th>OUT</th>
+                                            <th>W time</th>
+                                            <th>OT</th>
+                                        </tr>
 
-                                </thead>
+                                    </thead>
 
-                                <tbody>
-                                    <?php
+                                    <tbody>
+                                        <?php
                             $result = $db->prepare("SELECT * FROM attendance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
 				            $result->bindParam(':userid', $date);
                             $result->execute();
                             for($i=0; $row = $result->fetch(); $i++){
                                 ?>
-                                    <tr>
-                                        <td><?php echo $row['id'];?></td>
-                                        <td><?php echo $row['date']?></td>
-                                        <td><?php echo $row['IN_time'];?></td>
-                                        <td><?php echo $row['OUT_time'];?></td>
-                                        <td><?php echo $row['work_time']; ?></td>
-                                        <td><?php echo $row['ot']; ?></td>
+                                        <tr>
+                                            <td><?php echo $row['id'];?></td>
+                                            <td><?php echo $row['date']?></td>
+                                            <td><?php echo $row['IN_time'];?></td>
+                                            <td><?php echo $row['OUT_time'];?></td>
+                                            <td><?php echo $row['work_time']; ?></td>
+                                            <td><?php echo $row['ot']; ?></td>
 
-                                        <?php	} ?>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th><?php echo $hour; ?></th>
-                                    <th><?php echo $ot ?></th>
-                                </tfoot>
-                            </table>
+                                            <?php	} ?>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th><?php echo $hour; ?></th>
+                                        <th><?php echo $ot ?></th>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
+                        <?php } ?>
+                        <!-- /.box -->
                     </div>
-                    <?php } ?>
-                    <!-- /.box -->
-                </div>
                 </div>
 
 
