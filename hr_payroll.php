@@ -81,22 +81,22 @@ include_once("sidebar.php");
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            
-                                                                
-                                                                <select class="form-control select2" name="id"
-                                                                    style="width: 100%;" tabindex="1" autofocus>
-                                                                    <option value="0"></option>
-                                                                    <?php  
+
+
+                                                            <select class="form-control select2" name="id"
+                                                                style="width: 100%;" tabindex="1" autofocus>
+                                                                <option value="0"></option>
+                                                                <?php  
                                                              $result = $db->prepare("SELECT * FROM Employees ");
 		                                                     $result->bindParam(':userid', $res);
 		                                                     $result->execute();
 		                                                     for($i=0; $row = $result->fetch(); $i++){ ?>
-                                                                    <option value="<?php echo $row['id'];?>">
-                                                                        <?php echo $row['name']; ?>
-                                                                    </option>
-                                                                    <?php	} ?>
-                                                                </select>
-                                                            
+                                                                <option value="<?php echo $row['id'];?>">
+                                                                    <?php echo $row['name']; ?>
+                                                                </option>
+                                                                <?php	} ?>
+                                                            </select>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -124,7 +124,7 @@ include_once("sidebar.php");
                                         </div>
                                     </div>
                                 </form>
-                                
+
                                 <?php
                                 function AddPlayTime($times) {
                                     $minutes = 0; //declare minutes either it gives Notice: Undefined variable
@@ -185,8 +185,20 @@ include_once("sidebar.php");
                                     for($i=0; $row = $result->fetch(); $i++){$adv=$row['sum(amount)'];}
                                     
                                     ?>
-                                    <h2><?php echo $name; ?></h2>
-                                    <h3><?php echo $_GET['year'].'-'.$_GET['month'] ?></h3>
+                                <h2><?php echo $name; ?></h2>
+
+
+
+                                <a
+                                    href="hr_payroll.php?id=<?php echo $_GET['id']-1 ?>&year=<?php echo $_GET['year'] ?>&month=<?php echo $_GET['month'] ?>">
+                                    <button class="btn btn-danger">Previous</button>
+                                </a>
+
+                                <a
+                                    href="hr_payroll.php?id=<?php echo $_GET['id']+1 ?>&year=<?php echo $_GET['year'] ?>&month=<?php echo $_GET['month'] ?>">
+                                    <button class="btn btn-danger">Next</button>
+                                </a>
+                                <h3><?php echo $_GET['year'].'-'.$_GET['month'] ?></h3>
                                 <table class="table">
                                     <tr>
                                         <td>ATTENDANCE DAYS</td>
@@ -234,7 +246,7 @@ include_once("sidebar.php");
                                         <td>EPF</td>
                                         <td>Rs.<?php echo $epf; ?></td>
                                     </tr>
-                                    
+
                                     <tr style="font-size: 20px; color:#2E86C1">
                                         <td>Balance Pay</td>
                                         <td>Rs.<?php echo ($ot_tot+$basic+$allowances)-$epf-$adv ?></td>
@@ -244,7 +256,13 @@ include_once("sidebar.php");
                                 <!-- /.box -->
                             </div>
                             <!-- /.col (left) -->
-                            <a href="hr_payroll_print.php?id=<?php echo $_GET['id'] ?>&year=<?php echo $_GET['year'] ?>&month=<?php echo $_GET['month'] ?>"><button class="btn btn-danger pull-right" ><i class="fa fa-print"></i></button></a>
+                            
+                        
+                        
+                    <form action="hr_payroll_save.php" method="post">
+                        <input type="hidden" name="date" value="<?php echo $_GET['year']."-".$_GET['month'] ?>">
+                        <input type="submit" value="Process All" class="btn btn-danger" style="width: 100%;">
+                    </form>
                         </div>
                     </div>
                 </div>
@@ -321,8 +339,9 @@ include_once("sidebar.php");
                                     <tr>
                                         <th>ID</th>
                                         <th>Date</th>
-                                        <th>Amount</th>
                                         <th>Note</th>
+                                        <th>Amount</th>
+                                        
                                     </tr>
 
                                 </thead>
@@ -337,8 +356,9 @@ include_once("sidebar.php");
                                     <tr>
                                         <td><?php echo $row['id'];?></td>
                                         <td><?php echo $row['date']?></td>
-                                        <td>Rs.<?php echo $row['amount'];?></td>
                                         <td><?php echo $row['note'];?></td>
+                                        <td>Rs.<?php echo $row['amount'];?></td>
+                                        
 
                                         <?php	} ?>
                                     </tr>

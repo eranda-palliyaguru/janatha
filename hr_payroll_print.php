@@ -67,9 +67,17 @@
             }
 
 
-           $id=$_GET["id"];
-           $d1=$_GET['year'].'-'.$_GET['month'].'-01';
-           $d2=$_GET['year'].'-'.$_GET['month'].'-31';  $h=0;$m=0;
+           $ids=$_GET["id"];
+           $date=$_GET["date"];
+           $result = $db->prepare("SELECT * FROM hr_payroll WHERE emp_id ='$ids' AND date='$date' ORDER BY id ASC");
+    $result->bindParam(':userid', $date);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){ 
+        $id=$row['emp_id'];
+    }
+
+           $d1=$_GET['date'].'-01';
+           $d2=$_GET['date'].'-31';  $h=0;$m=0;
            $result = $db->prepare("SELECT work_time,ot FROM attendance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id ASC");
            $result->bindParam(':userid', $date);
            $result->execute();
@@ -105,7 +113,7 @@
                 <!-- accepted payments column -->
                 <div class="col-xs-6">
                     <h2><?php echo $name; ?></h2>
-                    <h3><?php echo $_GET['year'].'-'.$_GET['month'] ?></h3>
+                    <h3><?php echo $_GET['date'] ?></h3>
                 </div>
                 <!-- /.col -->
             </div>
@@ -233,7 +241,7 @@
 
 
                     <div style="width:48%;">
-                        <?php if(isset($_GET['id'])){ ?>
+
                         <div class="box box-warning">
                             <div class="box-header">
                                 <h3 class="box-title">Attendance List</h3>
@@ -285,7 +293,7 @@
                             </div>
                             <!-- /.box-body -->
                         </div>
-                        <?php } ?>
+
                         <!-- /.box -->
                     </div>
                 </div>
@@ -307,9 +315,21 @@
     </div>
     </section>
     <?php
-$sec = "1";
+$sec = "1"; 
+$id=$ids+1;
+$result = $db->prepare("SELECT * FROM hr_payroll WHERE emp_id >='$id' AND date='$date' ORDER BY id ASC");
+    $result->bindParam(':userid', $date);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){ 
+        $empid=$row['emp_id'];
+    }
+
+    if(isset($empid)){
 ?>
-    <meta http-equiv="refresh" content="<?php echo $sec;?>;URL='hr_payroll.php">
+    <meta http-equiv="refresh" content="<?php echo $sec;?>;URL='hr_payroll_print.php?id=<?php echo $empid; ?>&date=<?php echo $_GET['date']; ?>">
+    <?php }else{ ?>
+        <meta http-equiv="refresh" content="<?php echo $sec;?>;URL='hr_payroll.php">
+    <?php } ?>
     </div>
 </body>
 
