@@ -3,6 +3,18 @@
 
 <head>
     <?php include('hed.php'); ?>
+    <style>
+        .login-btn {
+        border-radius: 30px;
+        width: 40%;
+        background: linear-gradient(27deg, rgba(190, 0, 0, 0.8), rgba(50, 0, 0, 0.6));
+        /* color:#FF3636; */
+        color: #ABABAB;
+        margin-top: 50px;
+        font-size: 17px;
+        height: 40px;
+    }
+    </style>
 </head>
 
 <body>
@@ -68,7 +80,16 @@ for($i=0; $row1 = $result1->fetch(); $i++){ $model_name=$row1['model']; }
     <?php } ?>
     <br>
     
-    <center><img src="../<?php echo $path; ?>" width="300px"></center>
+    <center><img src="../<?php echo $path; ?>" width="300px">
+    <form action="../job_img_save.php" method="post" enctype="multipart/form-data">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <input type="file" name="fileToUpload" id="fileToUpload" class="model-box">
+            </div>
+<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" >
+<input type="submit" value="Update" name="submit" class="login-btn">
+<input type="hidden" name="end" value="app">
+</form>
+</center>
 
 
     <br><br><br>

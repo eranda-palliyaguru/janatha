@@ -289,6 +289,7 @@
             <li><a href="hr_allowances.php"><i class="fa fa-star-o text-yellow"></i>Allowances</a></li>
             <li><a href="hr_salary_advance.php"><i class="fa fa-money text-yellow"></i>Advance</a></li>
             <li><a href="hr_payroll.php"><i class="fa fa-list-alt text-red"></i>Payroll </a></li>
+            <li><a href="hr_salary_rp.php?date=<?php echo date('Y-m') ?>"><i class="fa fa-list-alt text-blue"></i>Payroll Report</a></li>
           </ul>
         </li>
 		  

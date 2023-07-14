@@ -222,13 +222,13 @@
                     
                 </tr>
                 <tr>
+                    <td style="color:#686868">2023-03-12</td>
                     <td style="color:#959595"><?php echo $row['customer_name']; ?></td>
-                    <td style="color:#959595"><?php echo $row['contact']; ?></td>
                 </tr>
 
                 <tr>
-                    <td></td>
-                    <td style="color:#686868"><?php echo $row['km']; ?> km</td>
+                    <td style="color:#959595">12/3</td>
+                    <td style="color:#959595"><?php echo $row['contact']; ?></td>
                 </tr>
                 <tr>
 
