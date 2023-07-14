@@ -174,7 +174,7 @@
     
 
     <?php 				  
-        $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no, job.img  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
+        $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no, job.img , job.img_date FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
         $result->execute();
         for($i=0; $row = $result->fetch(); $i++){ 
@@ -222,7 +222,7 @@
                     
                 </tr>
                 <tr>
-                    <td style="color:#686868">2023-03-12</td>
+                    <td style="color:#686868"><?php echo $row['img_date']; ?></td>
                     <td style="color:#959595"><?php echo $row['customer_name']; ?></td>
                 </tr>
 
