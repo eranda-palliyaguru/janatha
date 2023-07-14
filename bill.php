@@ -139,7 +139,7 @@
 
                 <!-- /.col -->
             </div>
-            <h4><center><?php echo "Estimate For Repairs to Vehicle Number: <i>".$vehicle_no."</i>"; ?></center></h4>
+            <h4><center><u><?php echo "Estimate For Repairs to Vehicle Number: <i>".$vehicle_no."</i>"; ?></u></center></h4>
             <p>We thank you for your kind inquiries and wish to submit our quotation for your kind consideration.</p>
             <?php
   			  $invo=$_GET['id'];
@@ -155,7 +155,7 @@
                 <table style="width:100%;" class="list">
                     <thead style="border: 1px solid; text-align: center;" >
                         <tr >
-
+                            <th style="text-align: center;">#</th>
                             <th style="text-align: center;">Decs</th>
                             <th style="text-align: center;" width="40px">Qty</th>
                             <th style="text-align: center;">Rate</th>
@@ -171,7 +171,7 @@
                     </thead>
                     <tbody>
 
-                        <tr>
+                        <tr><td></td>
                             <td>
                                 <b><u>Supply</u></b>
 
@@ -192,7 +192,8 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td width="40%"><?php echo $list_no.'. '. $row['name'];?></td>
+                            <td style="text-align: center;"><?php echo $list_no ?>.</td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
 
@@ -207,9 +208,9 @@
                         </tr>
                         <?php $list_no+=1; } ?>
 
-                        <tr>
+                        <tr><td></td>
                             <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 16px;"><b> Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> <u>Rs.<?php echo number_format($tot,2); ?></u></b></td>
                             <td></td>
                         </tr>
 
@@ -219,7 +220,7 @@
 
 
 
-                        <tr>
+                        <tr><td></td>
                             <td>
                                 <b><u>Remove & Refitting</u></b>
                             </td>
@@ -239,7 +240,8 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                        <td><?php echo $list_no.'. '.$row['name'];?></td>
+                        <td style="text-align: center;"><?php echo $list_no ?>.</td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -253,13 +255,13 @@
                         </tr>
                         <?php $list_no+=1; } ?>
 
-                        <tr>
+                        <tr><td></td>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> <u>Rs.<?php echo number_format($tot,2); ?></u></b></td>
                             <td></td>
                         </tr>
 
-                        <tr>
+                        <tr><td></td>
                             <td>
                                 <b><u>Repair</u></b>
                             </td>
@@ -279,7 +281,8 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                        <td><?php echo $list_no.'. '.$row['name'];?></td>
+                        <td style="text-align: center;"><?php echo $list_no ?>.</td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -298,13 +301,13 @@
 
 
 
-                        <tr>
+                        <tr><td></td>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> <u>Rs.<?php echo number_format($tot,2); ?></u></b></td>
                             <td></td>
                         </tr>
 
-                        <tr>
+                        <tr><td></td>
                             <th>
                                 <b><u>Paint</u></b>
                                 <td></td>
@@ -328,7 +331,8 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                            <td><?php echo $list_no.'. '.$row['name'];?></td>
+                        <td style="text-align: center;"><?php echo $list_no ?>.</td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -343,9 +347,9 @@
                         <?php $list_no+=1; } ?>
 
 
-                        <tr>
+                        <tr><td></td>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> <u>Rs.<?php echo number_format($tot,2); ?></u></b></td>
                             <td></td>
                         </tr>
 
@@ -353,6 +357,7 @@
 
 
 
+                        <td></td>
                         <td>
                                 <b><u>Miscellaneous</u></b>
                             </td>
@@ -372,7 +377,8 @@
 					$u_pri=$u_to/$row['qty'];
 			?>
                         <tr>
-                        <td><?php echo $list_no.'. '.$row['name'];?></td>
+                        <td style="text-align: center;"><?php echo $list_no ?>.</td>
+                            <td width="40%"><?php echo $row['name'];?></td>
                             <td style="text-align: center;"><?php echo $row['qty'];?></td>
                             <td style="text-align: right;"><?php echo number_format($row['price'],2);?></td>
                             <?php
@@ -386,13 +392,14 @@
                         </tr>
                         <?php $list_no+=1; } ?>
 
-                        <tr>
+                        <tr><td></td>
                         <td></td> <td></td> <td></td>
-                            <td align="right" style="font-size: 16px;"><b>Rs.<?php echo number_format($tot,2); ?></b></td>
+                            <td align="right" style="font-size: 16px;"><b> <u>Rs.<?php echo number_format($tot,2); ?></u></b></td>
                             <td></td>
                         </tr>
 
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
