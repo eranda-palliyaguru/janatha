@@ -9,7 +9,6 @@ $date=date("Y-m-d");
 			 
 
 
-
 //---------------------------------------------------------------- upload image file ------------------------------------------------//
 
 function compressImage($source, $destination, $quality) { 
@@ -83,17 +82,22 @@ echo $statusMsg;
 
 //---------------------------------------------------------------- upload image end ----------------------------------------------------//
 	
-
-
+$result = $db->prepare("SELECT *  FROM job WHERE id='$job_id'");
+$result->bindParam(':userid', $date);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){ 
+    $path=$row['img'];
+}
+unlink($path);
 
 $sql = "UPDATE job
-SET img=?
+SET img=? , img_date=?
 WHERE id=?";
 $q = $db->prepare($sql);
-$q->execute(array($imageUploadPath,$job_id));
+$q->execute(array($imageUploadPath,$date,$job_id));
 
 if(isset($_POST['end'])){
-//header("location: app/job_view.php?id=$job_id");
+header("location: app/job_view.php?id=$job_id");
 }else{header("location: job_list.php?id=$job_id"); }
 	
 
