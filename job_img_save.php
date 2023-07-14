@@ -5,7 +5,6 @@ date_default_timezone_set("Asia/Colombo");
 
 
 $job_id = $_POST['id'];
-$img = $_POST['img'];
 $date=date("Y-m-d");
 			 
 
@@ -94,7 +93,7 @@ $q = $db->prepare($sql);
 $q->execute(array($imageUploadPath,$job_id));
 
 if(isset($_POST['end'])){
-header("location: app/job_view.php?id=$job_id");
+//header("location: app/job_view.php?id=$job_id");
 }else{header("location: job_list.php?id=$job_id"); }
 	
 
