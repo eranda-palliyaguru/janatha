@@ -217,8 +217,58 @@ include_once("sidebar.php");
             </div>
             <div class="box-body">
 
+            <form action="" method="get">
+                <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
 
+                                                    
+                                                        <select class="form-control select2" name="id"
+                                                            style="width: 100%;" tabindex="1" autofocus>
 
+                                                            <?php  
+         $result = $db->prepare("SELECT * FROM Employees ");
+		$result->bindParam(':userid', $res);
+		$result->execute();
+		for($i=0; $row = $result->fetch(); $i++){ ?>
+                                                            <option value="<?php echo $row['id'];?>">
+                                                                <?php echo $row['name']; ?>
+
+                                                            </option>
+                                                            <?php	} ?>
+                                                        </select>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <select class="form-control select2" name="year"
+                                                                style="width: 100%;" tabindex="1" autofocus>
+                                                                <option> <?php echo date('Y')-1 ?> </option>
+                                                                <option selected> <?php echo date('Y') ?> </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                            <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <select class="form-control select2" name="month"
+                                                                style="width: 100%;" tabindex="1" autofocus>
+                                                                <?php for($x = 1; $x <= 12; $x++){ ?>
+                                                                <option> <?php echo sprintf("%02d", $x); ?> </option>
+                                                                <?php  } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                <input class="btn btn-info" type="submit" value="Filter">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                </form>
 
 
                 <div class="box-body">
@@ -235,7 +285,13 @@ include_once("sidebar.php");
                         </thead>
                         <tbody>
 
-                            <?php $result = $db->prepare("SELECT * FROM salary_advance");
+                            <?php 
+                            if(isset($_GET['id'])){ $id=$_GET['id']; $d1=$_GET['year']."-".$_GET['month']."-01"; $d2=$_GET['year']."-".$_GET['month']."-31";
+                                $result = $db->prepare("SELECT * FROM salary_advance WHERE emp_id='$id' AND date BETWEEN '$d1' AND '$d2' ORDER BY id DESC LIMIT 50");
+                            }else{
+                                $result = $db->prepare("SELECT * FROM salary_advance  ORDER BY id DESC LIMIT 50");
+                            }
+                            
 				
 					                       $result->bindParam(':userid', $date);
                                  $result->execute();
