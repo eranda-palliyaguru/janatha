@@ -252,6 +252,10 @@ include_once("sidebar.php");
                                         <td>Rs.<?php echo ($ot_tot+$basic+$allowances)-$epf-$adv ?></td>
                                     </tr>
                                 </table>
+                                <form action="hr_payroll_save.php" method="post">
+                        <input type="hidden" name="date" value="<?php echo $_GET['year']."-".$_GET['month'] ?>">
+                        <input type="submit" value="Process All" class="btn btn-danger" style="width: 100%;">
+                    </form>
                                 <?php } ?>
                                 <!-- /.box -->
                             </div>
@@ -259,10 +263,7 @@ include_once("sidebar.php");
                             
                         
                         
-                    <form action="hr_payroll_save.php" method="post">
-                        <input type="hidden" name="date" value="<?php echo $_GET['year']."-".$_GET['month'] ?>">
-                        <input type="submit" value="Process All" class="btn btn-danger" style="width: 100%;">
-                    </form>
+                    
                         </div>
                     </div>
                 </div>
