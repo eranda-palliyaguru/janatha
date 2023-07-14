@@ -36,11 +36,17 @@
         td.cs {
             background-color: #737373 !important;
             color: #eee !important;
+            
         }
+    }
+
+    td {
+        padding: 3px;
     }
 
     table.list{
         border: 1px solid;
+        padding: 5px;
         
     }
     th:not(:last-child), td:not(:last-child) { border-right: 1px solid; }
@@ -173,7 +179,7 @@
 
                         <tr><td></td>
                             <td>
-                                <b><u>Supply</u></b>
+                                <b><u>SUPPLY</u></b>
 
                             </td>
                             <td></td> <td></td> <td></td> <td></td>
@@ -221,8 +227,8 @@
 
 
                         <tr><td></td>
-                            <td>
-                                <b><u>Remove & Refitting</u></b>
+                            <td >
+                                <b><u>REMOVE & REFITTING</u></b>
                             </td>
                             <td></td> <td></td> <td></td> <td></td>
 
@@ -263,7 +269,7 @@
 
                         <tr><td></td>
                             <td>
-                                <b><u>Repair</u></b>
+                                <b><u> REPAIR</u></b>
                             </td>
                             <td></td> <td></td> <td></td> <td></td>
 
@@ -308,13 +314,13 @@
                         </tr>
 
                         <tr><td></td>
-                            <th>
-                                <b><u>Paint</u></b>
+                            
+                                <td><b><u>PAINT</u></b></td>
                                 <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            </th>
+                            
                             
 
                         </tr>
@@ -359,7 +365,7 @@
 
                         <td></td>
                         <td>
-                                <b><u>Miscellaneous</u></b>
+                                <b><u>MISCELLANEOUS</u></b>
                             </td>
                             <td></td> <td></td> <td></td> <td></td>
 
